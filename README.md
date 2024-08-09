@@ -8,7 +8,7 @@ The goals of this package are to standardize eSTZ documentation to accelerate th
 eSTZwritR is available only from github. 
 It can be installed via:
 ```
-install.packages('devtools'
+install.packages('devtools')
 devtools::install_github('sagesteppe/eSTZwritR')
 ```
 
