@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ## eSTZwritR ('easy rider')
 An R package for applying standardized file naming, directory structure, mapping, and metadata conventions to empirical Seed Transfer Zones (eSTZs). 
 
@@ -19,15 +18,16 @@ and attached for use like any other package from github or CRAN
 library(eSTZwritR)
 ```
 
-## Usage
+## Usage  
+Used .... 
 
-## Documentation 
+## Documentation  
 A poster describing the impetus behind eSTZwritRS creation, and broadly outlining it's functionality is available here (COMING SOON!). 
 
 A vignette showcasing the usage of the package is available here (COMING SOON!). 
 
-## Citation 
+## Citation  
 Wieferich, B., Benkendorf, R.C. 2024. eSTZwritR
-=======
-# eSTZwritR
+
+# eSTZwritR  
 A simple package for documenting and sharing empirical Seed Transfer Zones (STZs)
