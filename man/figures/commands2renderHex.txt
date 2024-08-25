@@ -1,0 +1,20 @@
+library(hexSticker)
+library(showtext)
+font_add_google('Audiowide') # download the font locally each session. 
+
+p <- 'man/figures/EasyRider.png'
+
+sticker(
+	p, 
+	filename = 'inst/figures/imgfile.png', 
+	h_fill = '#758BFD',
+	h_color = '#06D6A0', 
+	s_x = 1, s_y = 1.2, s_width = 0.5, 
+	
+	# package name specs
+	package = 'eSTZwritR',
+	p_family = 'Audiowide',  
+	p_color = '#EF476F',
+	p_size=20, 
+	p_y = 0.55
+)

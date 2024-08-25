@@ -19,7 +19,7 @@ library(eSTZwritR)
 ```
 
 ## Usage  
-eSTZwritR requires only three user-facing functions to implement all data sharing conventions.
+eSTZwritR requires only three user-facing functions to implement all data sharing conventions. 
 
 |       Function        |      Purpose            |             Output                 |
 |  :-----------------:  | :--------------------:  | :--------------------------------: |
