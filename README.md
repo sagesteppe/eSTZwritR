@@ -19,13 +19,14 @@ library(eSTZwritR)
 ```
 
 ## Usage  
-eSTZwritR requires only three user-facing functions to implement all data sharing conventions. 
+eSTZwritR requires only four user-facing functions to implement all data sharing conventions. 
 
-|       Function        |      Purpose            |             Output                 |
-|  :-----------------:  | :--------------------:  | :--------------------------------: |
-|      regionCoding     | determine DOI Regions   | Character string for file naming   | 
-|        dirmakR        | create Directory        | Directory, spatial data            |             
-|        mapmakR        |   create Map            | PDF or png map (for publications)  |          
+|       Function        |         Purpose                   |              Output                 |
+|  :-----------------:  | :----------------------------:    | :--------------------------------:  |
+|      regionCoding     | determine DOI Regions             | Character string for file naming    | 
+|        dirmakR        | create Directory                  | Directory, spatial data             |             
+|        mapmakR        | create Map                        | PDF or png map (for publications)   |  
+|      fieldsmakR       | ensure fields (columns) are named | sf object to local location         | 
 
 
 ## Documentation  
@@ -38,7 +39,7 @@ Wieferich, B., Benkendorf, R.C. 2024. eSTZwritR
 
 A bibtex entry for latex users is: 
 
-@Misc{,  
+@Misc{wieferich2024estz,  
   title = {eSTZwritR},  
   author = {Wieferich, B and Benkendorf R.C.},  
   year = {2024},  
