@@ -6,11 +6,21 @@
 #' @param AreaAcres a string containing the name for the column containing an area measurement, if not supplied this value will be calculated using epsg:5070
 #' @examples
 #' df <- data.frame(
-#'   id = 1:10,
-#'   gridcode = sample(1:10, replace = F),
-#'   zone = sample(LETTERS, 10, replace = F),
-#'   AreaAcres = seq(1000, 100000, length.out = 10)
-#'  )
+#' id = 1:10,
+#' gridcode = sample(1:10, replace = F),
+#' zone = sample(LETTERS, 10, replace = F),
+#' bio1_sd = runif(10, 5, 7),
+#' bio8_mean = runif(10, 5, 7)
+#' )
+#'
+#' nc <- sf::st_read(system.file("shape/nc.shp", package="sf")) |>
+#'  dplyr::select(geometry) |>
+#'  dplyr::slice_head(n = 10) |>
+#'  dplyr::bind_cols(df, )
+#'
+#' ob <- fieldsmakR(nc, SeedZone = 'gridcode')
+#'
+#' dplyr::select(ob, -zone) # easily remove like so.
 #'
 #' @export
 fieldsmakR <- function(x, SeedZone, ID, SZName, AreaAcres, ...){
@@ -27,6 +37,9 @@ fieldsmakR <- function(x, SeedZone, ID, SZName, AreaAcres, ...){
   if(missing(SZName)){ # copy these names to this column
     x <- dplyr::mutate(x, SZName = x$SeedZone, .before = 1)
   }
+
+  # make all of the geometries valid real quick
+  x <- sf::st_make_valid(x)
 
   # calculate the area of each row.
   if(missing(AreaAcres)){
@@ -68,39 +81,26 @@ fieldsmakR <- function(x, SeedZone, ID, SZName, AreaAcres, ...){
       cnames <- cnames[order(as.numeric(gsub('[A-z]', '', cnames)))]
     } else if (length(cnames) > length(grep('^bio', cnames)))
 
-      cnames_bio <- cnames[grep('^bio', cnames)]
+      # if a mix of columns exist order them by BIO # AND then other columns alp
+      cnames_bio <- cnames[grep('^BIO', cnames)]
       cnames_bio <- cnames_bio[order(as.numeric(gsub('[A-z]', '', cnames_bio)))]
 
-    # if a mix of columns exist order them by BIO # AND then other columns alp
+      cnames_unk <- cnames[ grep('^BIO', cnames, invert = T) ]
+      cnames_unk <- cnames_unk[order(cnames_unk)]
+      cnames <- c(cnames_bio, cnames_unk)
+      message(
+      "There is a column(s), `",  cnames_unk, "`, which we can't figure out the purpose of.
+      It will be returned here, but FYI a list of bioclim vars are here https://www.worldclim.org/data/bioclim.html.")
 
-
+  } else {
     # if none of the columns are bio simply return them alphabetically.
-
-
+    cnames <- cnames[order(cnames)]
+    message(
+      "There is a column(s), `",  cnames_unk, "`, which we can't figure out the purpose of.
+      It's still attached, but FYI a list of bioclim vars are here https://www.worldclim.org/data/bioclim.html.")
   }
 
+  cols <- c(four, cnames, 'geometry')
+  x <- dplyr::select(x, dplyr::all_of(cols))
+
 }
-
-df <- data.frame(
-   id = 1:10,
-   gridcode = sample(1:10, replace = F),
-   zone = sample(LETTERS, 10, replace = F),
-   bio1_sd = runif(10, 5, 7),
-   bio8_mean = runif(10, 5, 7)
-)
-
-nc <- sf::st_read(system.file("shape/nc.shp", package="sf")) |>
-  dplyr::select(geometry) |>
-  dplyr::slice_head(n = 10) |>
-  dplyr::bind_cols(df, )
-
-fieldsmakR(nc, SeedZone = 'gridcode')
-
-
-cnames <- colnames(nc)[3:6]
-
-cnames_bio <- cnames[grep('^bio', cnames)]
-cnames_bio <- cnames_bio[order(as.numeric(gsub('[A-z]', '', cnames_bio)))]
-
-grep('^bio', cnames)
-
