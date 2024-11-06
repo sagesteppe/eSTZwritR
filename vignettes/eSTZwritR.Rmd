@@ -18,8 +18,9 @@ knitr::opts_chunk$set(
 It can be installed using the `remotes` or `devtools` packages. 
 Users from different operating systems (e.g. Mac and Windows) have differing sucess with the above two packages in general. 
 If one package is not easy for the install, perhaps try the other. 
+
 ```{r Installation}
-install.packages('devtools')
+# install.packages('devtools')
 devtools::install_github('sagesteppe/eSTZwritR')
 
 #install.packages('remotes')
@@ -31,7 +32,4 @@ library(eSTZwritR)
 library(ggplot2)
 ```
 
-```{r}
-
-```
 
