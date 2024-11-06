@@ -23,7 +23,7 @@
 #' dplyr::select(ob, -zone) # easily remove like so.
 #'
 #' @export
-fieldsmakR <- function(x, SeedZone, ID, SZName, AreaAcres, ...){
+fieldsmakR <- function(x, SeedZone, ID, SZName, AreaAcres){
 
   if(missing(ID)){ # create an ID if not already present.
     if(length(grep('^id*', colnames(x))) == 0){
