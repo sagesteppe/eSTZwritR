@@ -1,0 +1,22 @@
+url: https://sagesteppe.github.io/eSTZwritR/
+template:
+  bootstrap: 5
+
+reference:
+  - title: "Main Functions"
+    desc: "User facing functions"
+    contents:
+      - regionCoding
+      - dirmakR
+      - mapmakR
+      - fieldsmakR
+  - title: "Data"
+    desc: "Preparation for Environmental Based Sampling"
+    contents:
+      - countries
+      - omernik
+      - regions
+  - title: "Internal"
+    desc: "Data prep functions"
+    contents:
+      - buffR 

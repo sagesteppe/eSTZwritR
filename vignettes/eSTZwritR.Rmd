@@ -1,0 +1,37 @@
+---
+title: "eSTZwritR"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{eSTZwritR}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+`eSTZwritR` is available only on github. 
+It can be installed using the `remotes` or `devtools` packages. 
+Users from different operating systems (e.g. Mac and Windows) have differing sucess with the above two packages in general. 
+If one package is not easy for the install, perhaps try the other. 
+```{r Installation}
+install.packages('devtools')
+devtools::install_github('sagesteppe/eSTZwritR')
+
+#install.packages('remotes')
+#remotes::install_github('sagesteppe/eSTZwritR')
+```
+
+```{r setup, message = FALSE}
+library(eSTZwritR)
+library(ggplot2)
+```
+
+```{r}
+
+```
+
