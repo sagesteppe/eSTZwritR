@@ -4,7 +4,8 @@
 #' to raster before plotting.
 #' @param species Character string, the name of the species which is being mapped.
 #' @param outdir Character string, a directory to save the map to. Defaults to the current working directory.
-#' @param ecoregions Boolean, whether to draw ecoregions or not. Defaults to TRUE
+#' @param ecoregions Boolean, whether to draw ecoregions or not. Defaults to TRUE.
+#' @param cities Boolean, whether to draw cities or not, Defaults to TRUE.
 #' @param landscape Boolean, whether to draw the map in a landscape orientation or not. Defaults to TRUE
 #' @param caption Character string, text for a caption. It's best to mention any published product related to the data set.
 #' Defaults to omitting any caption

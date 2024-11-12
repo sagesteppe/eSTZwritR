@@ -1,5 +1,3 @@
-https://simplemaps.com/data/us-cities
-
 #' select cities for cartography
 #'
 #' A geospatial vector data set of some US cities

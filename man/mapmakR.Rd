@@ -11,20 +11,22 @@ mapmakR(x, species, outdir, ecoregions, landscape, caption, filetype)
 \item{x}{the vector (e.g. shapefile) or raster dataset to plot, note vector data will be coerced
 to raster before plotting.}
 
-\item{species}{character string, the name of the species which is being mapped.}
+\item{species}{Character string, the name of the species which is being mapped.}
 
-\item{outdir}{a directory to save the map to. Defaults to the current working directory.}
+\item{outdir}{Character string, a directory to save the map to. Defaults to the current working directory.}
 
-\item{ecoregions}{Boolean, whether to draw ecoregions or not. Defaults to TRUE}
+\item{ecoregions}{Boolean, whether to draw ecoregions or not. Defaults to TRUE.}
 
-\item{landscape}{boolean, whether to draw the map in a landscape orientation or not. Defaults to TRUE}
+\item{landscape}{Boolean, whether to draw the map in a landscape orientation or not. Defaults to TRUE}
 
-\item{caption}{text for a caption, it's best to mention any published product related to the data set.
+\item{caption}{Character string, text for a caption. It's best to mention any published product related to the data set.
 Defaults to omitting any caption}
 
-\item{filetype}{defaults to 'pdf' for saving a pdf page for distribution with data,
+\item{filetype}{Character string, defaults to 'pdf' for saving a pdf page for distribution with data,
 but 'png' (or any other format supported by ?ggsave) can be used to create
 a map for embedding in a publication or poster.}
+
+\item{cities}{Boolean, whether to draw cities or not, Defaults to TRUE.}
 }
 \description{
 mapmakR
