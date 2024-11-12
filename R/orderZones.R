@@ -31,12 +31,12 @@
 #'  ggplot2::theme_classic() +
 #'
 #'  ggplot2::scale_y_continuous(
-#'    'Mean Annual Temperature (C\u00B0)',
-#'    ggplot2::sec.axis = ggplot2::sec_axis( ~ (. * 9/5) + 32, name = "MAT (F\u00B0)")
+#'    name = 'Mean Annual Temperature (C\u00B0)',
+#'    sec.axis = ggplot2::sec_axis( ~ (. * 9/5) + 32, name = "MAT (F\u00B0)")
 #'  ) +
 #'  ggplot2::scale_x_continuous(
-#'    'Annual Precipitation (mm)',
-#'    ggplot2::sec.axis = ggplot2::sec_axis( ~ . * 0.0393701, name = "AP (inches)")
+#'    name = 'Annual Precipitation (mm)',
+#'    sec.axis = ggplot2::sec_axis( ~ . * 0.0393701, name = "AP (inches)")
 #'  )
 #' @export
 orderZones <- function(x, SeedZone, n, ...){
@@ -71,45 +71,3 @@ orderZones <- function(x, SeedZone, n, ...){
   return(values)
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-nc <- sf::st_read(system.file("shape/nc.shp", package="sf"), quiet = TRUE) |>
- dplyr::slice_head(n = 10)
-
-pts <- orderZones(nc, SeedZone = 'NAME', n = 100)
-#'
-#'
-SZplot <- ggplot2::ggplot() +
-  ggplot2::geom_point(data = pts,
-                      ggplot2::aes(
-                        x = meanAP,
-                        y = meanMAT,
-                        color = Zone) ) +
-  ggplot2::labs(
-    title = 'Relationship between Temperature and Precipitation across Seed Zones',
-    color = 'Seed Zone',
-    caption = 'Source: PRISM 1990-2020 climate normals') +
- ggplot2::theme_classic() +
- ggplot2::scale_y_continuous(
-    'Mean Annual Temperature (C\u00B0)',
-    sec.axis = ggplot2::sec_axis( ~ (. * 9/5) + 32, name = "MAT (F\u00B0)")
-  ) +
-  ggplot2::scale_x_continuous(
-    'Annual Precipitation (mm)',
-    sec.axis  =  ggplot2::sec_axis( ~ . * 0.0393701, name = "AP (inches)") )
-
-
-SZplot
-library(ggplot2)

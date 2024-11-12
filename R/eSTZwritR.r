@@ -22,7 +22,7 @@
 #' @format A data frame/tibble/sf with 3 rows and 2 columns:
 #' \describe{
 #'   \item{US_L3CODE}{Ecoregion code}
-#'   \item{US_L3CODE}{Full ecoregion name}
+#'   \item{US_L3NAME}{Full ecoregion name}
 #'   \item{geometry}{sf geometry column}
 #' }
 "omernik"
@@ -42,13 +42,3 @@
 #'   \item{geometry}{sf geometry column}
 #' }
 "regions"
-
-#' select cities for cartography
-#'
-#' Downloaded from https://simplemaps.com/data/us-cities and subset using R.
-#' @format A geospatial vector data set of some US cities with two text columns in addition to geometry list column.
-#' \describe{
-#'  \item{City}{Full City name}
-#'  \item{State}{Abbreviated state name}
-#' }
-NULL

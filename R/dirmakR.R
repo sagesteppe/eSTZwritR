@@ -3,7 +3,6 @@
 #' @description Create a directory following standard conventions to ensure appropriate
 #' placement of subdirectories and naming conventions.
 #'
-#' @param x DATA PLACEHOLDER
 #' @param outpath the directory folder where the final products will be placed. Note there is no need
 #' to create an independent folder to hold them, this will be included in the product.
 #' @param sci_name the scientific name of the taxon

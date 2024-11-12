@@ -20,8 +20,6 @@ to create an independent folder to hold them, this will be included in the produ
 
 \item{estz_type}{one of 'lg' for landscape genetics (or genetic), 'cg' for common garden, or 'cm' for climate matched.
 If multiple approaches choose the most robust method, e.g. 'cg' > 'lg' > 'cm'}
-
-\item{x}{DATA PLACEHOLDER}
 }
 \description{
 Create a directory following standard conventions to ensure appropriate

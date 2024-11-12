@@ -44,11 +44,11 @@ SZplot <- ggplot2::ggplot() +
  ggplot2::theme_classic() +
 
  ggplot2::scale_y_continuous(
-   'Mean Annual Temperature (C\u00B0)',
-   ggplot2::sec.axis = ggplot2::sec_axis( ~ (. * 9/5) + 32, name = "MAT (F\u00B0)")
+   name = 'Mean Annual Temperature (C\u00B0)',
+   sec.axis = ggplot2::sec_axis( ~ (. * 9/5) + 32, name = "MAT (F\u00B0)")
  ) +
  ggplot2::scale_x_continuous(
-   'Annual Precipitation (mm)',
-   ggplot2::sec.axis = ggplot2::sec_axis( ~ . * 0.0393701, name = "AP (inches)")
+   name = 'Annual Precipitation (mm)',
+   sec.axis = ggplot2::sec_axis( ~ . * 0.0393701, name = "AP (inches)")
  )
 }

@@ -10,8 +10,8 @@
 #' @examples
 #' df <- data.frame(
 #' id = 1:10,
-#' gridcode = sample(1:10, replace = F),
-#' zone = sample(LETTERS, 10, replace = F),
+#' gridcode = sample(1:10, replace = FALSE),
+#' zone = sample(LETTERS, 10, replace = FALSE),
 #' bio1_sd = runif(10, 5, 7),
 #' bio8_mean = runif(10, 5, 7)
 #' )
@@ -88,7 +88,7 @@ fieldsmakR <- function(x, SeedZone, ID, SZName, AreaAcres){
       cnames_bio <- cnames[grep('^BIO', cnames)]
       cnames_bio <- cnames_bio[order(as.numeric(gsub('[A-z]', '', cnames_bio)))]
 
-      cnames_unk <- cnames[ grep('^BIO', cnames, invert = T) ]
+      cnames_unk <- cnames[ grep('^BIO', cnames, invert = TRUE) ]
       cnames_unk <- cnames_unk[order(cnames_unk)]
       cnames <- c(cnames_bio, cnames_unk)
       message(

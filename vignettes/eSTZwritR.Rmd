@@ -37,14 +37,14 @@ library(tidyverse)
 
 ### Region Coding
 
-```{r}
+```{r, eval = F}
 regionCoding()
 ```
 
 ### Directory (Folder) Structure
 
 ![Directory Structure](./images/DirectoryStructure.png)
-```{r}
+```{r, eval = F}
 dirmakR()
 ```
 
@@ -54,7 +54,7 @@ dirmakR()
 
 ### Maps 
 
-```{r}
+```{r, eval = F}
 mapmakR()
 ```
 
@@ -67,7 +67,7 @@ mapmakR()
 
 ![Field Names](./images/FieldNames_Variables.png)
 
-```{r}
+```{r, eval = F}
 fieldsmakR()
 ```
 

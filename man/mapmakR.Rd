@@ -4,7 +4,7 @@
 \alias{mapmakR}
 \title{Create standardized maps for empirical seed transfer zones}
 \usage{
-mapmakR(x, species, outdir, ecoregions, landscape, caption, filetype)
+mapmakR(x, species, outdir, ecoregions, cities, landscape, caption, filetype)
 }
 \arguments{
 \item{x}{the vector (e.g. shapefile) or raster dataset to plot, note vector data will be coerced
@@ -16,6 +16,8 @@ to raster before plotting.}
 
 \item{ecoregions}{Boolean, whether to draw ecoregions or not. Defaults to TRUE.}
 
+\item{cities}{Boolean, whether to draw cities or not, Defaults to TRUE.}
+
 \item{landscape}{Boolean, whether to draw the map in a landscape orientation or not. Defaults to TRUE}
 
 \item{caption}{Character string, text for a caption. It's best to mention any published product related to the data set.
@@ -25,8 +27,9 @@ and coordinate reference system information.}
 \item{filetype}{Character string, defaults to 'pdf' for saving a pdf page for distribution with data,
 but 'png' (or any other format supported by ?ggsave) can be used to create
 a map for embedding in a publication or poster.}
-
-\item{cities}{Boolean, whether to draw cities or not, Defaults to TRUE.}
+}
+\value{
+Writes a PDF (or other specified \code{filetype}) to disk, and returns the ggplot object to console allowing user to modify it for other purposes.
 }
 \description{
 Create a full page PDF map for distributing with the eSTZ for quick refernce by users.

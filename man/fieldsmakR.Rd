@@ -23,8 +23,8 @@ Appropriately order the fields of a shapefile and ensure consistent naming of th
 \examples{
 df <- data.frame(
 id = 1:10,
-gridcode = sample(1:10, replace = F),
-zone = sample(LETTERS, 10, replace = F),
+gridcode = sample(1:10, replace = FALSE),
+zone = sample(LETTERS, 10, replace = FALSE),
 bio1_sd = runif(10, 5, 7),
 bio8_mean = runif(10, 5, 7)
 )
