@@ -23,6 +23,8 @@ If one package is not easy for the install, perhaps try the other.
 # install.packages('devtools')
 devtools::install_github('sagesteppe/eSTZwritR')
 
+file.path(system.file(package ='eSTZwritR'), 'extdata', 'Carto_cities.gpkg')
+
 #install.packages('remotes') 
 #remotes::install_github('sagesteppe/eSTZwritR')
 ```
