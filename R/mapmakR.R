@@ -15,6 +15,7 @@
 #' @param filetype Character string, defaults to 'pdf' for saving a pdf page for distribution with data,
 #' but 'png' (or any other format supported by ?ggsave) can be used to create
 #' a map for embedding in a publication or poster.
+#' @param returns Writes a PDF (or other specified `filetype`) to disk, and returns the ggplot object to console allowing user to modify it for other purposes.
 #' @export
 mapmakR <- function(x, species, outdir, ecoregions, landscape, caption, filetype){
 
@@ -124,5 +125,7 @@ mapmakR <- function(x, species, outdir, ecoregions, landscape, caption, filetype
            plot = p, dpi = 300, height = 11, width = 8.5, units = 'in')
   }
   message('File saved to: ', fname)
+
+  return(p)
 
 }
