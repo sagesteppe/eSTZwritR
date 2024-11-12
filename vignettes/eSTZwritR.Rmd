@@ -16,20 +16,57 @@ knitr::opts_chunk$set(
 
 `eSTZwritR` is available only on github. 
 It can be installed using the `remotes` or `devtools` packages. 
-Users from different operating systems (e.g. Mac and Windows) have differing sucess with the above two packages in general. 
+Users from different operating systems (e.g. Mac and Windows) have differing success with the above two packages in general. 
 If one package is not easy for the install, perhaps try the other. 
 
-```{r Installation}
+```{r Installation, eval = F}
 # install.packages('devtools')
 devtools::install_github('sagesteppe/eSTZwritR')
 
-#install.packages('remotes')
+#install.packages('remotes') 
 #remotes::install_github('sagesteppe/eSTZwritR')
 ```
 
+We will also load the core tidyverse packages for assorted data handling tasks. 
 ```{r setup, message = FALSE}
 library(eSTZwritR)
-library(ggplot2)
+library(tidyverse)
+```
+
+### Region Coding
+
+```{r}
+regionCoding()
+```
+
+### Directory (Folder) Structure
+
+![Directory Structure](./images/DirectoryStructure.png)
+```{r}
+dirmakR()
 ```
 
 
+### File Naming 
+
+
+### Maps 
+
+```{r}
+mapmakR()
+```
+
+
+### Data Formats 
+
+### Vector Data Field Attibutes. 
+
+![Vector Data (~Shapefile) Field Names](./images/FieldNames.png)
+
+![Field Names](./images/FieldNames_Variables.png)
+
+```{r}
+fieldsmakR()
+```
+
+### Metadata 
