@@ -1,4 +1,7 @@
 #' Ensure that all fields in a shapefile are named correctly, and in the right order.
+#'
+#' @description Appropriately order the fields of a shapefile and ensure consistent naming of them.
+#'
 #' @param x an sf/tibble/dataframe containing the spatial data which will be distributed as a final product
 #' @param SeedZone a string containing the numeric SeedZone code, if not supplied function will fail.
 #' @param ID a string specifying this columns names, If not supplied will create one.

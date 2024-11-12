@@ -18,7 +18,7 @@ fieldsmakR(x, SeedZone, ID, SZName, AreaAcres)
 \item{AreaAcres}{a string containing the name for the column containing an area measurement, if not supplied this value will be calculated using epsg:5070}
 }
 \description{
-Ensure that all fields in a shapefile are named correctly, and in the right order.
+Appropriately order the fields of a shapefile and ensure consistent naming of them.
 }
 \examples{
 df <- data.frame(

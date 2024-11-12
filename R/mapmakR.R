@@ -1,5 +1,7 @@
-#' mapmakR
 #' Create standardized maps for empirical seed transfer zones
+#'
+#' @description Create a full page PDF map for distributing with the eSTZ for quick refernce by users.
+#'
 #' @param x the vector (e.g. shapefile) or raster dataset to plot, note vector data will be coerced
 #' to raster before plotting.
 #' @param species Character string, the name of the species which is being mapped.
@@ -13,6 +15,7 @@
 #' @param filetype Character string, defaults to 'pdf' for saving a pdf page for distribution with data,
 #' but 'png' (or any other format supported by ?ggsave) can be used to create
 #' a map for embedding in a publication or poster.
+#' @export
 mapmakR <- function(x, species, outdir, ecoregions, landscape, caption, filetype){
 
   if(missing(species))(stop('Species Name Not supplied.'))

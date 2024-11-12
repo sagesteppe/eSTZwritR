@@ -1,4 +1,8 @@
 #' Create a directory and write out all empirical stz data
+#'
+#' @description Create a directory following standard conventions to ensure appropriate
+#' placement of subdirectories and naming conventions.
+#'
 #' @param x DATA PLACEHOLDER
 #' @param outpath the directory folder where the final products will be placed. Note there is no need
 #' to create an independent folder to hold them, this will be included in the product.
@@ -8,6 +12,7 @@
 #' @param overwrite whether to overwrite the existing directory (if it already exists)
 #' @param estz_type one of 'lg' for landscape genetics (or genetic), 'cg' for common garden, or 'cm' for climate matched.
 #' If multiple approaches choose the most robust method, e.g. 'cg' > 'lg' > 'cm'
+#' @export
 dir_makr <- function(outpath, sci_name, nrcs_code, regioncode, overwrite, estz_type){
 
   if(missing(overwrite)){overwrite <- FALSE}

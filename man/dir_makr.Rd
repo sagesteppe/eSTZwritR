@@ -24,5 +24,6 @@ If multiple approaches choose the most robust method, e.g. 'cg' > 'lg' > 'cm'}
 \item{x}{DATA PLACEHOLDER}
 }
 \description{
-Create a directory and write out all empirical stz data
+Create a directory following standard conventions to ensure appropriate
+placement of subdirectories and naming conventions.
 }

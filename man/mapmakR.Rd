@@ -2,8 +2,7 @@
 % Please edit documentation in R/mapmakR.R
 \name{mapmakR}
 \alias{mapmakR}
-\title{mapmakR
-Create standardized maps for empirical seed transfer zones}
+\title{Create standardized maps for empirical seed transfer zones}
 \usage{
 mapmakR(x, species, outdir, ecoregions, landscape, caption, filetype)
 }
@@ -20,7 +19,8 @@ to raster before plotting.}
 \item{landscape}{Boolean, whether to draw the map in a landscape orientation or not. Defaults to TRUE}
 
 \item{caption}{Character string, text for a caption. It's best to mention any published product related to the data set.
-Defaults to omitting any caption}
+Defaults to omitting any caption, except for the data sources (if omernik and cities are used),
+and coordinate reference system information.}
 
 \item{filetype}{Character string, defaults to 'pdf' for saving a pdf page for distribution with data,
 but 'png' (or any other format supported by ?ggsave) can be used to create
@@ -29,6 +29,5 @@ a map for embedding in a publication or poster.}
 \item{cities}{Boolean, whether to draw cities or not, Defaults to TRUE.}
 }
 \description{
-mapmakR
-Create standardized maps for empirical seed transfer zones
+Create a full page PDF map for distributing with the eSTZ for quick refernce by users.
 }
