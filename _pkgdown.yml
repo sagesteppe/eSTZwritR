@@ -1,7 +1,6 @@
 url: https://sagesteppe.github.io/eSTZwritR/
 template:
   bootstrap: 5
-
 reference:
   - title: "Main Functions"
     desc: "User facing functions"
@@ -10,6 +9,7 @@ reference:
       - dirmakR
       - mapmakR
       - fieldsmakR
+      - orderZones
   - title: "Data"
     desc: "Preparation for Environmental Based Sampling"
     contents:

@@ -12,7 +12,7 @@
 #' @param estz_type one of 'lg' for landscape genetics (or genetic), 'cg' for common garden, or 'cm' for climate matched.
 #' If multiple approaches choose the most robust method, e.g. 'cg' > 'lg' > 'cm'
 #' @export
-dir_makr <- function(outpath, sci_name, nrcs_code, regioncode, overwrite, estz_type){
+dirmakR <- function(outpath, sci_name, nrcs_code, regioncode, overwrite, estz_type){
 
   if(missing(overwrite)){overwrite <- FALSE}
   if(length(regioncode)>1){regioncode <- regioncode[1]}
