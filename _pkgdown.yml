@@ -19,7 +19,7 @@ reference:
   - Carto_cities
   - ACTH7
   - GAI-cont
-  - GIA-coarse
+  - GAI-coarse
 - title: Internal
   desc: Data prep functions
   contents: buffR
