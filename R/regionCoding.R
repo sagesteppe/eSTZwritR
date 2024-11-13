@@ -14,7 +14,7 @@
 regionCoding <- function(x, n){
 
   if(missing(n)){n <- 1000}
-  #regions <- data('interiorRegions')
+  regions <- data('interiorRegions')
 
   pts <- sf::st_sample(x, size = n, type = 'regular') |>
     sf::st_as_sf() |>
