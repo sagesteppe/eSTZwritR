@@ -30,6 +30,6 @@ acth7 <- sf::st_read(file.path(
 
 rc <- regionCoding(acth7)
 rc$SuggestedName # name suggestions
-rc$RegionsCovered # names suggested
+rc$RegionsCovered # number of random points in each DOI region
 
 }

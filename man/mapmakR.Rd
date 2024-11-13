@@ -4,13 +4,25 @@
 \alias{mapmakR}
 \title{Create standardized maps for empirical seed transfer zones}
 \usage{
-mapmakR(x, species, outdir, ecoregions, cities, landscape, caption, filetype)
+mapmakR(
+  x,
+  species,
+  save,
+  outdir,
+  ecoregions,
+  cities,
+  landscape,
+  caption,
+  filetype
+)
 }
 \arguments{
 \item{x}{the vector (e.g. shapefile) or raster dataset to plot, note vector data will be coerced
 to raster before plotting.}
 
 \item{species}{Character string, the name of the species which is being mapped.}
+
+\item{save}{Boolean, whether to save the file or not. Defaults to TRUE.}
 
 \item{outdir}{Character string, a directory to save the map to. Defaults to the current working directory.}
 
@@ -33,4 +45,11 @@ Writes a PDF (or other specified \code{filetype}) to disk, and returns the ggplo
 }
 \description{
 Create a full page PDF map for distributing with the eSTZ for quick refernce by users.
+}
+\examples{
+acth7 <- sf::st_read(file.path(
+  system.file(package="eSTZwritR"), "extdata", 'ACTH7.gpkg')
+)
+
+mapmakR(acth7, 'Eriocoma thurberiana', save = FALSE, ecoregions = TRUE, cities = TRUE, caption = 'Johnson et al. 2017'))
 }
