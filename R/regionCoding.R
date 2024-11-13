@@ -5,6 +5,15 @@
 #' @param x an empirical STZ as vector data.
 #' @param n a sample size for determining which interior regions cover the most area of the stz
 #' defaults to 1000, sizes above a couple thousand seem gratuitous.
+#' @examples
+#' acth7 <- sf::st_read(file.path(
+#'   system.file(package="eSTZwritR"), "extdata", 'ACTH7.gpkg')
+#' )
+#'
+#' rc <- regionCoding(acth7)
+#' rc$SuggestedName # name suggestions
+#' rc$RegionsCovered # names suggested
+#'
 #' @return a list with a vector and a dataframe. The vector lists this component of the filename, at most
 #' two interior regions separated by a '-'.
 #' The dataframe contains a count of the number of randomly drawn points which intersect
@@ -14,7 +23,6 @@
 regionCoding <- function(x, n){
 
   if(missing(n)){n <- 1000}
-  data('regions')
 
   regions <- sf::st_read(
     file.path(
@@ -22,9 +30,11 @@ regionCoding <- function(x, n){
     )
   )
 
+  sf::st_agr(regions) <- 'constant';  sf::st_agr(x) <- 'constant'
   pts <- sf::st_sample(x, size = n, type = 'regular') |>
     sf::st_as_sf() |>
-    sf::st_transform(pts, sf::st_crs(regions)) |>
+    sf::st_set_crs(sf::st_crs(x)) |>
+    sf::st_transform(sf::st_crs(regions)) |>
     sf::st_intersection(regions) |>
     sf::st_drop_geometry() |>
     dplyr::count(REG_ABB) |>
@@ -42,3 +52,4 @@ regionCoding <- function(x, n){
       )
     )
 }
+

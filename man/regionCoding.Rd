@@ -23,3 +23,13 @@ to st:sample.
 This function helps determine which Interior Regions coincide with the majority
 of an empirical seed transfer zone and should be used for naming the file.
 }
+\examples{
+acth7 <- sf::st_read(file.path(
+  system.file(package="eSTZwritR"), "extdata", 'ACTH7.gpkg')
+)
+
+rc <- regionCoding(acth7)
+rc$SuggestedName # name suggestions
+rc$RegionsCovered # names suggested
+
+}
