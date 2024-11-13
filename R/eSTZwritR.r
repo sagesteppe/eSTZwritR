@@ -48,7 +48,7 @@
 #'
 #' This data set is curated to feature cities which can be helpful for contextualizing locations in a STZ map.
 #' It is sourced from https://simplemaps.com/data/us-cities, and subst in a script available in the raw-data folder 'EssentialCities.R'.
-#' @name simplemaps_uscities_basicv1.79
+#' @name Carto_cities
 #'
 #' @section Carto_cities.gpkg:
 #'

@@ -16,6 +16,10 @@ reference:
   - countries
   - omernik
   - regions
+  - Carto_cities
+  - ACTH7
+  - GAI-cont
+  - GIA-coarse
 - title: Internal
   desc: Data prep functions
   contents: buffR
