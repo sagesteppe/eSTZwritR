@@ -21,7 +21,12 @@
 #'   system.file(package="eSTZwritR"), "extdata", 'ACTH7.gpkg')
 #' )
 #'
-#' mapmakR(acth7, 'Eriocoma thurberiana', save = FALSE, ecoregions = TRUE, cities = TRUE, caption = 'Johnson et al. 2017'))
+#' mapmakR(acth7,
+#'  species = 'Eriocoma thurberiana',
+#'  save = FALSE,
+#'  ecoregions = TRUE,
+#'  cities = TRUE,
+#'  caption = 'Johnson et al. 2017')
 #' @returns Writes a PDF (or other specified `filetype`) to disk, and returns the ggplot object to console allowing user to modify it for other purposes.
 #' @export
 mapmakR <- function(x, species, save, outdir, ecoregions, cities, landscape, caption, filetype){

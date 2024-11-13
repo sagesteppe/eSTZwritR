@@ -51,5 +51,10 @@ acth7 <- sf::st_read(file.path(
   system.file(package="eSTZwritR"), "extdata", 'ACTH7.gpkg')
 )
 
-mapmakR(acth7, 'Eriocoma thurberiana', save = FALSE, ecoregions = TRUE, cities = TRUE, caption = 'Johnson et al. 2017'))
+mapmakR(acth7,
+ species = 'Eriocoma thurberiana',
+ save = FALSE,
+ ecoregions = TRUE,
+ cities = TRUE,
+ caption = 'Johnson et al. 2017')
 }
