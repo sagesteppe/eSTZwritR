@@ -10,14 +10,16 @@
 #' The dataframe contains a count of the number of randomly drawn points which intersect
 #' interior regions. For areas with near ties we recommend increasing the sample size argument, `n` which is paseed to
 #'  to st:sample.
-#'  @export
+#' @export
 regionCoding <- function(x, n){
 
   if(missing(n)){n <- 1000}
-  regions <- data('interiorRegions')
+  data('regions', envir=environment())
 
+  sf::st_agr(x) <- 'constant' ; sf::st_agr(regions) <- 'constant'
   pts <- sf::st_sample(x, size = n, type = 'regular') |>
     sf::st_as_sf() |>
+    sf::st_transform(pts, sf::st_crs(regions)) |>
     sf::st_intersection(regions) |>
     sf::st_drop_geometry() |>
     dplyr::count(REG_ABB) |>
@@ -35,3 +37,16 @@ regionCoding <- function(x, n){
       )
     )
 }
+
+
+acth7 <- sf::st_read(file.path(
+ system.file(package="eSTZwritR"), "extdata", 'ACTH7.gpkg')
+ ) |>
+  sf::st_make_valid() |>
+  sf::st_transform(4326)
+
+
+regionCoding(acth7)
+sf::st_crs(regions)
+
+library(eSTZwritR)
