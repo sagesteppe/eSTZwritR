@@ -34,6 +34,7 @@
 #' They are imported directly and silently by the `regionCoding` function to determine which geographic areas to append to a filename.
 #' These data are sourced from the US Department of Interior (DOI) \url{https://www.doi.gov/employees/reorg/unified-regional-boundaries}.
 #' However, the 'REB_ABB' variable, which is utlimately used by eSTZwritR, is derived here and is not an officially sanctioned abbrevation by the USDOI.
+#' @name regions
 #' @format A data frame/tibble/sf with 3 rows and 2 columns:
 #' \describe{
 #'   \item{REG_NUM}{Region number}
@@ -41,7 +42,7 @@
 #'   \item{REG_ABB}{Unofficial 2-3-letter region abbreviation}
 #'   \item{geometry}{sf geometry column}
 #' }
-"regions"
+NULL
 
 
 #' Cities for cartography

@@ -18,7 +18,6 @@ two interior regions separated by a '-'.
 The dataframe contains a count of the number of randomly drawn points which intersect
 interior regions. For areas with near ties we recommend increasing the sample size argument, \code{n} which is paseed to
 to st:sample.
-@export
 }
 \description{
 This function helps determine which Interior Regions coincide with the majority
