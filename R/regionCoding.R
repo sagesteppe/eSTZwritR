@@ -12,7 +12,7 @@
 #'
 #' rc <- regionCoding(acth7)
 #' rc$SuggestedName # name suggestions
-#' rc$RegionsCovered # names suggested
+#' rc$RegionsCovered # number of random points in each DOI region
 #'
 #' @return a list with a vector and a dataframe. The vector lists this component of the filename, at most
 #' two interior regions separated by a '-'.

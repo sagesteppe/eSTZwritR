@@ -5,6 +5,7 @@
 #' @param x the vector (e.g. shapefile) or raster dataset to plot, note vector data will be coerced
 #' to raster before plotting.
 #' @param species Character string, the name of the species which is being mapped.
+#' @param save Boolean, whether to save the file or not. Defaults to TRUE.
 #' @param outdir Character string, a directory to save the map to. Defaults to the current working directory.
 #' @param ecoregions Boolean, whether to draw ecoregions or not. Defaults to TRUE.
 #' @param cities Boolean, whether to draw cities or not, Defaults to TRUE.
@@ -15,11 +16,18 @@
 #' @param filetype Character string, defaults to 'pdf' for saving a pdf page for distribution with data,
 #' but 'png' (or any other format supported by ?ggsave) can be used to create
 #' a map for embedding in a publication or poster.
+#' @examples
+#' acth7 <- sf::st_read(file.path(
+#'   system.file(package="eSTZwritR"), "extdata", 'ACTH7.gpkg')
+#' )
+#'
+#' mapmakR(acth7, 'Eriocoma thurberiana', save = FALSE, ecoregions = TRUE, cities = TRUE, caption = 'Johnson et al. 2017'))
 #' @returns Writes a PDF (or other specified `filetype`) to disk, and returns the ggplot object to console allowing user to modify it for other purposes.
 #' @export
-mapmakR <- function(x, species, outdir, ecoregions, cities, landscape, caption, filetype){
+mapmakR <- function(x, species, save, outdir, ecoregions, cities, landscape, caption, filetype){
 
   if(missing(species))(stop('Species Name Not supplied.'))
+  if(missing(save)){save <- TRUE}
   if(missing(outdir)){outdir = getwd()}
   if(missing(landscape)){landscape = TRUE}
   if(missing(ecoregions)){ecoregions = TRUE}
@@ -117,14 +125,16 @@ mapmakR <- function(x, species, outdir, ecoregions, cities, landscape, caption, 
   }
 
 # save file to location
-  if(landscape == TRUE){
-    ggsave(filename = fname,
-           plot = p, dpi = 300, height = 8.5, width = 11, units = 'in')
-  } else {
-    ggsave(filename = fname,
-           plot = p, dpi = 300, height = 11, width = 8.5, units = 'in')
+  if(save==TRUE){
+    if(landscape == TRUE){
+      ggsave(filename = fname,
+             plot = p, dpi = 300, height = 8.5, width = 11, units = 'in')
+    } else {
+      ggsave(filename = fname,
+             plot = p, dpi = 300, height = 11, width = 8.5, units = 'in')
+    }
+    message('File saved to: ', fname)
   }
-  message('File saved to: ', fname)
 
   return(p)
 
