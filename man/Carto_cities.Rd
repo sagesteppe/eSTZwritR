@@ -2,14 +2,15 @@
 % Please edit documentation in R/eSTZwritR.r
 \name{Carto_cities}
 \alias{Carto_cities}
-\title{Dataset Carto_cities}
+\title{Cities for cartography}
+\format{
+A data frame/tibble/sf with 2 columns
+\describe{
+\item{City}{Full name of city.}
+\item{State}{Abbreviation of State Name, using FIPS code.}
+}
+}
 \description{
 This data set is curated to feature cities which can be helpful for contextualizing locations in a STZ map.
 It is sourced from https://simplemaps.com/data/us-cities, and subst in a script available in the raw-data folder 'EssentialCities.R'.
 }
-\section{Carto_cities.gpkg}{
-
-
-This data is used in mapmakR().
-}
-

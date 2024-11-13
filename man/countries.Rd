@@ -3,7 +3,7 @@
 \docType{data}
 \name{countries}
 \alias{countries}
-\title{Borders of three North American nations.}
+\title{Borders of three North American nations}
 \format{
 A data frame/tibble/sf with 3 rows and 2 columns:
 \describe{

@@ -1,4 +1,4 @@
-#' Borders of three North American nations.
+#' Borders of three North American nations
 #'
 #' This data set contains the borders of three North American countries.
 #' It is used within the `mapmaker` function to showcase the edges of both landmasses and where the
@@ -44,48 +44,51 @@
 "regions"
 
 
-#' Dataset Carto_cities
+#' Cities for cartography
 #'
 #' This data set is curated to feature cities which can be helpful for contextualizing locations in a STZ map.
 #' It is sourced from https://simplemaps.com/data/us-cities, and subst in a script available in the raw-data folder 'EssentialCities.R'.
 #' @name Carto_cities
-#'
-#' @section Carto_cities.gpkg:
-#'
-#' This data is used in mapmakR().
+#' @format A data frame/tibble/sf with 2 columns
+#' \describe{
+#'   \item{City}{Full name of city.}
+#'   \item{State}{Abbreviation of State Name, using FIPS code.}
+#' }
 NULL
 
-#' Dataset ACTH7.gpkg
+#' An empirical seed transfer zone
 #'
 #' This data set is from Johnson et al. 2017, and slightly modified by us.
 #' It is an eSTZ of Eriocoma thurberiana.
 #' Johnson, R. C., E. A. Leger, and Ken Vance-Borland. "Genecology of Thurber’s Needlegrass (Achnatherum thurberianum \[Piper\] Barkworth) in the Western United States." Rangeland Ecology & Management 70.4 (2017): 509-517.
 #' @name ACTH7
-#'
-#' @section ACTH7.gpkg:
-#'
-#' This data is, by default, used in orderZones()
+#' @format A data frame/tibble/sf with 2 columns
+#' \describe{
+#'   \item{ID}{A unique ID for each each polygon, note this includes gaps in the numbering. }
+#'   \item{GRIDCODE}{From an ESRI raster, the classification output used during creating the product. }
+#'   \item{area_ha}{From ESRI calulcated area of each polygon.}
+#'   \item{zone}{STZ defined by the authors from the GRIDCODE.}
+#' }
 NULL
 
-#' Dataset GAI-coarse
+#' A raster of Global Aridity Index version 3
 #'
 #' This data set is from Zomer et al. 2022, and modified by sub-setting to most US territories, and making more coarse (factor of 2).
 #' Zomer, Robert J., Jianchu Xu, and Antonio Trabucco. "Version 3 of the global aridity index and potential evapotranspiration database." Scientific Data 9.1 (2022): 409.
 #' @name GAI-coarse
-#'
-#' @section GAI-coarse.tif:
-#'
-#' This data is, optionally, used in orderZones()
+#' @format A raster data set
+#' \describe{
+#'   \item{GAI}{GAI stored as an integer, needs divided by 10000 to receover decimal places.  }
+#' }
 NULL
 
-#' Dataset GAI-cont
+#' A raster of Global Aridity Index version 3
 #'
 #' This data set is from Zomer et al. 2022, and modified by sub-setting to the contiguous USA.
 #' Zomer, Robert J., Jianchu Xu, and Antonio Trabucco. "Version 3 of the global aridity index and potential evapotranspiration database." Scientific Data 9.1 (2022): 409.
 #' @name GAI-cont
-#'
-#' @section GAI-cont.tif:
-#'
-#' This data is, by default, used in orderZones()
+#' @format A raster data set
+#' \describe{
+#'   \item{GAI}{GAI stored as an integer, needs divided by 10000 to receover decimal places.  }
+#' }
 NULL
-

@@ -2,14 +2,14 @@
 % Please edit documentation in R/eSTZwritR.r
 \name{GAI-coarse}
 \alias{GAI-coarse}
-\title{Dataset GAI-coarse}
+\title{A raster of Global Aridity Index version 3}
+\format{
+A raster data set
+\describe{
+\item{GAI}{GAI stored as an integer, needs divided by 10000 to receover decimal places.  }
+}
+}
 \description{
 This data set is from Zomer et al. 2022, and modified by sub-setting to most US territories, and making more coarse (factor of 2).
 Zomer, Robert J., Jianchu Xu, and Antonio Trabucco. "Version 3 of the global aridity index and potential evapotranspiration database." Scientific Data 9.1 (2022): 409.
 }
-\section{GAI-coarse.tif}{
-
-
-This data is, optionally, used in orderZones()
-}
-

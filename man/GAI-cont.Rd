@@ -2,14 +2,14 @@
 % Please edit documentation in R/eSTZwritR.r
 \name{GAI-cont}
 \alias{GAI-cont}
-\title{Dataset GAI-cont}
+\title{A raster of Global Aridity Index version 3}
+\format{
+A raster data set
+\describe{
+\item{GAI}{GAI stored as an integer, needs divided by 10000 to receover decimal places.  }
+}
+}
 \description{
 This data set is from Zomer et al. 2022, and modified by sub-setting to the contiguous USA.
 Zomer, Robert J., Jianchu Xu, and Antonio Trabucco. "Version 3 of the global aridity index and potential evapotranspiration database." Scientific Data 9.1 (2022): 409.
 }
-\section{GAI-cont.tif}{
-
-
-This data is, by default, used in orderZones()
-}
-

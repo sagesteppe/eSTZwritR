@@ -11,7 +11,7 @@ reference:
   - fieldsmakR
   - orderZones
 - title: Data
-  desc: Preparation for Environmental Based Sampling
+  desc: Data sets for examples and functions
   contents:
   - countries
   - omernik

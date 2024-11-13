@@ -19,7 +19,7 @@ library(eSTZwritR)
 ```
 
 ## Usage  
-eSTZwritR requires only four user-facing functions to implement all data sharing conventions. 
+eSTZwritR requires only five user-facing functions to implement all data sharing conventions. 
 
 |       Function        |         Purpose                   |              Output                 |
 |  :-----------------:  | :----------------------------:    | :--------------------------------:  |
@@ -27,8 +27,8 @@ eSTZwritR requires only four user-facing functions to implement all data sharing
 |        dirmakR        | create Directory                  | Directory, spatial data             |             
 |        mapmakR        | create Map                        | PDF or png map (for publications)   |  
 |      fieldsmakR       | ensure fields (columns) are named | sf object to local location         | 
-
-
+|      orderZones       | ordering seed zone numbers        | updated vector data, plot, summary  | 
+   
 ## Documentation  
 A poster describing the impetus behind the creation of eSTZwritR, and broadly outlining it's functionality is available here (COMING SOON!). 
 
