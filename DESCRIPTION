@@ -16,10 +16,11 @@ Imports:
     dplyr,
     ggplot2,
     ggtext,
-    scales,
     spData,
     tigris,
-    units
+    units,
+    RColorBrewer,
+    ggpubr
 Depends: 
     R (>= 2.10)
 LazyData: true

@@ -2,8 +2,7 @@
 % Please edit documentation in R/buffR.R
 \name{buffR}
 \alias{buffR}
-\title{buffR
-buffer an input STZ to determine map extents}
+\title{buffR}
 \usage{
 buffR(x, buf_prcnt)
 }
@@ -12,7 +11,10 @@ buffR(x, buf_prcnt)
 
 \item{buf_prcnt}{the amount of buffering to add to the map, defaults to 0.025 or 2.5\%}
 }
+\value{
+a bounding box around the eSTZ product of the specified buffer amount.
+}
 \description{
-buffR
 buffer an input STZ to determine map extents
 }
+\keyword{internal}

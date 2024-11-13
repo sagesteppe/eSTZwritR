@@ -42,3 +42,50 @@
 #'   \item{geometry}{sf geometry column}
 #' }
 "regions"
+
+
+#' Dataset Carto_cities
+#'
+#' This data set is curated to feature cities which can be helpful for contextualizing locations in a STZ map.
+#' It is sourced from https://simplemaps.com/data/us-cities, and subst in a script available in the raw-data folder 'EssentialCities.R'.
+#' @name simplemaps_uscities_basicv1.79
+#'
+#' @section Carto_cities.gpkg:
+#'
+#' This data is used in mapmakR().
+NULL
+
+#' Dataset ACTH7.gpkg
+#'
+#' This data set is from Johnson et al. 2017, and slightly modified by us.
+#' It is an eSTZ of Eriocoma thurberiana.
+#' Johnson, R. C., E. A. Leger, and Ken Vance-Borland. "Genecology of Thurber’s Needlegrass (Achnatherum thurberianum \[Piper\] Barkworth) in the Western United States." Rangeland Ecology & Management 70.4 (2017): 509-517.
+#' @name ACTH7
+#'
+#' @section ACTH7.gpkg:
+#'
+#' This data is, by default, used in orderZones()
+NULL
+
+#' Dataset GAI-coarse
+#'
+#' This data set is from Zomer et al. 2022, and modified by sub-setting to most US territories, and making more coarse (factor of 2).
+#' Zomer, Robert J., Jianchu Xu, and Antonio Trabucco. "Version 3 of the global aridity index and potential evapotranspiration database." Scientific Data 9.1 (2022): 409.
+#' @name GAI-coarse
+#'
+#' @section GAI-coarse.tif:
+#'
+#' This data is, optionally, used in orderZones()
+NULL
+
+#' Dataset GAI-cont
+#'
+#' This data set is from Zomer et al. 2022, and modified by sub-setting to the contiguous USA.
+#' Zomer, Robert J., Jianchu Xu, and Antonio Trabucco. "Version 3 of the global aridity index and potential evapotranspiration database." Scientific Data 9.1 (2022): 409.
+#' @name GAI-cont
+#'
+#' @section GAI-cont.tif:
+#'
+#' This data is, by default, used in orderZones()
+NULL
+

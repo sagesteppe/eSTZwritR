@@ -33,7 +33,7 @@ mapmakR <- function(x, species, outdir, ecoregions, cities, landscape, caption, 
     }
 
   # Buffer the map so that the species only doesn't occupy the entire region.
-  extent <- buffeR(x)
+  extent <- buffR(x)
 
   # ggplot does the cropping to an extent, but we'll manually specify the borders
   # and what data we want here.

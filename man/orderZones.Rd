@@ -4,7 +4,7 @@
 \alias{orderZones}
 \title{Suggest seed zones names, or at least numeric orders, based on input polygons}
 \usage{
-orderZones(x, SeedZone, n, ...)
+orderZones(x, SeedZone, n, rasta, ...)
 }
 \arguments{
 \item{x}{an sf/tibble/dataframe containing the spatial data which will be distributed as a final product}
@@ -14,41 +14,56 @@ orderZones(x, SeedZone, n, ...)
 \item{n}{sample size of points across the entire shapefile for calculating an order, defaults to 2500. Note that this shouldn't
 exceed the number of raster cells of the products used to generate the stz, or results will be replicated.}
 
+\item{rasta}{Either a terra::spatrast object or, a character string of either "coarse" or 'cont' - short for contiguous USA.
+GAI coarse has been aggregated by a factor of 2 from it's native 1km resolution to 4k, GAI cont is in the native resolution, but only covers the USA and a degree or so of Canada.
+If neither of the rasters contained in the package meet your requirements, resubmit the GAI raster.}
+
 \item{...}{additional parameters passed onto sf::st_sample}
 }
+\value{
+A list containing three components, 'Reclassified' the shapefile which
+was submitted, with the #' seedzone values over written by the ones resulting from the function.
+'Summary' a dataframe containing the original zones, and final zones, as well as the calculated median and the number of samples used to calculate the median.
+'Plot' a ggpubr boxplot of the results of a kruskal-wallis test amongst seed zones.
+}
 \description{
-This function seeks to make STZ more simple to convey, or at least visualize. Rather than using seed zone names
-which relate to growth measurements, phenological responses, or combinations thereof, or zones from PCA axis we bastardize
-the results of these analyses to two major components which humans think about extensively. Mean annual temperature, and
-mean annual precipitation. By rescaling these two variables together we propose intuitively simple zones that follow a gradient from
-hot and dry to cool and moist.
+Given a shapefile of output seed transfer zones, with arbitrarily
+assigned class or zone identifiers (e.g. numeric) this function specifies an
+order to the zones from 1 to n zones reflecting an increase in humidity. In other
+words, this function can assign an order to Seed Zones ID's, where drier zones
+have lower numbers.
+
+We have found it very difficult to discuss zones resulting from any PCA type
+analysis, or incorporating measurements of phenology etc. Further it is very difficult
+for us to estimate which zone a new population would be in, or notice many trends
+in the zones at all. This function uses on aridity, as formulated in the Global
+Aridity Index Version 3, as the ordering variable for zone numbering. For more
+information on GAI please see https://www.nature.com/articles/s41597-022-01493-1.
+
+Results may not always be statistically robust, but hopefully convey some
+degree of useful information in their order regarding the range of the zones
+across the species.
 }
 \examples{
-nc <- sf::st_read(system.file("shape/nc.shp", package="sf")) |>
-  dplyr::slice_head(n = 10)
+acth7 <- sf::st_read(file.path(
+system.file(package="eSTZwritR"), "extdata", 'ACTH7.gpkg')
+) |>
+  sf::st_make_valid()
 
-pts <- orderZones(nc, SeedZone = 'NAME', n = 100)
+zoneOrder_suggestions <- orderZones(acth7, SeedZone = zone, n = 1000)
 
+zoneOrder_suggestions$Summary
+zoneOrder_suggestions$Plot
 
-SZplot <- ggplot2::ggplot() +
-  ggplot2::geom_point(data = pts,
-                     ggplot2::aes(
-                       x = AnnualPrecipitation,
-                       y = MeanAnnualTemp,
-                       color = SeedZone)
- ) +
- ggplot2::labs(
-   title = 'Relationship between Temperature and Precipitation across Seed Zones',
-   color = 'Seed Zone',
-   caption = 'Source: PRISM 1990-2020 climate normals') +
- ggplot2::theme_classic() +
+acth7
+zoneOrder_suggestions$Reclassified
 
- ggplot2::scale_y_continuous(
-   name = 'Mean Annual Temperature (C\u00B0)',
-   sec.axis = ggplot2::sec_axis( ~ (. * 9/5) + 32, name = "MAT (F\u00B0)")
- ) +
- ggplot2::scale_x_continuous(
-   name = 'Annual Precipitation (mm)',
-   sec.axis = ggplot2::sec_axis( ~ . * 0.0393701, name = "AP (inches)")
- )
+# if you want to see the extent of the continental raster
+# note that the Olympic peninsula and BC get so much rain they essentially
+# swamps the colors of all other areas in plots.
+cont <- terra::rast(
+ file.path(
+    system.file(package="eSTZwritR"), "extdata", 'GAI-cont.tif')
+)
+terra::plot(cont)
 }
