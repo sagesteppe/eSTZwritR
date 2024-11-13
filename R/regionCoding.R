@@ -42,18 +42,3 @@ regionCoding <- function(x, n){
       )
     )
 }
-
-
-
-
-acth7 <- sf::st_read(file.path(
-  system.file(package="eSTZwritR"), "extdata", 'ACTH7.gpkg')
-) |>
-  sf::st_make_valid() |>
-  sf::st_transform(4326)
-
-regionCoding(acth7)
-
-sf::st_crs(regions)
-
-library(eSTZwritR)
