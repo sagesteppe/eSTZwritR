@@ -16,6 +16,12 @@ regionCoding <- function(x, n){
   if(missing(n)){n <- 1000}
   data('regions')
 
+  regions <- sf::st_read(
+    file.path(
+      system.file(package="eSTZwritR"),  "extdata", 'regions.gpkg'
+    )
+  )
+
   pts <- sf::st_sample(x, size = n, type = 'regular') |>
     sf::st_as_sf() |>
     sf::st_transform(pts, sf::st_crs(regions)) |>
@@ -36,3 +42,18 @@ regionCoding <- function(x, n){
       )
     )
 }
+
+
+
+
+acth7 <- sf::st_read(file.path(
+  system.file(package="eSTZwritR"), "extdata", 'ACTH7.gpkg')
+) |>
+  sf::st_make_valid() |>
+  sf::st_transform(4326)
+
+regionCoding(acth7)
+
+sf::st_crs(regions)
+
+library(eSTZwritR)
