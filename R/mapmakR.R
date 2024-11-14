@@ -1,6 +1,10 @@
 #' Create standardized maps for empirical seed transfer zones
 #'
 #' @description Create a full page PDF map for distributing with the eSTZ for quick refernce by users.
+#' The function will also return the map as a ggplot object if you want to make further modifications to it.
+#' These maps are intended for being seen in a large format size, and may not be suitable for including in a manuscript or publication, outsize the appendeix or online references.
+#' If you like components of the map, and want to try and make them for a smaller format, you can rip out the source code and go from there; don't worry this map is very simple so there isn't much to figure out there.
+#' You can visualize source code by typing either: `mapmakR` (without a function argument) into the R console, or in a more intuitive format on Github at: https://github.com/sagesteppe/eSTZwritR/blob/main/R/mapmakR.R .
 #'
 #' @param x the vector (e.g. shapefile) or raster dataset to plot, note vector data will be coerced
 #' to raster before plotting.
@@ -58,7 +62,7 @@ mapmakR <- function(x, species, save, outdir, ecoregions, cities, landscape, cap
     sf::st_transform(sf::st_crs(extent))
   countries <- sf::st_intersection(sf::st_as_sfc(extent), countries)
 
-  states <- tigris::states(cb = TRUE) |>
+  states <- tigris::states(cb = TRUE, progress_bar = FALSE) |>
     sf::st_transform(5070)
   states <- sf::st_intersection(sf::st_as_sfc(extent), states)
 

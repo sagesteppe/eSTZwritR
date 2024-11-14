@@ -27,7 +27,7 @@
 #'   \item{geometry}{sf geometry column}
 #' }
 #' @examples
-#' plot(omernik)
+#' plot(omernik[,1])
 "omernik"
 
 #' Unified interior region boundaries
@@ -52,7 +52,7 @@
 #'  )
 #' )
 #' plot(regions[,1]) # those aren't errors - they are some far flung pacific islands.
-#' plot(regions[1:10,]) # more continental of a focus.
+#' plot(regions[1:10,1]) # more continental of a focus.
 NULL
 
 #' Cities for cartography
@@ -110,9 +110,12 @@ NULL
 #'    system.file(package="eSTZwritR"),  "extdata", 'GAI-coarse.tif'
 #'  )
 #' )
-#' terra::plot(r/10000, col = terra::map.pal('ryg')) # rainforests swamp the palette!
-#' terra::plot(sqrt(r/10000), col = terra::map.pal('ryg')) # better visualization of mid points
-#' terra::plot(log(r/10000), col = terra::map.pal('ryg')) # better vis of low end
+#' terra::plot(r/10000, col = terra::map.pal('ryg'))
+#' # rainforests swamp the palette!
+#' terra::plot(sqrt(r/10000), col = terra::map.pal('ryg'))
+#' # better visualization of mid points
+#' terra::plot(log(r/10000), col = terra::map.pal('ryg'))
+#'  # better vis of low end
 NULL
 
 
@@ -131,7 +134,10 @@ NULL
 #'    system.file(package="eSTZwritR"),  "extdata", 'GAI-cont.tif'
 #'  )
 #' )
-#' terra::plot(r/10000, col = terra::map.pal('ryg')) # rainforests swamp the palette!
-#' terra::plot(sqrt(r/10000), col = terra::map.pal('ryg')) # better visualization of mid points
-#' terra::plot(log(r/10000), col = terra::map.pal('ryg')) # better vis of low end
+#' terra::plot(r/10000, col = terra::map.pal('ryg'))
+#' # rainforests swamp the palette!
+#' terra::plot(sqrt(r/10000), col = terra::map.pal('ryg'))
+#'  # better visualization of mid points
+#' terra::plot(log(r/10000), col = terra::map.pal('ryg'))
+#' # better vis of low end
 NULL

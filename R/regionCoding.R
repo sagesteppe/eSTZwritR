@@ -27,7 +27,7 @@ regionCoding <- function(x, n){
   regions <- sf::st_read(
     file.path(
       system.file(package="eSTZwritR"),  "extdata", 'regions.gpkg'
-    )
+    ), quiet = TRUE
   )
 
   sf::st_agr(regions) <- 'constant';  sf::st_agr(x) <- 'constant'
@@ -52,4 +52,6 @@ regionCoding <- function(x, n){
       )
     )
 }
+
+
 
