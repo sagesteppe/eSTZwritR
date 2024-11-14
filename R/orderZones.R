@@ -33,7 +33,8 @@
 #' zoneOrder_suggestions <- orderZones(acth7, SeedZone = zone, n = 1000)
 #'
 #' zoneOrder_suggestions$Summary
-#' zoneOrder_suggestions$Plot
+#' zoneOrder_suggestions$PlotKruskal
+#' zoneOrder_suggestions$PlotDunns
 #'
 #' acth7
 #' zoneOrder_suggestions$Reclassified
@@ -175,17 +176,3 @@ orderZones <- function(x, SeedZone, n, rasta, ...){
     )
   )
 }
-
-
-
-
-
-geom_pwd(
-  method = 'dunn_test', label = 'p.signif'
-)
-
-  geom_pwc(
-    aes(group = dose), tip.length = 0,
-    method = "t_test", label = "p.adj.format",
-    bracket.nudge.y = -0.08
-  )

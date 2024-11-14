@@ -53,7 +53,8 @@ acth7 <- sf::st_read(file.path(
 zoneOrder_suggestions <- orderZones(acth7, SeedZone = zone, n = 1000)
 
 zoneOrder_suggestions$Summary
-zoneOrder_suggestions$Plot
+zoneOrder_suggestions$PlotKruskal
+zoneOrder_suggestions$PlotDunns
 
 acth7
 zoneOrder_suggestions$Reclassified
