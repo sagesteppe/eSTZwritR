@@ -54,11 +54,12 @@
 orderZones <- function(x, SeedZone, n, rasta, ...){
 
   SeedZone <- dplyr::enquo(SeedZone)
+  sf::st_agr(x) <- 'constant'
   if(missing(n)){n <- 2500}
   if(missing(rasta)){rasta <- 'cont'} # if the user supplied a raster use that instead.
   if(typeof(rasta)!='S4'){
 
-    r <- terra::rast(
+  r <- terra::rast(
       file.path(
         system.file(package="eSTZwritR"),  "extdata",
         paste0('GAI-', rasta, '.tif')
@@ -74,6 +75,7 @@ orderZones <- function(x, SeedZone, n, rasta, ...){
   pts <- sf::st_sample(x, size = n, ...) |>
     sf::st_as_sf() |>
     sf::st_transform(terra::crs(r))
+  sf::st_agr(pts) <- 'constant'
 
   pts <- sf::st_intersection(pts, x) |>
     sf::st_transform(terra::crs(r))
@@ -140,11 +142,7 @@ orderZones <- function(x, SeedZone, n, rasta, ...){
     # determine which groups have strong evidence of have different central
     # tendencies, we use the *** notation here, which is a compromise because
     # so many p-values become a rounding mess, and no one wants sci notation on plots
-    ggpubr::stat_compare_means(
-      label = "p.signif",
-      method = "t.test",
-      ref.group = ".all."
-    ) +
+
     ggplot2::labs( # specify what we are up to.
       title = 'Empirical STZs ordered by Global Aridity Index (GAI)',
       y = 'Global Aridity Index',
@@ -158,6 +156,10 @@ orderZones <- function(x, SeedZone, n, rasta, ...){
       axis.line.y = ggplot2::element_blank(),
       axis.line.x = ggplot2::element_blank())
 
+  p1 <- p +     ggpubr::geom_pwc(
+    method = 'dunn_test', label = 'p.signif', tip.length = 0, hide.ns = TRUE
+  )
+
   # return the same input item, but with the original zones overwritten.
   rcl <- dplyr::left_join(
     x,
@@ -168,8 +170,22 @@ orderZones <- function(x, SeedZone, n, rasta, ...){
     list(
       Reclassified = rcl,
       Summary = ZoneOrder,
-      Plot = p
+      PlotKruskal = p,
+      PlotDunns = p1
     )
   )
-
 }
+
+
+
+
+
+geom_pwd(
+  method = 'dunn_test', label = 'p.signif'
+)
+
+  geom_pwc(
+    aes(group = dose), tip.length = 0,
+    method = "t_test", label = "p.adj.format",
+    bracket.nudge.y = -0.08
+  )
