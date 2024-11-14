@@ -26,7 +26,7 @@
 #' @param ... additional parameters passed onto sf::st_sample
 #' @examples
 #' acth7 <- sf::st_read(file.path(
-#' system.file(package="eSTZwritR"), "extdata", 'ACTH7.gpkg')
+#'   system.file(package="eSTZwritR"), "extdata", 'ACTH7.gpkg')
 #' ) |>
 #'   sf::st_make_valid()
 #'

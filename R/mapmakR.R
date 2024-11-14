@@ -41,8 +41,10 @@ mapmakR <- function(x, species, save, outdir, ecoregions, cities, landscape, cap
 
   if(missing(cities)){cities <- TRUE}
   if(cities == TRUE){
-    cities.sf <- file.path(
-      system.file(package ='eSTZwritR'), 'extdata', 'Carto_cities.gpkg')
+    cities.sf <- sf::st_read(
+      file.path(
+        system.file(package ='eSTZwritR'), 'extdata', 'Carto_cities.gpkg')
+    )
     }
 
   # Buffer the map so that the species only doesn't occupy the entire region.
