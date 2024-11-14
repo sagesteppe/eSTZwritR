@@ -2,12 +2,12 @@
 #'
 #' @description buffer an input STZ to determine map extents
 #' @param x an input STZ, as vector or raster data -vector is much preferred for speed.
-#' @param buf_prcnt the amount of buffering to add to the map, defaults to 0.025 or 2.5%
+#' @param buf_prcnt the amount of buffering to add to the map, defaults to 0.005 or 0.5%
 #' @keywords internal
 #' @return a bounding box around the eSTZ product of the specified buffer amount.
 buffR <- function(x, buf_prcnt){
 
-  if(missing(buf_prcnt)){buf_prcnt <- 0.025}
+  if(missing(buf_prcnt)){buf_prcnt <- 0.001}
 
   if(class(x)[1] == 'sf'){
     if(sf::st_crs(x) != 5070){x <- sf::st_transform(x, 5070)}
