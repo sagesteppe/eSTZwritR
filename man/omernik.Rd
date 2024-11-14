@@ -16,9 +16,12 @@ A data frame/tibble/sf with 3 rows and 2 columns:
 omernik
 }
 \description{
-This data set contains the, slightly simplified, level 3 ecoregions for the USA.
+This data set contains the, highly simplified, level 3 ecoregions for the USA.
 These data are simplified to save space, and for use with cartographic, not for analytical purposes.
 They are imported directly and silently by the \code{mapmaker} function to contextualize eSTZ border.
 These data were sourced from the United States Geological Survey (usgs) \url{https://www.sciencebase.gov/catalog/item/55c77f7be4b08400b1fd82d4}
+}
+\examples{
+plot(omernik)
 }
 \keyword{datasets}

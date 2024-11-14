@@ -13,9 +13,18 @@ A data frame/tibble/sf with 3 rows and 2 columns:
 }
 }
 \description{
-This data set contains the, slightly simplified, 12 department of interior regionas.
-These data are simplified to save space, and for use with cartographic, not for analytical purposes.
-They are imported directly and silently by the \code{regionCoding} function to determine which geographic areas to append to a filename.
+This data set contains the, slightly simplified, 12 department of interior regions.
+These data are simplified to save disk space, and for use with cartographic not for purposes of analysis, except for region coding.
+They are imported directly and silently by the \code{regionCoding} function to determine which geographic areas to append to a file name.
 These data are sourced from the US Department of Interior (DOI) \url{https://www.doi.gov/employees/reorg/unified-regional-boundaries}.
-However, the 'REB_ABB' variable, which is utlimately used by eSTZwritR, is derived here and is not an officially sanctioned abbrevation by the USDOI.
+However, the 'REB_ABB' variable, which is ultimately used by eSTZwritR, is derived here and is not an officially sanctioned abbreviation by the USDOI.
+}
+\examples{
+regions <- sf::st_read(
+file.path(
+   system.file(package="eSTZwritR"),  "extdata", 'regions.gpkg'
+ )
+)
+plot(regions[,1]) # those aren't errors - they are some far flung pacific islands.
+plot(regions[1:10,]) # more continental of a focus.
 }

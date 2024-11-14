@@ -19,4 +19,7 @@ This data set contains the borders of three North American countries.
 It is used within the \code{mapmaker} function to showcase the edges of both landmasses and where the
 borders of the United States end. These data are subsetted from the 'spData' r package.
 }
+\examples{
+plot(countries)
+}
 \keyword{datasets}

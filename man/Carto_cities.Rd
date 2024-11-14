@@ -8,9 +8,17 @@ A data frame/tibble/sf with 2 columns
 \describe{
 \item{City}{Full name of city.}
 \item{State}{Abbreviation of State Name, using FIPS code.}
+\item{geometry}{sf geometry column}
 }
 }
 \description{
 This data set is curated to feature cities which can be helpful for contextualizing locations in a STZ map.
 It is sourced from https://simplemaps.com/data/us-cities, and subst in a script available in the raw-data folder 'EssentialCities.R'.
+}
+\examples{
+cities.sf <- sf::st_read(
+file.path(
+  system.file(package ='eSTZwritR'), 'extdata', 'Carto_cities.gpkg')
+)
+plot(cities.sf[,1])
 }

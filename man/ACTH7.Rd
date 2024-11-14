@@ -10,10 +10,17 @@ A data frame/tibble/sf with 2 columns
 \item{GRIDCODE}{From an ESRI raster, the classification output used during creating the product. }
 \item{area_ha}{From ESRI calulcated area of each polygon.}
 \item{zone}{STZ defined by the authors from the GRIDCODE.}
+\item{geometry}{sf geometry column}
 }
 }
 \description{
 This data set is from Johnson et al. 2017, and slightly modified by us.
 It is an eSTZ of Eriocoma thurberiana.
 Johnson, R. C., E. A. Leger, and Ken Vance-Borland. "Genecology of Thurber’s Needlegrass (Achnatherum thurberianum [Piper] Barkworth) in the Western United States." Rangeland Ecology & Management 70.4 (2017): 509-517.
+}
+\examples{
+acth7 <- sf::st_read(file.path(
+   system.file(package="eSTZwritR"), "extdata", 'ACTH7.gpkg')
+)
+plot(acth7[,4])
 }
