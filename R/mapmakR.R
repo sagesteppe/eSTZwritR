@@ -44,20 +44,22 @@ mapmakR <- function(x, species, save, outdir, ecoregions, cities, landscape, cap
   if(missing(cities)){cities <- TRUE}
   fname <- paste0(file.path(outdir, gsub(' ', '_', species)), '_STZmap.', filetype)
 
+  sf::st_agr(x) <- 'constant'
   # Buffer the map so that the species only doesn't occupy the entire region.
-  extent <- buffR(x) |>
-    sf::st_transform(sf::st_crs(x))
+  extent <- sf::st_bbox(x)
   if(cities == TRUE){
     cities.sf <- sf::st_read(
       file.path(
         system.file(package ='eSTZwritR'), 'extdata', 'Carto_cities.gpkg'), quiet = TRUE) |>
         sf::st_transform(sf::st_crs(x))
-    cities.sf <- cities.sf[unlist(sf::st_intersects(sf::st_as_sfc(extent), cities.sf)),]
+    sf::st_agr(cities.sf) <- 'constant'
+    cities.sf <- sf::st_crop(cities.sf, x)
   }
 
   if(ecoregions == TRUE){
     omernik <- sf::st_transform(omernik, sf::st_crs(x))
-    omernik <- sf::st_intersection(sf::st_as_sfc(extent), omernik)
+    sf::st_agr(omernik) <- 'constant'
+    omernik <- sf::st_crop(omernik, extent)
   }
 
   # ggplot does the cropping to an extent, but we'll manually specify the borders
@@ -66,11 +68,9 @@ mapmakR <- function(x, species, save, outdir, ecoregions, cities, landscape, cap
     dplyr::filter(iso_a2 %in% c('CA', 'US', 'MX')) |>
     dplyr::select(name_long) |>
     sf::st_transform(sf::st_crs(x))
-  countries <- sf::st_intersection(sf::st_as_sfc(extent), countries)
 
-  states <- tigris::states(cb = TRUE, progress_bar = FALSE) |>
+  states <- tigris::states(cb = TRUE, progress_bar = FALSE, year = 2022) |>
     sf::st_transform(sf::st_crs(x))
-  states <- sf::st_intersection(sf::st_as_sfc(extent), states)
 
   p <- ggplot2::ggplot() +
     ggplot2::geom_sf(
@@ -84,26 +84,8 @@ mapmakR <- function(x, species, save, outdir, ecoregions, cities, landscape, cap
       lwd = 0.25,
       color = 'black',
       alpha = 0.5) +
-  #  ggplot2::geom_sf(data = countries, fill = NA, lwd = 1, color = 'black') +
- #   ggplot2::coord_sf(
-#      xlim = extent[c(1,3)],
-#      ylim = extent[c(2,4)],
-#      default_crs = sf::st_crs(4326),
-#      expand = F) +
 
-    ggplot2::labs(
-      x = NULL, y = NULL, fill = 'Transfer\nZone',
-      title = paste0('*', species, '*'),
-      subtitle = 'Seed Transfer Zones') +
-    ggplot2::theme(
-      panel.background = element_rect(fill = "aliceblue"),
-      plot.title = ggtext::element_markdown(hjust = 0.5),
-      plot.subtitle = ggplot2::element_text(hjust = 0.5),
-      legend.title = ggplot2::element_text(hjust = 0.5),
-      legend.position = "bottom"
-      ) +
-
-    ggspatial::annotation_scale(location = "br", width_hint = 0.25) +
+    suppressMessages(ggspatial::annotation_scale(location = "br", width_hint = 0.25)) +
     ggspatial::annotation_north_arrow(
       location = "br", which_north = "true",
       pad_x = ggplot2::unit(0.25, "in"), pad_y = ggplot2::unit(0.25, "in"),
@@ -133,36 +115,58 @@ mapmakR <- function(x, species, save, outdir, ecoregions, cities, landscape, cap
         }
     }
 
-  return(p)
   # determine whether to add cities and ecoregions to the plot.
     if(ecoregions == TRUE & cities == FALSE){
       p <- p +
-        ggplot2::geom_sf(data = omernik, fill = NA, lty = 3, color = 'grey30') +
+        ggplot2::geom_sf(data = omernik, fill = NA, lty = 3, linewidth = 0.7, color = 'grey30') +
         ggplot2::labs(caption = caption)
 
     } else if(ecoregions == FALSE & cities == TRUE){
     p <- p +
       ggplot2::geom_sf(data = cities.sf) +
-      ggrepel::geom_text_repel(
-        data = cities.sf,
-        ggplot2::aes(label = City, geometry = geom),
-        stat = "sf_coordinates") +
+      suppressWarnings(
+        ggrepel::geom_text_repel(
+          data = cities.sf,
+          ggplot2::aes(label = City, geometry = geom),
+          stat = "sf_coordinates")
+        ) +
       ggplot2::labs(caption = caption)
 
     } else if(ecoregions == TRUE & cities == TRUE){
     p <- p +
-      ggplot2::geom_sf(data = omernik, fill = NA, lty = 3, color = 'grey30') +
+      ggplot2::geom_sf(data = omernik, fill = NA, lty = 3, linewidth = 0.7, color = 'grey30') +
       ggplot2::geom_sf(data = cities.sf) +
-      ggrepel::geom_text_repel(
-        data = cities.sf,
-        ggplot2::aes(label = City, geometry = geom),
-        stat = "sf_coordinates") +
+      suppressWarnings(
+        ggrepel::geom_text_repel(
+          data = cities.sf,
+          ggplot2::aes(label = City, geometry = geom),
+          stat = "sf_coordinates")
+        ) +
       ggplot2::labs(caption = caption)
 
     } else {
     p <- p +
       ggplot2::labs(caption = caption)
     }
+
+  #  add on style elements which would be overwritten by the above code.
+  p <- p + ggplot2::coord_sf(
+    xlim = extent[c(1,3)],
+    ylim = extent[c(2,4)],
+    default_crs = sf::st_crs(4326),
+    expand = F
+  ) +
+    ggplot2::labs(
+      x = NULL, y = NULL, fill = 'Transfer\nZone',
+      title = paste0('*', species, '*'),
+      subtitle = 'Seed Transfer Zones') +
+    ggplot2::theme(
+      panel.background = element_rect(fill = "aliceblue"),
+      plot.title = ggtext::element_markdown(hjust = 0.5),
+      plot.subtitle = ggplot2::element_text(hjust = 0.5),
+      legend.title = ggplot2::element_text(hjust = 0.5),
+      legend.position = "bottom"
+    )
 
   # Determine where to put the legend. Added to the size of Portrait Plots,
   # the base of landscape Plots.

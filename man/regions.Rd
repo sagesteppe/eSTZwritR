@@ -26,5 +26,5 @@ file.path(
  )
 )
 plot(regions[,1]) # those aren't errors - they are some far flung pacific islands.
-plot(regions[1:10,]) # more continental of a focus.
+plot(regions[1:10,1]) # more continental of a focus.
 }

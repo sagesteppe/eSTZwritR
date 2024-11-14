@@ -20,7 +20,3 @@ reference:
   - ACTH7
   - GAI-cont
   - GAI-coarse
-- title: Internal
-  desc: Data prep functions
-  contents: buffR
-

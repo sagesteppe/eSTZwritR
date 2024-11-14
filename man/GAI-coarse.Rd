@@ -19,7 +19,10 @@ file.path(
    system.file(package="eSTZwritR"),  "extdata", 'GAI-coarse.tif'
  )
 )
-terra::plot(r/10000, col = terra::map.pal('ryg')) # rainforests swamp the palette!
-terra::plot(sqrt(r/10000), col = terra::map.pal('ryg')) # better visualization of mid points
-terra::plot(log(r/10000), col = terra::map.pal('ryg')) # better vis of low end
+terra::plot(r/10000, col = terra::map.pal('ryg'))
+# rainforests swamp the palette!
+terra::plot(sqrt(r/10000), col = terra::map.pal('ryg'))
+# better visualization of mid points
+terra::plot(log(r/10000), col = terra::map.pal('ryg'))
+ # better vis of low end
 }

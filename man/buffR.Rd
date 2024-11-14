@@ -9,7 +9,7 @@ buffR(x, buf_prcnt)
 \arguments{
 \item{x}{an input STZ, as vector or raster data -vector is much preferred for speed.}
 
-\item{buf_prcnt}{the amount of buffering to add to the map, defaults to 0.025 or 2.5\%}
+\item{buf_prcnt}{the amount of buffering to add to the map, defaults to 0.005 or 0.5\%}
 }
 \value{
 a bounding box around the eSTZ product of the specified buffer amount.

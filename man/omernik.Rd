@@ -22,6 +22,6 @@ They are imported directly and silently by the \code{mapmaker} function to conte
 These data were sourced from the United States Geological Survey (usgs) \url{https://www.sciencebase.gov/catalog/item/55c77f7be4b08400b1fd82d4}
 }
 \examples{
-plot(omernik)
+plot(omernik[,1])
 }
 \keyword{datasets}

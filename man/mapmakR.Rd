@@ -45,6 +45,10 @@ Writes a PDF (or other specified \code{filetype}) to disk, and returns the ggplo
 }
 \description{
 Create a full page PDF map for distributing with the eSTZ for quick refernce by users.
+The function will also return the map as a ggplot object if you want to make further modifications to it.
+These maps are intended for being seen in a large format size, and may not be suitable for including in a manuscript or publication, outsize the appendeix or online references.
+If you like components of the map, and want to try and make them for a smaller format, you can rip out the source code and go from there; don't worry this map is very simple so there isn't much to figure out there.
+You can visualize source code by typing either: \code{mapmakR} (without a function argument) into the R console, or in a more intuitive format on Github at: https://github.com/sagesteppe/eSTZwritR/blob/main/R/mapmakR.R .
 }
 \examples{
 acth7 <- sf::st_read(file.path(

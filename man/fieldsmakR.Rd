@@ -29,7 +29,7 @@ bio1_sd = runif(10, 5, 7),
 bio8_mean = runif(10, 5, 7)
 )
 
-nc <- sf::st_read(system.file("shape/nc.shp", package="sf")) |>
+nc <- sf::st_read(system.file("shape/nc.shp", package="sf"), quiet = TRUE) |>
  dplyr::select(geometry) |>
  dplyr::slice_head(n = 10) |>
  dplyr::bind_cols(df, )
