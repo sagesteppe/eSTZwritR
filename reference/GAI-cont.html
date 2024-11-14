@@ -47,7 +47,23 @@ Zomer, Robert J., Jianchu Xu, and Antonio Trabucco. "Version 3 of the global ari
 
 </dl></div>
 
-  </main></div>
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html" class="external-link">rast</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>   <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span>package<span class="op">=</span><span class="st">"eSTZwritR"</span><span class="op">)</span>,  <span class="st">"extdata"</span>, <span class="st">'GAI-cont.tif'</span></span></span>
+<span class="r-in"><span> <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">r</span><span class="op">/</span><span class="fl">10000</span>, col <span class="op">=</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/mappal.html" class="external-link">map.pal</a></span><span class="op">(</span><span class="st">'ryg'</span><span class="op">)</span><span class="op">)</span> <span class="co"># rainforests swamp the palette!</span></span></span>
+<span class="r-plt img"><img src="GAI-cont-1.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span><span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">r</span><span class="op">/</span><span class="fl">10000</span><span class="op">)</span>, col <span class="op">=</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/mappal.html" class="external-link">map.pal</a></span><span class="op">(</span><span class="st">'ryg'</span><span class="op">)</span><span class="op">)</span> <span class="co"># better visualization of mid points</span></span></span>
+<span class="r-plt img"><img src="GAI-cont-2.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span><span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">r</span><span class="op">/</span><span class="fl">10000</span><span class="op">)</span>, col <span class="op">=</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/mappal.html" class="external-link">map.pal</a></span><span class="op">(</span><span class="st">'ryg'</span><span class="op">)</span><span class="op">)</span> <span class="co"># better vis of low end</span></span></span>
+<span class="r-plt img"><img src="GAI-cont-3.png" alt="" width="700" height="433"></span>
+</code></pre></div>
+    </div>
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
+    </nav></aside></div>
 
 
     <footer><div class="pkgdown-footer-left">

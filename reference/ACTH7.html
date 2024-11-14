@@ -56,10 +56,31 @@ Johnson, R. C., E. A. Leger, and Ken Vance-Borland. "Genecology of Thurber’s N
 <dt>zone</dt>
 <dd><p>STZ defined by the authors from the GRIDCODE.</p></dd>
 
+<dt>geometry</dt>
+<dd><p>sf geometry column</p></dd>
+
 
 </dl></div>
 
-  </main></div>
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">acth7</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">st_read</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>   <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span>package<span class="op">=</span><span class="st">"eSTZwritR"</span><span class="op">)</span>, <span class="st">"extdata"</span>, <span class="st">'ACTH7.gpkg'</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Reading layer `ACTH7' from data source </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   `/home/runner/work/_temp/Library/eSTZwritR/extdata/ACTH7.gpkg' </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   using driver `GPKG'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Simple feature collection with 4967 features and 4 fields</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Geometry type: POLYGON</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Dimension:     XY</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Bounding box:  xmin: -121.5447 ymin: 36.53208 xmax: -111.0114 ymax: 46.35708</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Geodetic CRS:  WGS 84</span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">acth7</span><span class="op">[</span>,<span class="fl">4</span><span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="ACTH7-1.png" alt="" width="700" height="433"></span>
+</code></pre></div>
+    </div>
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
+    </nav></aside></div>
 
 
     <footer><div class="pkgdown-footer-left">
