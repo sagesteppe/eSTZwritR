@@ -37,7 +37,7 @@ library(patchwork)
 ```
 
 Here we will load in the example data we will use for all steps of the vignette. 
-These data are from ... 
+These data are from Johnson, R. C., E. A. Leger, and Ken Vance-Borland. "Genecology of Thurber’s Needlegrass (*Achnatherum thurberianum* \[Piper\] Barkworth) in the Western United States." Rangeland Ecology & Management 70.4 (2017): 509-517.
 They represent a rather complex eSTZ, composed of many polygons. 
 
 ```{r import example data}
@@ -47,7 +47,7 @@ acth7 <- sf::st_read(file.path(
 ```
 
 We will perform a few minor alteration on this data set which you may find useful in your own workflow. 
-
+They are documented inline, understanding these operations is tangential to the rest of the vignette. 
 ```{r clean up data product}
 
 # This step was already run during creation of the package. simple feature 
