@@ -26,7 +26,8 @@ Depends:
 LazyData: true
 Suggests: 
     knitr,
-    rmarkdown, 
+    patchwork,
+    rmarkdown,
     tidyverse
 VignetteBuilder: knitr
 URL: https://sagesteppe.github.io/eSTZwritR/

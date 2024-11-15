@@ -121,8 +121,12 @@ mapmakR <- function(x, species, save, outdir, ecoregions, cities, landscape, cap
   # determine whether to add cities and ecoregions to the plot.
     if(ecoregions == TRUE & cities == FALSE){
       p <- p +
-        ggplot2::geom_sf(data = omernik,
-                         fill = NA, lty = 3, linewidth = 0.5, color = 'grey30') +
+        ggplot2::geom_sf(
+          data = omernik,
+          fill = NA,
+          lty = 3,
+          linewidth = 0.5,
+          color = 'grey30') +
         ggplot2::labs(caption = caption)
 
     } else if(ecoregions == FALSE & cities == TRUE){
@@ -131,7 +135,6 @@ mapmakR <- function(x, species, save, outdir, ecoregions, cities, landscape, cap
       suppressWarnings(
         ggrepel::geom_text_repel(
           data = cities.sf,
-      #    size = 3.5,
           ggplot2::aes(label = City, geometry = geom),
           stat = "sf_coordinates")
         ) +
@@ -139,12 +142,16 @@ mapmakR <- function(x, species, save, outdir, ecoregions, cities, landscape, cap
 
     } else if(ecoregions == TRUE & cities == TRUE){
     p <- p +
-      ggplot2::geom_sf(data = omernik, fill = NA, lty = 3, linewidth = 0.5, color = 'grey30') +
+      ggplot2::geom_sf(
+        data = omernik,
+        fill = NA,
+        lty = 3,
+        linewidth = 0.5,
+        color = 'grey30') +
       ggplot2::geom_sf(data = cities.sf) +
       suppressWarnings(
         ggrepel::geom_text_repel(
           data = cities.sf,
-    #      size = 3.5,
           ggplot2::aes(label = City, geometry = geom),
           stat = "sf_coordinates")
         ) +

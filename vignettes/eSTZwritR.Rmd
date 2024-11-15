@@ -211,7 +211,13 @@ dirmakR()
 
 ### Maps 
 
-```{r, eval = F}
+Maps can oftentimes be used in lieu of the actual spatial data product itself. 
+We also use them freqently to verify that values are 'mapped' over correctly in GIS, a problem which should now be alleviated with more defined field naming conventions. 
+The maps which eSTZwritR makes are meant to be, well are, full page PDF's in either a landscape or portait orientation. 
+We will also return a map to the R plot pane, but that is a much smaller format than the map is intended to be uesd at. 
+
+
+```{r mapmakR, eval = F}
 mapmakR()
 ```
 
