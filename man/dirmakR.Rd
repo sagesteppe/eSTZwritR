@@ -4,13 +4,15 @@
 \alias{dirmakR}
 \title{Create a directory and write out all empirical stz data}
 \usage{
-dirmakR(outpath, sci_name, nrcs_code, regioncode, overwrite, estz_type)
+dirmakR(outpath, sci_name, x, nrcs_code, regioncode, overwrite, estz_type)
 }
 \arguments{
 \item{outpath}{the directory folder where the final products will be placed. Note there is no need
 to create an independent folder to hold them, this will be included in the product.}
 
 \item{sci_name}{the scientific name of the taxon}
+
+\item{x}{Vector data product.}
 
 \item{nrcs_code}{from https://plants.usda.gov/}
 
@@ -24,4 +26,10 @@ If multiple approaches choose the most robust method, e.g. 'cg' > 'lg' > 'cm'}
 \description{
 Create a directory following standard conventions to ensure appropriate
 placement of subdirectories and naming conventions.
+}
+\examples{
+acth7 <- sf::st_read(file.path(
+  system.file(package="eSTZwritR"), "extdata", 'ACTH7.gpkg')
+)
+dirmakR('.', 'Eriocoma thurberiana', acth7, nrcs_code = 'ACHT7', regioncode =  'CGB-CPN', estz_type = 'cg')
 }
