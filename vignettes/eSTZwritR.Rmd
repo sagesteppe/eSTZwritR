@@ -232,7 +232,10 @@ map <- mapmakR(acth7,
 
 
 We show the saved PDF version of the map below. 
-![Map](./images/Eriocoma_thurberiana_STZmap.pdf)
+
+```{r image-ref-for-in-text, echo = FALSE, message=FALSE, fig.align='center', fig.cap='Pre-rendered PDF map of eSTZ', out.width='0.75\\linewidth', fig.pos='H'}
+knitr::include_graphics("./images/Eriocoma_thurberiana_STZmap.pdf")
+```
 
 ### Data Formats 
 

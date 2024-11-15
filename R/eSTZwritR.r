@@ -79,7 +79,7 @@ NULL
 #' This data set is from Johnson et al. 2017, and slightly modified by us.
 #' It is an eSTZ of Eriocoma thurberiana.
 #' Johnson, R. C., E. A. Leger, and Ken Vance-Borland. "Genecology of Thurber’s Needlegrass (Achnatherum thurberianum \[Piper\] Barkworth) in the Western United States." Rangeland Ecology & Management 70.4 (2017): 509-517.
-#' @name ACTH7
+#' @name acth7
 #' @format A data frame/tibble/sf with 2 columns
 #' \describe{
 #'   \item{ID}{A unique ID for each each polygon, note this includes gaps in the numbering. }
