@@ -115,9 +115,9 @@ rm(polygonsStart, polygonsEnd)
 The first step in using the package is determining which Department of Interior regions the data product is mostly associated with. 
 The zones listed on the file will not be comprehensive, as we restrict the number of listed areas to two zones. 
 However, they should give an OK indication of roughly the spatial extent which the data product covers. 
+
 ```{r Region Coding, message = F}
 rc <- regionCoding(acth7)
-
 str(rc) # the returned data is a list of two objects, a vector and a data frame. 
 
 # Either format works to extract the data from the list.
@@ -144,7 +144,8 @@ It will take a little bit of time to run, here we have the number of points used
 ```{r orderZones}
 oz <- orderZones(acth7, SeedZone = zone, n = 1000)
 
-# oz$Summary # i use kable so this looks nice online, just run oz$Summary to print to console. 
+# oz$Summary # i use kable so this looks nice online, 
+# just run oz$Summary to print to console. 
 knitr::kable(oz$Summary)
 ```
 
@@ -175,13 +176,13 @@ Some zones are markedly different from others, but most of them are able to run 
 Finally, we can make some maps and see how our seed zones differ on them - is their any intuitive sensibility here? 
 
 ```{r Maps of Ordered Seed Zones, message = F}
-p1 <- ggplot(data = acth7, aes(fill = zone)) + 
+p1 <- ggplot(data = acth7, aes(fill = zone), color = NA) + 
   geom_sf() + 
   theme_void() + 
   scale_fill_distiller(palette = "RdYlGn", direction = 1) + 
   labs(title = 'Original')
 
-p2 <- ggplot(data = oz$Reclassified, aes(fill = zone)) + 
+p2 <- ggplot(data = oz$Reclassified, aes(fill = zone), color = NA) + 
   geom_sf() + 
   theme_void() + 
   scale_fill_distiller(palette = "RdYlGn", direction = 1) + 
@@ -206,21 +207,32 @@ dirmakR()
 ```
 
 
-
 ### File Naming 
 
 ### Maps 
 
-Maps can oftentimes be used in lieu of the actual spatial data product itself. 
-We also use them freqently to verify that values are 'mapped' over correctly in GIS, a problem which should now be alleviated with more defined field naming conventions. 
-The maps which eSTZwritR makes are meant to be, well are, full page PDF's in either a landscape or portait orientation. 
-We will also return a map to the R plot pane, but that is a much smaller format than the map is intended to be uesd at. 
+Maps can oftentimes be used in lieu of the actual spatial data product itself for many applications. 
+We also use them frequently to verify that values are 'mapped' over correctly in GIS, a problem which should now be alleviated with more defined field naming conventions. 
+The maps which `eSTZwritR` makes are meant to be, well are, full page PDFs in either a landscape or portrait orientation. 
+We will also return a map to the R plot pane, but that is a much smaller format than the map is intended to be used at. 
+So when you are actually using the function, focus on only altering maps if the appearance of the PDF's leave something to be desired, not the examples from the viewing pane. 
 
-
-```{r mapmakR, eval = F}
-mapmakR()
+```{r mapmakR}
+map <- mapmakR(acth7,
+  species = 'Eriocoma thurberiana', # this will become the title. 
+  save = FALSE, # whether to write to disk, defaults to TRUE
+  landscape = FALSE, # defaults ot TRUE, we want a landscape page
+  ecoregions = TRUE, # whether to add unlabeled L4 ecoregions or not. 
+  cities = TRUE, # whether to add some cities to the map
+  caption = 
+    'Data from Johnson et al. 2017. https://doi.org/10.1016/j.rama.2017.01.004'
+  # Cite where the data comes from!!! A doi would be great too ;-) !
+)
 ```
 
+
+We show the saved PDF version of the map below. 
+![Map](./images/Eriocoma_thurberiana_STZmap.pdf)
 
 ### Data Formats 
 

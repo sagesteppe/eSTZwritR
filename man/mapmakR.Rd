@@ -13,7 +13,8 @@ mapmakR(
   cities,
   landscape,
   caption,
-  filetype
+  filetype,
+  buf_prcnt
 )
 }
 \arguments{
@@ -36,7 +37,9 @@ to raster before plotting.}
 Defaults to omitting any caption, except for the data sources (if omernik and cities are used),
 and coordinate reference system information.}
 
-\item{filetype}{Character string, defaults to 'pdf' for saving a pdf page for distribution with data,
+\item{filetype}{Character string, defaults to 'pdf' for saving a pdf page for distribution with data,}
+
+\item{buf_prcnt}{The amount to buffer the extent around the focal taxons range by. Defaults to 0.025 oor 2.5\%
 but 'png' (or any other format supported by ?ggsave) can be used to create
 a map for embedding in a publication or poster.}
 }
@@ -51,6 +54,7 @@ If you like components of the map, and want to try and make them for a smaller f
 You can visualize source code by typing either: \code{mapmakR} (without a function argument) into the R console, or in a more intuitive format on Github at: https://github.com/sagesteppe/eSTZwritR/blob/main/R/mapmakR.R .
 }
 \examples{
+#library(eSTZwritR)
 acth7 <- sf::st_read(file.path(
   system.file(package="eSTZwritR"), "extdata", 'ACTH7.gpkg')
 )
@@ -58,7 +62,9 @@ acth7 <- sf::st_read(file.path(
 mapmakR(acth7,
  species = 'Eriocoma thurberiana',
  save = FALSE,
+ landscape = FALSE,
  ecoregions = TRUE,
  cities = TRUE,
- caption = 'Johnson et al. 2017')
+ caption = 'Data from Johnson et al. 2017. https://doi.org/10.1016/j.rama.2017.01.004'
+ )
 }

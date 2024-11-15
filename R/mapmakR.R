@@ -22,16 +22,19 @@
 #' but 'png' (or any other format supported by ?ggsave) can be used to create
 #' a map for embedding in a publication or poster.
 #' @examples
+#' #library(eSTZwritR)
 #' acth7 <- sf::st_read(file.path(
 #'   system.file(package="eSTZwritR"), "extdata", 'ACTH7.gpkg')
 #' )
 #'
 #' mapmakR(acth7,
 #'  species = 'Eriocoma thurberiana',
-#'  save = TRUE,
+#'  save = FALSE,
+#'  landscape = FALSE,
 #'  ecoregions = TRUE,
 #'  cities = TRUE,
-#'  caption = 'Data from Johnson et al. 2017. https://doi.org/10.1016/j.rama.2017.01.004')
+#'  caption = 'Data from Johnson et al. 2017. https://doi.org/10.1016/j.rama.2017.01.004'
+#'  )
 #' @returns Writes a PDF (or other specified `filetype`) to disk, and returns the ggplot object to console allowing user to modify it for other purposes.
 #' @export
 mapmakR <- function(x, species, save, outdir, ecoregions, cities, landscape, caption, filetype, buf_prcnt){
@@ -61,7 +64,6 @@ mapmakR <- function(x, species, save, outdir, ecoregions, cities, landscape, cap
   if(ecoregions == TRUE){
     omernik <- sf::st_transform(omernik, sf::st_crs(x))
     sf::st_agr(omernik) <- 'constant'
-    omernik <- sf::st_crop(omernik, extent)
   }
 
   # ggplot does the cropping to an extent, but we'll manually specify the borders
@@ -184,7 +186,7 @@ mapmakR <- function(x, species, save, outdir, ecoregions, cities, landscape, cap
   # the base of landscape Plots.
   if(landscape == TRUE){
     p <- p + ggplot2::theme(legend.position='right')
-  } else {
+  } else if (landscape == FALSE){
     p <- p + ggplot2::theme(
       legend.position='bottom',
       legend.justification = "left",
@@ -196,7 +198,7 @@ mapmakR <- function(x, species, save, outdir, ecoregions, cities, landscape, cap
     if(landscape == TRUE){
       ggplot2::ggsave(filename = fname,
              plot = p, dpi = 300, height = 8.5, width = 11, units = 'in')
-    } else {
+    } else if (landscape == FALSE){
       ggplot2::ggsave(filename = fname,
              plot = p, dpi = 300, height = 11, width = 8.5, units = 'in')
     }
