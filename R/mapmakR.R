@@ -96,7 +96,7 @@ mapmakR <- function(x, species, save, outdir, ecoregions, cities, landscape, cap
       height = ggplot2::unit(0.35, "in"), width = ggplot2::unit(0.35, "in")
       )
 
-  caption <- paste0(caption, '. CRS: ', sf::st_crs(acth7)[[1]])
+  caption <- paste0(caption, '. CRS: ', sf::st_crs(x)[[1]])
   states_only <- '\nStates data courtesy of US Census Bureau'
   ecoTcityF <- '. Omernik ecoregions courtesy of US EPA'
   ecoFcityT <- '. Cities courtesy of Simplemaps.com'
