@@ -18,6 +18,7 @@
 #' Defaults to omitting any caption, except for the data sources (if omernik and cities are used),
 #'  and coordinate reference system information.
 #' @param filetype Character string, defaults to 'pdf' for saving a pdf page for distribution with data,
+#' @param buf_prcnt The amount to buffer the extent around the focal taxons range by. Defaults to 0.025 oor 2.5%
 #' but 'png' (or any other format supported by ?ggsave) can be used to create
 #' a map for embedding in a publication or poster.
 #' @examples
@@ -27,13 +28,13 @@
 #'
 #' mapmakR(acth7,
 #'  species = 'Eriocoma thurberiana',
-#'  save = FALSE,
+#'  save = TRUE,
 #'  ecoregions = TRUE,
 #'  cities = TRUE,
-#'  caption = 'Johnson et al. 2017')
+#'  caption = 'Data from Johnson et al. 2017. https://doi.org/10.1016/j.rama.2017.01.004')
 #' @returns Writes a PDF (or other specified `filetype`) to disk, and returns the ggplot object to console allowing user to modify it for other purposes.
 #' @export
-mapmakR <- function(x, species, save, outdir, ecoregions, cities, landscape, caption, filetype){
+mapmakR <- function(x, species, save, outdir, ecoregions, cities, landscape, caption, filetype, buf_prcnt){
 
   if(missing(species))(stop('Species Name Not supplied.'))
   if(missing(save)){save <- TRUE}
@@ -42,11 +43,12 @@ mapmakR <- function(x, species, save, outdir, ecoregions, cities, landscape, cap
   if(missing(ecoregions)){ecoregions = TRUE}
   if(missing(filetype)){filetype = 'pdf'}
   if(missing(cities)){cities <- TRUE}
+  if(missing(buf_prcnt)){buf_prcnt <- 0.025}
   fname <- paste0(file.path(outdir, gsub(' ', '_', species)), '_STZmap.', filetype)
 
   sf::st_agr(x) <- 'constant'
   # Buffer the map so that the species only doesn't occupy the entire region.
-  extent <- sf::st_bbox(x)
+  extent <- buffR(x, buf_prcnt)
   if(cities == TRUE){
     cities.sf <- sf::st_read(
       file.path(
@@ -80,7 +82,7 @@ mapmakR <- function(x, species, save, outdir, ecoregions, cities, landscape, cap
       inherit.aes = TRUE) +
     ggplot2::geom_sf(
       data = states,
-      fill = NA,
+      fill = 'cornsilk',
       lwd = 0.25,
       color = 'black',
       alpha = 0.5) +
@@ -92,10 +94,11 @@ mapmakR <- function(x, species, save, outdir, ecoregions, cities, landscape, cap
       height = ggplot2::unit(0.35, "in"), width = ggplot2::unit(0.35, "in")
       )
 
+  caption <- paste0(caption, '. CRS: ', sf::st_crs(acth7)[[1]])
   states_only <- '\nStates data courtesy of US Census Bureau'
-  ecoTcityF <- '\nOmernik Ecoregions data courtesy of US EPA'
-  ecoFcityT <- '\nCities data courtesy of Simplemaps.com'
-  ecoTcityT <- '\nOmernik Ecoregions data courtesy of US EPA\nCities data courtesy of Simplemaps.com'
+  ecoTcityF <- '. Omernik ecoregions courtesy of US EPA'
+  ecoFcityT <- '. Cities courtesy of Simplemaps.com'
+  ecoTcityT <- '. Omernik ecoregions courtesy of US EPA. Cities courtesy of Simplemaps.com'
   #determine the correct caption format for the data.
   if(exists('caption')){
     if(ecoregions == TRUE & cities == FALSE){
@@ -118,7 +121,8 @@ mapmakR <- function(x, species, save, outdir, ecoregions, cities, landscape, cap
   # determine whether to add cities and ecoregions to the plot.
     if(ecoregions == TRUE & cities == FALSE){
       p <- p +
-        ggplot2::geom_sf(data = omernik, fill = NA, lty = 3, linewidth = 0.7, color = 'grey30') +
+        ggplot2::geom_sf(data = omernik,
+                         fill = NA, lty = 3, linewidth = 0.5, color = 'grey30') +
         ggplot2::labs(caption = caption)
 
     } else if(ecoregions == FALSE & cities == TRUE){
@@ -127,6 +131,7 @@ mapmakR <- function(x, species, save, outdir, ecoregions, cities, landscape, cap
       suppressWarnings(
         ggrepel::geom_text_repel(
           data = cities.sf,
+      #    size = 3.5,
           ggplot2::aes(label = City, geometry = geom),
           stat = "sf_coordinates")
         ) +
@@ -134,11 +139,12 @@ mapmakR <- function(x, species, save, outdir, ecoregions, cities, landscape, cap
 
     } else if(ecoregions == TRUE & cities == TRUE){
     p <- p +
-      ggplot2::geom_sf(data = omernik, fill = NA, lty = 3, linewidth = 0.7, color = 'grey30') +
+      ggplot2::geom_sf(data = omernik, fill = NA, lty = 3, linewidth = 0.5, color = 'grey30') +
       ggplot2::geom_sf(data = cities.sf) +
       suppressWarnings(
         ggrepel::geom_text_repel(
           data = cities.sf,
+    #      size = 3.5,
           ggplot2::aes(label = City, geometry = geom),
           stat = "sf_coordinates")
         ) +
@@ -161,11 +167,10 @@ mapmakR <- function(x, species, save, outdir, ecoregions, cities, landscape, cap
       title = paste0('*', species, '*'),
       subtitle = 'Seed Transfer Zones') +
     ggplot2::theme(
-      panel.background = element_rect(fill = "aliceblue"),
+      panel.background = ggplot2::element_rect(fill = "aliceblue"),
       plot.title = ggtext::element_markdown(hjust = 0.5),
       plot.subtitle = ggplot2::element_text(hjust = 0.5),
-      legend.title = ggplot2::element_text(hjust = 0.5),
-      legend.position = "bottom"
+      legend.title = ggplot2::element_text(hjust = 0.5)
     )
 
   # Determine where to put the legend. Added to the size of Portrait Plots,
@@ -173,21 +178,24 @@ mapmakR <- function(x, species, save, outdir, ecoregions, cities, landscape, cap
   if(landscape == TRUE){
     p <- p + ggplot2::theme(legend.position='right')
   } else {
-    p <- p + ggplot2::theme(legend.position='bottom')
+    p <- p + ggplot2::theme(
+      legend.position='bottom',
+      legend.justification = "left",
+    )
   }
 
 # save file to location
   if(save==TRUE){
     if(landscape == TRUE){
-      ggsave(filename = fname,
+      ggplot2::ggsave(filename = fname,
              plot = p, dpi = 300, height = 8.5, width = 11, units = 'in')
     } else {
-      ggsave(filename = fname,
+      ggplot2::ggsave(filename = fname,
              plot = p, dpi = 300, height = 11, width = 8.5, units = 'in')
     }
     message('File saved to: ', fname)
   }
 
-  return(p)
+  return(p) # also return the plot to user.
 
 }
