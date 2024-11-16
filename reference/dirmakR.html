@@ -40,7 +40,7 @@ placement of subdirectories and naming conventions.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">dirmakR</span><span class="op">(</span><span class="va">outpath</span>, <span class="va">sci_name</span>, <span class="va">nrcs_code</span>, <span class="va">regioncode</span>, <span class="va">overwrite</span>, <span class="va">estz_type</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">dirmakR</span><span class="op">(</span><span class="va">outpath</span>, <span class="va">sci_name</span>, <span class="va">x</span>, <span class="va">nrcs_code</span>, <span class="va">regioncode</span>, <span class="va">overwrite</span>, <span class="va">estz_type</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -54,6 +54,10 @@ to create an independent folder to hold them, this will be included in the produ
 
 <dt id="arg-sci-name">sci_name<a class="anchor" aria-label="anchor" href="#arg-sci-name"></a></dt>
 <dd><p>the scientific name of the taxon</p></dd>
+
+
+<dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
+<dd><p>Vector data product.</p></dd>
 
 
 <dt id="arg-nrcs-code">nrcs_code<a class="anchor" aria-label="anchor" href="#arg-nrcs-code"></a></dt>
@@ -74,6 +78,25 @@ If multiple approaches choose the most robust method, e.g. 'cg' &gt; 'lg' &gt; '
 
 </dl></div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">acth7</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">st_read</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span>package<span class="op">=</span><span class="st">"eSTZwritR"</span><span class="op">)</span>, <span class="st">"extdata"</span>, <span class="st">'ACTH7.gpkg'</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Reading layer `ACTH7' from data source </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   `/home/runner/work/_temp/Library/eSTZwritR/extdata/ACTH7.gpkg' </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   using driver `GPKG'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Simple feature collection with 4967 features and 4 fields</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Geometry type: MULTIPOLYGON</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Dimension:     XY</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Bounding box:  xmin: -121.5447 ymin: 36.53208 xmax: -111.0114 ymax: 46.35708</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Geodetic CRS:  WGS 84</span>
+<span class="r-in"><span><span class="fu">dirmakR</span><span class="op">(</span><span class="st">'.'</span>, <span class="st">'Eriocoma thurberiana'</span>, <span class="va">acth7</span>, nrcs_code <span class="op">=</span> <span class="st">'ACHT7'</span>, regioncode <span class="op">=</span>  <span class="st">'CGB-CPN'</span>, estz_type <span class="op">=</span> <span class="st">'cg'</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Writing layer `Vector ACHT7 _ cg STZ' to data source </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   `./Eriocoma_thurberianacgSTZ/Data/Vector ACHT7 _ cg STZ.shp' using driver `ESRI Shapefile'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Writing 4967 features with 4 fields and geometry type Polygon.</span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 
