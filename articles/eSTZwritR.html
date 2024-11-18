@@ -14,8 +14,8 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="eSTZwritR">
 </head>
 <body>
@@ -85,11 +85,9 @@ handling tasks.</p>
 <p>Here we will load in the example data we will use for all steps of
 the vignette. These data are from Johnson, R. C., E. A. Leger, and Ken
 Vance-Borland. “Genecology of Thurber’s Needlegrass (<em>Achnatherum
-thurberianum</em>
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mi>i</mi><mi>p</mi><mi>e</mi><mi>r</mi></mrow><annotation encoding="application/x-tex">Piper</annotation></semantics></math>
-Barkworth) in the Western United States.” Rangeland Ecology &amp;
-Management 70.4 (2017): 509-517. They represent a rather complex eSTZ,
-composed of many polygons.</p>
+thurberianum</em> (Piper) Barkworth) in the Western United States.”
+Rangeland Ecology &amp; Management 70.4 (2017): 509-517. They represent
+a rather complex eSTZ, composed of many polygons.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">acth7</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">st_read</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span></span>
 <span>   <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span>package<span class="op">=</span><span class="st">"eSTZwritR"</span><span class="op">)</span>, <span class="st">"extdata"</span>, <span class="st">'ACTH7.gpkg'</span><span class="op">)</span></span>
@@ -343,8 +341,8 @@ determining an order before distributing a data set.</p>
 there actually any merit to this order?</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">oz</span><span class="op">$</span><span class="va">PlotKruskal</span></span></code></pre></div>
-<p><img src="eSTZwritR_files/figure-html/orderZones%20KruskalWallis-1.png" width="700">
-We can check that with the results from a Kruskal-Wallis test
+<p><img src="eSTZwritR_files/figure-html/orderZones%20KruskalWallis-1.png" width="700"></p>
+<p>We can check that with the results from a Kruskal-Wallis test
 implemented using ggpubr. First visual impressions give an indication
 that a trend is present throughout the data, but that the differences
 between some groups appears negligible. So while a global trend exists,
@@ -357,8 +355,8 @@ one group differs from the others, i.e. they were not drawn from the
 same distribution.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">oz</span><span class="op">$</span><span class="va">PlotDunns</span></span></code></pre></div>
-<p><img src="eSTZwritR_files/figure-html/orderZones%20Dunns-1.png" width="700">
-In this squished plot what we have depicted are the results from
+<p><img src="eSTZwritR_files/figure-html/orderZones%20Dunns-1.png" width="700"></p>
+<p>In this squished plot what we have depicted are the results from
 pairwise comparisons of all seed transfer zones using a Dunn’s test,
 with Holm’s p-adjustment method for multiple comparisons. If a line is
 missing between two groups, that indicates that a p-value of &gt; 0.05
@@ -443,9 +441,21 @@ pane.</p>
 <span>    <span class="st">'Data from Johnson et al. 2017. https://doi.org/10.1016/j.rama.2017.01.004'</span></span>
 <span>  <span class="co"># Cite where the data comes from!!! A doi would be great too ;-) !</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>We show the saved PDF version of the map below.</p>
+<p>Here is a call to have it show up in the viewing pane, definitely do
+not judge them from this format. Save a copy locally before scrutinizing
+them, all it takes to do that is to change ‘save = FALSE’ to TRUE in the
+code chunk above.</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">map</span></span>
+<span><span class="co">#&gt; Warning in st_point_on_surface.sfc(sf::st_zm(x)): st_point_on_surface may not</span></span>
+<span><span class="co">#&gt; give correct results for longitude/latitude data</span></span>
+<span><span class="co">#&gt; Scale on map varies by more than 10%, scale bar may be inaccurate</span></span></code></pre></div>
+<p><img src="eSTZwritR_files/figure-html/Show%20mapmakrR%20results%20in%20viewing%20pane-1.png" width="700"></p>
+<p>We show the saved PDF version of the map below. It is definitely a
+very strange format to view it in, but the only way I can figure out how
+to get it loaded into this vignette and pass the R package checks.</p>
 <div class="figure" style="text-align: center">
-<embed src="./images/Eriocoma_thurberiana_STZmap.pdf" title="Pre-rendered PDF map of eSTZ" width="0.75\linewidth" type="application/pdf"></embed><p class="caption">
+<embed src="./images/Eriocoma_thurberiana_STZmap.pdf" title="Pre-rendered PDF map of eSTZ" type="application/pdf"></embed><p class="caption">
 Pre-rendered PDF map of eSTZ
 </p>
 </div>
@@ -463,7 +473,7 @@ Pre-rendered PDF map of eSTZ
 <div class="float">
 <img src="images%2FFieldNames_Variables.png" alt="Field Names"><div class="figcaption">Field Names</div>
 </div>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/fieldsmakR.html">fieldsmakR</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
