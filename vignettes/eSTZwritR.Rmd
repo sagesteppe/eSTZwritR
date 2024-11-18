@@ -37,7 +37,7 @@ library(patchwork)
 ```
 
 Here we will load in the example data we will use for all steps of the vignette. 
-These data are from Johnson, R. C., E. A. Leger, and Ken Vance-Borland. "Genecology of Thurber’s Needlegrass (*Achnatherum thurberianum* \[Piper\] Barkworth) in the Western United States." Rangeland Ecology & Management 70.4 (2017): 509-517.
+These data are from Johnson, R. C., E. A. Leger, and Ken Vance-Borland. "Genecology of Thurber’s Needlegrass (*Achnatherum thurberianum*  (Piper) Barkworth) in the Western United States." Rangeland Ecology & Management 70.4 (2017): 509-517.
 They represent a rather complex eSTZ, composed of many polygons. 
 
 ```{r import example data}
@@ -154,6 +154,7 @@ Obviously, we can always get an order from the seed zones - but is there actuall
 ```{r orderZones KruskalWallis, message = FALSE}
 oz$PlotKruskal
 ```
+
 We can check that with the results from a Kruskal-Wallis test implemented using ggpubr. 
 First visual impressions give an indication that a trend is present throughout the data, but that the differences between some groups appears negligible. 
 So while a global trend exists, under a magnifying lens, relationships are more nuanced. 
@@ -163,6 +164,7 @@ The results of the Kruskal-Wallis test (or one-way ANOVA on ranks) indicates tha
 ```{r orderZones Dunns, message = FALSE}
 oz$PlotDunns
 ```
+
 In this squished plot what we have depicted are the results from pairwise comparisons of all seed transfer zones using a Dunn's test, with Holm's p-adjustment method for multiple comparisons.
 If a line is missing between two groups, that indicates that a p-value of > 0.05 exists between the groups, showing little to no evidence of differences between them. 
 The presence of the line indicates that a p-value beneath 0.05 is present, see ??stat_pwc for details on the coding. 
@@ -231,9 +233,17 @@ map <- mapmakR(acth7,
 ```
 
 
-We show the saved PDF version of the map below.  
+Here is a call to have it show up in the viewing pane, definitely do not judge them from this format. 
+Save a copy locally before scrutinizing them, all it takes to do that is to change 'save = FALSE' to TRUE in the code chunk above. 
 
-```{r image-ref-for-in-text, echo = FALSE, message=FALSE, fig.align='center', fig.cap='Pre-rendered PDF map of eSTZ', out.width='0.75\\linewidth', fig.pos='H'}
+```{r Show mapmakrR results in viewing pane}
+map
+```
+
+We show the saved PDF version of the map below. 
+It is definitely a very strange format to view it in, but the only way I can figure out how to get it loaded into this vignette and pass the R package checks. 
+
+```{r image-ref-for-in-text, echo = FALSE, message=FALSE, fig.align='center', fig.cap='Pre-rendered PDF map of eSTZ'}
 knitr::include_graphics("./images/Eriocoma_thurberiana_STZmap.pdf")
 ```
 
