@@ -8,7 +8,7 @@ vignette: >
 ---
 
 ```{r, include = FALSE}
-knitr::opts_chunk$set(
+knitr::opts_chunk$set( 
   collapse = TRUE,
   comment = "#>"
 )
@@ -178,14 +178,14 @@ Some zones are markedly different from others, but most of them are able to run 
 Finally, we can make some maps and see how our seed zones differ on them - is their any intuitive sensibility here? 
 
 ```{r Maps of Ordered Seed Zones, message = F}
-p1 <- ggplot(data = acth7, aes(fill = zone), color = NA) + 
-  geom_sf() + 
+p1 <- ggplot(data = acth7, aes(fill = zone)) + 
+  geom_sf(color = NA) + 
   theme_void() + 
   scale_fill_distiller(palette = "RdYlGn", direction = 1) + 
   labs(title = 'Original')
 
-p2 <- ggplot(data = oz$Reclassified, aes(fill = zone), color = NA) + 
-  geom_sf() + 
+p2 <- ggplot(data = oz$Reclassified, aes(fill = zone)) + 
+  geom_sf(color = NA) + 
   theme_void() + 
   scale_fill_distiller(palette = "RdYlGn", direction = 1) + 
   labs(title = 'Ordered')
@@ -237,12 +237,13 @@ map <- mapmakR(acth7,
 Here is a call to have it show up in the viewing pane, definitely do not judge them from this format. 
 Save a copy locally before scrutinizing them, all it takes to do that is to change 'save = FALSE' to TRUE in the code chunk above. 
 
-```{r Show mapmakrR results in viewing pane}
+```{r Show mapmakrR results in viewing pane, eval = F}
 map
 ```
 
 We show the saved PDF version of the map below. 
 It is definitely a very strange format to view it in, but the only way I can figure out how to get it loaded into this vignette and pass the R package checks. 
+On firefox, at least, you can download the map from this viewer if you want to be able to zoom in on it. 
 
 ```{r image-ref-for-in-text, echo = FALSE, message=FALSE, fig.align='center', fig.cap='Pre-rendered PDF map of eSTZ'}
 knitr::include_graphics("./images/Eriocoma_thurberiana_STZmap.pdf")
@@ -258,12 +259,34 @@ The below image has four fields (ID, SeedZone, SZName, AreaAcres) which we consi
 
 ![Vector Data (~Shapefile) Field Names](./images/FieldNames.png)
 
-Some further guidance for naming and structing shapefiles is provided below.... 
+Some further guidance for naming and structuring shapefiles is provided below.... 
 
 ![Field Names](./images/FieldNames_Variables.png)
 
-```{r, eval = F}
-fieldsmakR()
+```{r Run fieldmakr}
+ob <- fieldsmakR(acth7, SeedZone = 'zone')
+head(ob)
 ```
+
+by default we try NOT to remove any columns, this way you don't have to backtrack to recompute a variable. 
+Please consider removing the column yourself, or rename it as necessary. 
+I'll re-familiarize you with this in a chunk further down. 
+
+We can also make the problem a little more difficult and see what the function returns 
+
+```{r Fieldmakr fake columns}
+acht7_stuff <- acth7 |>
+  dplyr::mutate(
+    bio1_range = runif(n = dplyr::n()), 
+    bio12_avg = runif(n = dplyr::n()), 
+    bio9_m = runif(n = dplyr::n()), 
+  )
+
+fieldsmakR(acht7_stuff, SeedZone = 'zone')
+```
+
+See that the function can make some modifications to very simple abbreviations which we anticipate exist in the wild (range -> R, avg -> mean), but we cannot do much with BIO9_m, because we do not know what to do with it - should it be mean? max? min? 
+
+Please further note the function will not emit a warning if a BIO column is unrecognized, so please refer to the rules above and your output to determine if you need to manually alter any values so they are readily interpretable to other users. 
 
 ### Metadata 

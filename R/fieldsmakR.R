@@ -34,6 +34,9 @@ fieldsmakR <- function(x, SeedZone, ID, SZName, AreaAcres){
          colnames(x)[grep('^id*', colnames(x))] <- 'ID'}
   }
 
+  # ensure geometry has not been abbreviated alal gpkg conventions
+  x <- dplyr::rename(x, dplyr::any_of(c(geometry = 'geom')))
+
   # ensure 'SeedZone' is appropriately named.
   colnames(x)[grep(SeedZone, colnames(x))] <- 'SeedZone'
 
@@ -69,6 +72,7 @@ fieldsmakR <- function(x, SeedZone, ID, SZName, AreaAcres){
     colnames(bio_cols) <- gsub('bio', 'BIO', colnames(bio_cols), ignore.case = TRUE) # Ensure this portion is uppercase
     colnames(bio_cols) <- gsub('-| ', '_', colnames(bio_cols), ignore.case = TRUE) # Ensure any spacer is an underscore
     colnames(bio_cols) <- gsub('_range', '_R', colnames(bio_cols), ignore.case = TRUE) # ensure that appropriate statistic abbreviations are used.
+    colnames(bio_cols) <- gsub('_average|_avg', '_mean', colnames(bio_cols), ignore.case = TRUE) # ensure that appropriate statistic abbreviations are used.
     colnames(bio_cols) <- gsub('_sd', '_SD', colnames(bio_cols), ignore.case = TRUE) # ensure that appropriate statistic abbreviations are used.
 
     x <- dplyr::bind_cols(x[ -grep('bio', colnames(x)) ], bio_cols)
@@ -80,15 +84,15 @@ fieldsmakR <- function(x, SeedZone, ID, SZName, AreaAcres){
   cnames <- colnames(x)[ ! colnames(x) %in% c(four, 'geometry')]
 
   if(length(cnames) > 0){ # if only bio columns are present order them by bio number
-    if(length(cnames) == length(grep('^bio', cnames))){
+    if(length(cnames) == length(grep('^bio', cnames, ignore.case=TRUE))){
       cnames <- cnames[order(as.numeric(gsub('[A-z]', '', cnames)))]
-    } else if (length(cnames) > length(grep('^bio', cnames)))
+    } else if (length(cnames) > length(grep('^bio', cnames, ignore.case=TRUE)))
 
       # if a mix of columns exist order them by BIO # AND then other columns alp
-      cnames_bio <- cnames[grep('^BIO', cnames)]
+      cnames_bio <- cnames[grep('^BIO', cnames, ignore.case=TRUE)]
       cnames_bio <- cnames_bio[order(as.numeric(gsub('[A-z]', '', cnames_bio)))]
 
-      cnames_unk <- cnames[ grep('^BIO', cnames, invert = TRUE) ]
+      cnames_unk <- cnames[ grep('^BIO', cnames, invert = TRUE, ignore.case=TRUE) ]
       cnames_unk <- cnames_unk[order(cnames_unk)]
       cnames <- c(cnames_bio, cnames_unk)
       message(
@@ -106,4 +110,7 @@ fieldsmakR <- function(x, SeedZone, ID, SZName, AreaAcres){
   cols <- c(four, cnames, 'geometry')
   x <- dplyr::select(x, dplyr::all_of(cols))
 
+  return(x)
 }
+
+
