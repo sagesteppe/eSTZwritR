@@ -81,37 +81,10 @@
 <span class="r-in"><span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_cols.html" class="external-link">bind_cols</a></span><span class="op">(</span><span class="va">df</span>, <span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">ob</span> <span class="op">&lt;-</span> <span class="fu">fieldsmakR</span><span class="op">(</span><span class="va">nc</span>, SeedZone <span class="op">=</span> <span class="st">'gridcode'</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> There is a column(s), `zone`, which we can't figure out the purpose of.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>       It will be returned here, but FYI a list of bioclim vars are here https://www.worldclim.org/data/bioclim.html.</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in rename.sf(x, dplyr::any_of(c(geometry = "geom"))):</span> internal error: can't find `agr` columns</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">ob</span>, <span class="op">-</span><span class="va">zone</span><span class="op">)</span> <span class="co"># easily remove like so.</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Simple feature collection with 10 features and 6 fields</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Geometry type: MULTIPOLYGON</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Dimension:     XY</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Bounding box:  xmin: -81.74107 ymin: 36.07282 xmax: -75.77316 ymax: 36.58965</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Geodetic CRS:  NAD27</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    ID SeedZone SZName AreaAcres  BIO1_SD BIO8_mean</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1   1        7      7  281058.5 5.062461  6.360326</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2   2        5      5  151003.2 5.451125  5.997691</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3   3        6      6  351757.7 5.601662  6.283359</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4   4       10     10  171630.7 6.272931  6.320569</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5   5        4      4  375785.3 5.958049  5.192048</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6   6        1      1  239133.8 5.864343  6.531200</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7   7        9      9  152205.6 6.412868  6.539350</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8   8        8      8  223298.9 6.897153  6.981425</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9   9        3      3  291423.0 5.360678  6.941042</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10 10        2      2  304632.8 5.433800  5.778366</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                          geometry</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  MULTIPOLYGON (((-81.45289 3...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  MULTIPOLYGON (((-81.17667 3...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  MULTIPOLYGON (((-80.45301 3...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4  MULTIPOLYGON (((-75.94193 3...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5  MULTIPOLYGON (((-77.14196 3...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6  MULTIPOLYGON (((-76.7075 36...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7  MULTIPOLYGON (((-76.01735 3...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8  MULTIPOLYGON (((-76.46035 3...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9  MULTIPOLYGON (((-78.13472 3...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10 MULTIPOLYGON (((-80.02406 3...</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'ob' not found</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
