@@ -23,7 +23,6 @@
 #'
 #' ob <- fieldsmakR(nc, SeedZone = 'gridcode')
 #'
-#' dplyr::rename(nc, dplyr::any_of(c(geometry = 'geom')))
 #' dplyr::select(ob, -zone) # easily remove like so.
 #' }
 #' @export
@@ -36,7 +35,7 @@ fieldsmakR <- function(x, SeedZone, ID, SZName, AreaAcres){
   }
 
   # ensure geometry has not been abbreviated alal gpkg conventions
-  x <- dplyr::rename(x, dplyr::any_of(c(geometry = 'geom')))
+  sf::st_geometry(x) <- 'geometry'
 
   # ensure 'SeedZone' is appropriately named.
   colnames(x)[grep(SeedZone, colnames(x))] <- 'SeedZone'
@@ -113,5 +112,3 @@ fieldsmakR <- function(x, SeedZone, ID, SZName, AreaAcres){
 
   return(x)
 }
-
-
