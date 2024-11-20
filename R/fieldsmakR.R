@@ -7,13 +7,13 @@
 #' @param ID a string specifying this columns names, If not supplied will create one.
 #' @param SZName a string containing a name for the SeedZone column to be used in conversation, such as 'Productivity high, Phenology late' or 'SW midmontane', if not supplied will copy 'SeedZone' column values
 #' @param AreaAcres a string containing the name for the column containing an area measurement, if not supplied this value will be calculated using epsg:5070
-#' @examples
+#' @examples \dontrun{
 #' df <- data.frame(
-#' id = 1:10,
-#' gridcode = sample(1:10, replace = FALSE),
-#' zone = sample(LETTERS, 10, replace = FALSE),
-#' bio1_sd = runif(10, 5, 7),
-#' bio8_mean = runif(10, 5, 7)
+#'   id = 1:10,
+#'   gridcode = sample(1:10, replace = FALSE),
+#'   zone = sample(LETTERS, 10, replace = FALSE),
+#'   bio1_sd = runif(10, 5, 7),
+#'   bio8_mean = runif(10, 5, 7)
 #' )
 #'
 #' nc <- sf::st_read(system.file("shape/nc.shp", package="sf"), quiet = TRUE) |>
@@ -23,8 +23,9 @@
 #'
 #' ob <- fieldsmakR(nc, SeedZone = 'gridcode')
 #'
+#' dplyr::rename(nc, dplyr::any_of(c(geometry = 'geom')))
 #' dplyr::select(ob, -zone) # easily remove like so.
-#'
+#' }
 #' @export
 fieldsmakR <- function(x, SeedZone, ID, SZName, AreaAcres){
 

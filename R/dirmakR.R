@@ -16,7 +16,13 @@
 #' acth7 <- sf::st_read(file.path(
 #'   system.file(package="eSTZwritR"), "extdata", 'ACTH7.gpkg')
 #' )
-#' dirmakR('.', 'Eriocoma thurberiana', acth7, nrcs_code = 'ACHT7', regioncode =  'CGB-CPN', estz_type = 'cg')
+#' dirmakR('.',
+#'   'Eriocoma thurberiana',
+#'    acth7,
+#'    nrcs_code = 'ACHT7',
+#'    regioncode =  'CGB-CPN',
+#'    estz_type = 'cg'
+#'    )
 #' @export
 dirmakR <- function(outpath, sci_name, x, nrcs_code, regioncode, overwrite, estz_type){
 
