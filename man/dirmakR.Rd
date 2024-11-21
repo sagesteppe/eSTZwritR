@@ -31,5 +31,11 @@ placement of subdirectories and naming conventions.
 acth7 <- sf::st_read(file.path(
   system.file(package="eSTZwritR"), "extdata", 'ACTH7.gpkg')
 )
-dirmakR('.', 'Eriocoma thurberiana', acth7, nrcs_code = 'ACHT7', regioncode =  'CGB-CPN', estz_type = 'cg')
+dirmakR('.',
+  'Eriocoma thurberiana',
+   acth7,
+   nrcs_code = 'ACHT7',
+   regioncode =  'CGB-CPN',
+   estz_type = 'cg'
+   )
 }

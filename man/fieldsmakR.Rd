@@ -21,12 +21,13 @@ fieldsmakR(x, SeedZone, ID, SZName, AreaAcres)
 Appropriately order the fields of a shapefile and ensure consistent naming of them.
 }
 \examples{
+\dontrun{
 df <- data.frame(
-id = 1:10,
-gridcode = sample(1:10, replace = FALSE),
-zone = sample(LETTERS, 10, replace = FALSE),
-bio1_sd = runif(10, 5, 7),
-bio8_mean = runif(10, 5, 7)
+  id = 1:10,
+  gridcode = sample(1:10, replace = FALSE),
+  zone = sample(LETTERS, 10, replace = FALSE),
+  bio1_sd = runif(10, 5, 7),
+  bio8_mean = runif(10, 5, 7)
 )
 
 nc <- sf::st_read(system.file("shape/nc.shp", package="sf"), quiet = TRUE) |>
@@ -37,5 +38,5 @@ nc <- sf::st_read(system.file("shape/nc.shp", package="sf"), quiet = TRUE) |>
 ob <- fieldsmakR(nc, SeedZone = 'gridcode')
 
 dplyr::select(ob, -zone) # easily remove like so.
-
+}
 }
