@@ -15,7 +15,7 @@ mapmakR(
   caption,
   filetype,
   buf_prcnt,
-  SeedZone
+  SZName
 )
 }
 \arguments{
@@ -68,6 +68,7 @@ mapmakR(acth7,
  landscape = FALSE,
  ecoregions = TRUE,
  cities = TRUE,
+ SZName = 'zone',
  caption = 'Data from Johnson et al. 2017. https://doi.org/10.1016/j.rama.2017.01.004'
  )
 }

@@ -34,11 +34,12 @@
 #'  landscape = FALSE,
 #'  ecoregions = TRUE,
 #'  cities = TRUE,
+#'  SZName = 'zone',
 #'  caption = 'Data from Johnson et al. 2017. https://doi.org/10.1016/j.rama.2017.01.004'
 #'  )
 #' @returns Writes a PDF (or other specified `filetype`) to disk, and returns the ggplot object to console allowing user to modify it for other purposes.
 #' @export
-mapmakR <- function(x, species, save, outdir, ecoregions, cities, landscape, caption, filetype, buf_prcnt, SeedZone){
+mapmakR <- function(x, species, save, outdir, ecoregions, cities, landscape, caption, filetype, buf_prcnt, SZName){
 
   if(missing(species))(stop('Species Name Not supplied.'))
   if(missing(save)){save <- TRUE}
