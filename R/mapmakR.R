@@ -79,7 +79,7 @@ mapmakR <- function(x, species, save, outdir, ecoregions, cities, landscape, cap
   p <- ggplot2::ggplot() +
     ggplot2::geom_sf(
       data = x,
-      ggplot2::aes(fill = factor(zone)),
+      ggplot2::aes(fill = factor(SeedZone)),
       color = NA,
       inherit.aes = TRUE) +
     ggplot2::geom_sf(

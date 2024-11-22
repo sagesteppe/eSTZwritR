@@ -201,17 +201,70 @@ In my mind yes, while others are free to disagree.
 *Note that this function uses Kruskal-Wallis tests by default, even though in this case we could probably swing an ANOVA due to the high number of groups, and high number of data points per group we were able to generate.* 
 *This particular eSTZ example was chosen because it is a bit more complex than other products, and we don't think swapping to an ANOVA in this function is warranted.* 
 
-### Directory (Folder) Structure
+### Data Formats 
 
-![Directory Structure](./images/DirectoryStructure.png)
-```{r, eval = F}
-dirmakR()
+### Vector Data Field Attibutes. 
+
+Many of these data products will be inspected and interacted with by human users, and they should cater to humans not just computers. 
+One of the important decisions we can make to enhance this utility is to 'order' the fields in the spatial data, and to apply a consistent - and hence predictable - naming structure. 
+The below image has four fields (ID, SeedZone, SZName, AreaAcres) which we consider mandatory for each file, and two supplementary fields which certain users may find useful (BIO1_R, BIO2_mean). 
+
+![Vector Data (~Shapefile) Field Names](./images/FieldNames.png)
+
+Some further guidance for naming and structuring shapefiles is provided below.... 
+
+![Field Names](./images/FieldNames_Variables.png)
+
+```{r Run fieldmakr}
+acth7_clean <- fieldsmakR(acth7, SeedZone = 'zone')
+head(acth7_clean)
 ```
 
+by default we try NOT to remove any columns, this way you don't have to backtrack to recompute a variable. 
+Please consider removing the column yourself, or rename it as necessary. 
+I'll re-familiarize you with this in a chunk further down. 
 
-### File Naming 
+We can also make the problem a little more difficult and see what the function returns 
 
-contents go here. 
+```{r Fieldmakr fake columns}
+acth7_stuff <- acth7 |>
+  dplyr::mutate(
+    bio1_range = runif(n = dplyr::n()), 
+    bio12_avg = runif(n = dplyr::n()), 
+    bio9_m = runif(n = dplyr::n()), 
+  )
+
+fieldsmakR(acth7_stuff, SeedZone = 'zone')
+```
+
+See that the function can make some modifications to very simple abbreviations which we anticipate exist in the wild (range -> R, avg -> mean), but we cannot do much with BIO9_m, because we do not know what to do with it - should it be mean? max? min? 
+
+Please further note the function will not emit a warning if a BIO column is unrecognized, so please refer to the rules above and your output to determine if you need to manually alter any values so they are readily interpretable to other users. 
+
+```{r}
+rm(acth7_stuff, acth7)
+```
+
+### Directory (Folder) Structure & File Naming 
+
+![Directory Structure](./images/DirectoryStructure.png)
+
+```{r, eval = F}
+
+dirmakR(
+  outpath = '~/Documents/EmpiricalSeedZones', 
+  sci_name = 'Eriocoma_thurberiana', 
+  x = acth7_clean, 
+  regioncode = rc,
+  nrcs_code = 'ACHT7',
+  estz_type = 'cg',
+  overwrite = TRUE
+)
+```
+
+```{r delete region code, echo = FALSE}
+rm(rc)
+```
 
 ### Maps 
 
@@ -221,13 +274,30 @@ The maps which `eSTZwritR` makes are meant to be, well are, full page PDFs in ei
 We will also return a map to the R plot pane, but that is a much smaller format than the map is intended to be used at. 
 So when you are actually using the function, focus on only altering maps if the appearance of the PDF's leave something to be desired, not the examples from the viewing pane. 
 
-```{r mapmakR}
-map <- mapmakR(acth7,
+```{r mapmakR for evaluation}
+map <- mapmakR(
+  acth7_clean,
   species = 'Eriocoma thurberiana', # this will become the title. 
   save = FALSE, # whether to write to disk, defaults to TRUE
   landscape = FALSE, # defaults ot TRUE, we want a landscape page
   ecoregions = TRUE, # whether to add unlabeled L4 ecoregions or not. 
   cities = TRUE, # whether to add some cities to the map
+  caption = 
+    'Data from Johnson et al. 2017. https://doi.org/10.1016/j.rama.2017.01.004'
+  # Cite where the data comes from!!! A doi would be great too ;-) !
+)
+```
+
+
+The code to save the map is simple and below, we let one of our arguments revert to it's boolean defaults (save == TRUE), and supply an output directory `outdir` to save our map too. 
+Note that *all* ancillary information for our projects go into the `Information` sub-directory. 
+
+```{r mapmakr for real, eval = F}
+
+mapmakR(acth7_clean,
+  species = 'Eriocoma thurberiana', # this will become the title. 
+  outdir = '~/Documents/EmpiricalSeedZones/Eriocoma_thurberianacgSTZ/Information',
+  landscape = FALSE, # defaults ot TRUE, we want a landscape page
   caption = 
     'Data from Johnson et al. 2017. https://doi.org/10.1016/j.rama.2017.01.004'
   # Cite where the data comes from!!! A doi would be great too ;-) !
@@ -249,44 +319,24 @@ On firefox, at least, you can download the map from this viewer if you want to b
 knitr::include_graphics("./images/Eriocoma_thurberiana_STZmap.pdf")
 ```
 
-### Data Formats 
 
-### Vector Data Field Attibutes. 
+### Bonus Activity - Naming the Seed Zones!
 
-Many of these data products will be inspected and interacted with by human users, and they should cater to humans not just computers. 
-One of the important decisions we can make to enhance this utility is to 'order' the fields in the spatial data, and to apply a consistent - and hence predictable - naming structure. 
-The below image has four fields (ID, SeedZone, SZName, AreaAcres) which we consider mandatory for each file, and two supplementary fields which certain users may find useful (BIO1_R, BIO2_mean). 
+One suggestion within a paper we published stemming from this project is that all individual eSTZs seed zones should have a colloquial name for communicating them broadly. 
+As individuals we generally find it easier to remember phrases, than simply numbers, even if they are ordered by an aridity gradient. 
 
-![Vector Data (~Shapefile) Field Names](./images/FieldNames.png)
+This section will be slightly wonky, I am going to open up the cleaned set of vector data we have created in a common Geographic Information System (GIS) with a Graphical User Interface (GUI). 
+While there are several good GIS with GUI, we will ues the one I recommend every single time, QGIS. 
+QGIS is totally free, works on essentially all operating systems and most flavours of linux, and is kind of like what ESRI products would be like if they weren't terrible. 
+If you want to download QGIS feel free to do so, it's available [here](https://qgis.org/download/), but othewise you can just read the text and you'll get an idea of what I mean by seed zone names. 
 
-Some further guidance for naming and structuring shapefiles is provided below.... 
+```{r}
 
-![Field Names](./images/FieldNames_Variables.png)
-
-```{r Run fieldmakr}
-ob <- fieldsmakR(acth7, SeedZone = 'zone')
-head(ob)
 ```
 
-by default we try NOT to remove any columns, this way you don't have to backtrack to recompute a variable. 
-Please consider removing the column yourself, or rename it as necessary. 
-I'll re-familiarize you with this in a chunk further down. 
+```{r Write out cleaned Data}
 
-We can also make the problem a little more difficult and see what the function returns 
+acth7
 
-```{r Fieldmakr fake columns}
-acht7_stuff <- acth7 |>
-  dplyr::mutate(
-    bio1_range = runif(n = dplyr::n()), 
-    bio12_avg = runif(n = dplyr::n()), 
-    bio9_m = runif(n = dplyr::n()), 
-  )
-
-fieldsmakR(acht7_stuff, SeedZone = 'zone')
 ```
 
-See that the function can make some modifications to very simple abbreviations which we anticipate exist in the wild (range -> R, avg -> mean), but we cannot do much with BIO9_m, because we do not know what to do with it - should it be mean? max? min? 
-
-Please further note the function will not emit a warning if a BIO column is unrecognized, so please refer to the rules above and your output to determine if you need to manually alter any values so they are readily interpretable to other users. 
-
-### Metadata 

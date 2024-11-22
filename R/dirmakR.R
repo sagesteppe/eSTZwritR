@@ -12,6 +12,7 @@
 #' @param overwrite whether to overwrite the existing directory (if it already exists)
 #' @param estz_type one of 'lg' for landscape genetics (or genetic), 'cg' for common garden, or 'cm' for climate matched.
 #' If multiple approaches choose the most robust method, e.g. 'cg' > 'lg' > 'cm'
+#' @param map
 #' @examples
 #' acth7 <- sf::st_read(file.path(
 #'   system.file(package="eSTZwritR"), "extdata", 'ACTH7.gpkg')
@@ -24,10 +25,10 @@
 #'    estz_type = 'cg'
 #'    )
 #' @export
-dirmakR <- function(outpath, sci_name, x, nrcs_code, regioncode, overwrite, estz_type){
+dirmakR <- function(outpath, sci_name, x, nrcs_code, regioncode, overwrite, estz_type, map){
 
   if(missing(overwrite)){overwrite <- FALSE}
-  if(length(regioncode)>1){regioncode <- regioncode[1]}
+  if(length(regioncode)>1){regioncode <- regioncode[[1]]}
 
   node1 <- file.path(outpath,
                      paste0(gsub(' ', '_', sci_name), estz_type, 'STZ'))
@@ -36,16 +37,17 @@ dirmakR <- function(outpath, sci_name, x, nrcs_code, regioncode, overwrite, estz
     message(node1, ' was found. If you still need this function to run use the argument `overwrite = TRUE`.')
   } else {
 
-    dir.create(node1) #create all the sub directories
-    dir.create(file.path(node1, 'Information'))
-    dir.create(file.path(node1, 'Data'))
-    dir.create(file.path(node1, 'Data', 'Vector'))
-    dir.create(file.path(node1, 'Data', 'Raster'))
+    dir.create(node1, showWarnings = FALSE) #create all the sub directories
+    dir.create(file.path(node1, 'Information'), showWarnings = FALSE)
+    dir.create(file.path(node1, 'Data'), showWarnings = FALSE)
+    dir.create(file.path(node1, 'Data', 'Vector'), showWarnings = FALSE)
+    dir.create(file.path(node1, 'Data', 'Raster'), showWarnings = FALSE)
 
     #########              write out the spatial data.                #########
     sf::st_make_valid(x) |> # ensure geometries do not self-intersect.
       sf::st_write(
-        paste(file.path(node1, 'Data', 'Vector'), nrcs_code, '_', estz_type, 'STZ.shp')
+        file.path(node1, 'Data', 'Vector', paste0(nrcs_code, '_', estz_type, 'STZ_', regioncode, '.shp')),
+        append = FALSE
       )
 
   #    terra::writeRaster(

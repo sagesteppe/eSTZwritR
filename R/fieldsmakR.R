@@ -97,14 +97,14 @@ fieldsmakR <- function(x, SeedZone, ID, SZName, AreaAcres){
       cnames <- c(cnames_bio, cnames_unk)
       message(
       "There is a column(s), `",  cnames_unk, "`, which we can't figure out the purpose of.
-      It will be returned here, but FYI a list of bioclim vars are here https://www.worldclim.org/data/bioclim.html.")
+      It will be returned here, but FYI a list of bioclim variables is here https://www.worldclim.org/data/bioclim.html.")
 
   } else {
     # if none of the columns are bio simply return them alphabetically.
     cnames <- cnames[order(cnames)]
     message(
       "There is a column(s), `",  cnames_unk, "`, which we can't figure out the purpose of.
-      It's still attached, but FYI a list of bioclim vars are here https://www.worldclim.org/data/bioclim.html.")
+      It's still attached, but FYI a list of bioclim variables is here https://www.worldclim.org/data/bioclim.html.")
   }
 
   cols <- c(four, cnames, 'geometry')
