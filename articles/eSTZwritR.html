@@ -404,62 +404,6 @@ because it is a bit more complex than other products, and we don’t think
 swapping to an ANOVA in this function is warranted.</em></p>
 </div>
 <div class="section level3">
-<h3 id="directory-folder-structure">Directory (Folder) Structure<a class="anchor" aria-label="anchor" href="#directory-folder-structure"></a>
-</h3>
-<div class="float">
-<img src="images%2FDirectoryStructure.png" alt="Directory Structure"><div class="figcaption">Directory Structure</div>
-</div>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/dirmakR.html">dirmakR</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="file-naming">File Naming<a class="anchor" aria-label="anchor" href="#file-naming"></a>
-</h3>
-<p>contents go here.</p>
-</div>
-<div class="section level3">
-<h3 id="maps">Maps<a class="anchor" aria-label="anchor" href="#maps"></a>
-</h3>
-<p>Maps can oftentimes be used in lieu of the actual spatial data
-product itself for many applications. We also use them frequently to
-verify that values are ‘mapped’ over correctly in GIS, a problem which
-should now be alleviated with more defined field naming conventions. The
-maps which <code>eSTZwritR</code> makes are meant to be, well are, full
-page PDFs in either a landscape or portrait orientation. We will also
-return a map to the R plot pane, but that is a much smaller format than
-the map is intended to be used at. So when you are actually using the
-function, focus on only altering maps if the appearance of the PDF’s
-leave something to be desired, not the examples from the viewing
-pane.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">map</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mapmakR.html">mapmakR</a></span><span class="op">(</span><span class="va">acth7</span>,</span>
-<span>  species <span class="op">=</span> <span class="st">'Eriocoma thurberiana'</span>, <span class="co"># this will become the title. </span></span>
-<span>  save <span class="op">=</span> <span class="cn">FALSE</span>, <span class="co"># whether to write to disk, defaults to TRUE</span></span>
-<span>  landscape <span class="op">=</span> <span class="cn">FALSE</span>, <span class="co"># defaults ot TRUE, we want a landscape page</span></span>
-<span>  ecoregions <span class="op">=</span> <span class="cn">TRUE</span>, <span class="co"># whether to add unlabeled L4 ecoregions or not. </span></span>
-<span>  cities <span class="op">=</span> <span class="cn">TRUE</span>, <span class="co"># whether to add some cities to the map</span></span>
-<span>  caption <span class="op">=</span> </span>
-<span>    <span class="st">'Data from Johnson et al. 2017. https://doi.org/10.1016/j.rama.2017.01.004'</span></span>
-<span>  <span class="co"># Cite where the data comes from!!! A doi would be great too ;-) !</span></span>
-<span><span class="op">)</span></span></code></pre></div>
-<p>Here is a call to have it show up in the viewing pane, definitely do
-not judge them from this format. Save a copy locally before scrutinizing
-them, all it takes to do that is to change ‘save = FALSE’ to TRUE in the
-code chunk above.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">map</span></span></code></pre></div>
-<p>We show the saved PDF version of the map below. It is definitely a
-very strange format to view it in, but the only way I can figure out how
-to get it loaded into this vignette and pass the R package checks. On
-firefox, at least, you can download the map from this viewer if you want
-to be able to zoom in on it.</p>
-<div class="figure" style="text-align: center">
-<embed src="./images/Eriocoma_thurberiana_STZmap.pdf" title="Pre-rendered PDF map of eSTZ" type="application/pdf"></embed><p class="caption">
-Pre-rendered PDF map of eSTZ
-</p>
-</div>
-</div>
-<div class="section level3">
 <h3 id="data-formats">Data Formats<a class="anchor" aria-label="anchor" href="#data-formats"></a>
 </h3>
 </div>
@@ -482,11 +426,11 @@ provided below….</p>
 <div class="float">
 <img src="images%2FFieldNames_Variables.png" alt="Field Names"><div class="figcaption">Field Names</div>
 </div>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ob</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fieldsmakR.html">fieldsmakR</a></span><span class="op">(</span><span class="va">acth7</span>, SeedZone <span class="op">=</span> <span class="st">'zone'</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">acth7_clean</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fieldsmakR.html">fieldsmakR</a></span><span class="op">(</span><span class="va">acth7</span>, SeedZone <span class="op">=</span> <span class="st">'zone'</span><span class="op">)</span></span>
 <span><span class="co">#&gt; There is a column(s), `area_ha`, which we can't figure out the purpose of.</span></span>
-<span><span class="co">#&gt;       It will be returned here, but FYI a list of bioclim vars are here https://www.worldclim.org/data/bioclim.html.</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">ob</span><span class="op">)</span></span>
+<span><span class="co">#&gt;       It will be returned here, but FYI a list of bioclim variables is here https://www.worldclim.org/data/bioclim.html.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">acth7_clean</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Simple feature collection with 6 features and 5 fields</span></span>
 <span><span class="co">#&gt; Geometry type: POLYGON</span></span>
 <span><span class="co">#&gt; Dimension:     XY</span></span>
@@ -507,17 +451,17 @@ column yourself, or rename it as necessary. I’ll re-familiarize you with
 this in a chunk further down.</p>
 <p>We can also make the problem a little more difficult and see what the
 function returns</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">acht7_stuff</span> <span class="op">&lt;-</span> <span class="va">acth7</span> <span class="op">|&gt;</span></span>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">acth7_stuff</span> <span class="op">&lt;-</span> <span class="va">acth7</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
 <span>    bio1_range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html" class="external-link">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>, </span>
 <span>    bio12_avg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html" class="external-link">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>, </span>
 <span>    bio9_m <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html" class="external-link">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>, </span>
 <span>  <span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="../reference/fieldsmakR.html">fieldsmakR</a></span><span class="op">(</span><span class="va">acht7_stuff</span>, SeedZone <span class="op">=</span> <span class="st">'zone'</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/fieldsmakR.html">fieldsmakR</a></span><span class="op">(</span><span class="va">acth7_stuff</span>, SeedZone <span class="op">=</span> <span class="st">'zone'</span><span class="op">)</span></span>
 <span><span class="co">#&gt; There is a column(s), `area_ha`, which we can't figure out the purpose of.</span></span>
-<span><span class="co">#&gt;       It will be returned here, but FYI a list of bioclim vars are here https://www.worldclim.org/data/bioclim.html.</span></span>
+<span><span class="co">#&gt;       It will be returned here, but FYI a list of bioclim variables is here https://www.worldclim.org/data/bioclim.html.</span></span>
 <span><span class="co">#&gt; Simple feature collection with 3380 features and 8 fields</span></span>
 <span><span class="co">#&gt; Geometry type: POLYGON</span></span>
 <span><span class="co">#&gt; Dimension:     XY</span></span>
@@ -546,10 +490,103 @@ what to do with it - should it be mean? max? min?</p>
 column is unrecognized, so please refer to the rules above and your
 output to determine if you need to manually alter any values so they are
 readily interpretable to other users.</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html" class="external-link">rm</a></span><span class="op">(</span><span class="va">acth7_stuff</span>, <span class="va">acth7</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="metadata">Metadata<a class="anchor" aria-label="anchor" href="#metadata"></a>
+<h3 id="directory-folder-structure-file-naming">Directory (Folder) Structure &amp; File Naming<a class="anchor" aria-label="anchor" href="#directory-folder-structure-file-naming"></a>
 </h3>
+<div class="float">
+<img src="images%2FDirectoryStructure.png" alt="Directory Structure"><div class="figcaption">Directory Structure</div>
+</div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="fu"><a href="../reference/dirmakR.html">dirmakR</a></span><span class="op">(</span></span>
+<span>  outpath <span class="op">=</span> <span class="st">'~/Documents/EmpiricalSeedZones'</span>, </span>
+<span>  sci_name <span class="op">=</span> <span class="st">'Eriocoma_thurberiana'</span>, </span>
+<span>  x <span class="op">=</span> <span class="va">acth7_clean</span>, </span>
+<span>  regioncode <span class="op">=</span> <span class="va">rc</span>,</span>
+<span>  nrcs_code <span class="op">=</span> <span class="st">'ACHT7'</span>,</span>
+<span>  estz_type <span class="op">=</span> <span class="st">'cg'</span>,</span>
+<span>  overwrite <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="maps">Maps<a class="anchor" aria-label="anchor" href="#maps"></a>
+</h3>
+<p>Maps can oftentimes be used in lieu of the actual spatial data
+product itself for many applications. We also use them frequently to
+verify that values are ‘mapped’ over correctly in GIS, a problem which
+should now be alleviated with more defined field naming conventions. The
+maps which <code>eSTZwritR</code> makes are meant to be, well are, full
+page PDFs in either a landscape or portrait orientation. We will also
+return a map to the R plot pane, but that is a much smaller format than
+the map is intended to be used at. So when you are actually using the
+function, focus on only altering maps if the appearance of the PDF’s
+leave something to be desired, not the examples from the viewing
+pane.</p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">map</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mapmakR.html">mapmakR</a></span><span class="op">(</span></span>
+<span>  <span class="va">acth7_clean</span>,</span>
+<span>  species <span class="op">=</span> <span class="st">'Eriocoma thurberiana'</span>, <span class="co"># this will become the title. </span></span>
+<span>  save <span class="op">=</span> <span class="cn">FALSE</span>, <span class="co"># whether to write to disk, defaults to TRUE</span></span>
+<span>  landscape <span class="op">=</span> <span class="cn">FALSE</span>, <span class="co"># defaults ot TRUE, we want a landscape page</span></span>
+<span>  ecoregions <span class="op">=</span> <span class="cn">TRUE</span>, <span class="co"># whether to add unlabeled L4 ecoregions or not. </span></span>
+<span>  cities <span class="op">=</span> <span class="cn">TRUE</span>, <span class="co"># whether to add some cities to the map</span></span>
+<span>  caption <span class="op">=</span> </span>
+<span>    <span class="st">'Data from Johnson et al. 2017. https://doi.org/10.1016/j.rama.2017.01.004'</span></span>
+<span>  <span class="co"># Cite where the data comes from!!! A doi would be great too ;-) !</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>The code to save the map is simple and below, we let one of our
+arguments revert to it’s boolean defaults (save == TRUE), and supply an
+output directory <code>outdir</code> to save our map too. Note that
+<em>all</em> ancillary information for our projects go into the
+<code>Information</code> sub-directory.</p>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="fu"><a href="../reference/mapmakR.html">mapmakR</a></span><span class="op">(</span><span class="va">acth7_clean</span>,</span>
+<span>  species <span class="op">=</span> <span class="st">'Eriocoma thurberiana'</span>, <span class="co"># this will become the title. </span></span>
+<span>  outdir <span class="op">=</span> <span class="st">'~/Documents/EmpiricalSeedZones/Eriocoma_thurberianacgSTZ/Information'</span>,</span>
+<span>  landscape <span class="op">=</span> <span class="cn">FALSE</span>, <span class="co"># defaults ot TRUE, we want a landscape page</span></span>
+<span>  caption <span class="op">=</span> </span>
+<span>    <span class="st">'Data from Johnson et al. 2017. https://doi.org/10.1016/j.rama.2017.01.004'</span></span>
+<span>  <span class="co"># Cite where the data comes from!!! A doi would be great too ;-) !</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>Here is a call to have it show up in the viewing pane, definitely do
+not judge them from this format. Save a copy locally before scrutinizing
+them, all it takes to do that is to change ‘save = FALSE’ to TRUE in the
+code chunk above.</p>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">map</span></span></code></pre></div>
+<p>We show the saved PDF version of the map below. It is definitely a
+very strange format to view it in, but the only way I can figure out how
+to get it loaded into this vignette and pass the R package checks. On
+firefox, at least, you can download the map from this viewer if you want
+to be able to zoom in on it.</p>
+<div class="figure" style="text-align: center">
+<embed src="./images/Eriocoma_thurberiana_STZmap.pdf" title="Pre-rendered PDF map of eSTZ" type="application/pdf"></embed><p class="caption">
+Pre-rendered PDF map of eSTZ
+</p>
+</div>
+</div>
+<div class="section level3">
+<h3 id="bonus-activity---naming-the-seed-zones">Bonus Activity - Naming the Seed Zones!<a class="anchor" aria-label="anchor" href="#bonus-activity---naming-the-seed-zones"></a>
+</h3>
+<p>One suggestion within a paper we published stemming from this project
+is that all individual eSTZs seed zones should have a colloquial name
+for communicating them broadly. As individuals we generally find it
+easier to remember phrases, than simply numbers, even if they are
+ordered by an aridity gradient.</p>
+<p>This section will be slightly wonky, I am going to open up the
+cleaned set of vector data we have created in a common Geographic
+Information System (GIS) with a Graphical User Interface (GUI). While
+there are several good GIS with GUI, we will ues the one I recommend
+every single time, QGIS. QGIS is totally free, works on essentially all
+operating systems and most flavours of linux, and is kind of like what
+ESRI products would be like if they weren’t terrible. If you want to
+download QGIS feel free to do so, it’s available <a href="https://qgis.org/download/" class="external-link">here</a>, but othewise you can just
+read the text and you’ll get an idea of what I mean by seed zone
+names.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
