@@ -198,6 +198,11 @@ The differences are not very loud, given the difficulty of interpreting habitat 
 In lieu of a sensible and readily interpretable set of ordering to the data is this an improvement? 
 In my mind yes, while others are free to disagree. 
 
+We can now apply these modifications to our input data, in fact, I'll just overwrite out original ACTH7 variable with the output data from the function. 
+```{r Update the vector data with ordered SZ}
+acth7 <- oz$Reclassified
+```
+
 *Note that this function uses Kruskal-Wallis tests by default, even though in this case we could probably swing an ANOVA due to the high number of groups, and high number of data points per group we were able to generate.* 
 *This particular eSTZ example was chosen because it is a bit more complex than other products, and we don't think swapping to an ANOVA in this function is warranted.* 
 
