@@ -21,6 +21,7 @@
 #' @param buf_prcnt The amount to buffer the extent around the focal taxons range by. Defaults to 0.025 oor 2.5%
 #' but 'png' (or any other format supported by ?ggsave) can be used to create
 #' a map for embedding in a publication or poster.
+#' @param SZName Character. The field containing the seed zone, defaults to 'SZName'.
 #' @examples
 #' #library(eSTZwritR)
 #' acth7 <- sf::st_read(file.path(
@@ -37,7 +38,7 @@
 #'  )
 #' @returns Writes a PDF (or other specified `filetype`) to disk, and returns the ggplot object to console allowing user to modify it for other purposes.
 #' @export
-mapmakR <- function(x, species, save, outdir, ecoregions, cities, landscape, caption, filetype, buf_prcnt){
+mapmakR <- function(x, species, save, outdir, ecoregions, cities, landscape, caption, filetype, buf_prcnt, SeedZone){
 
   if(missing(species))(stop('Species Name Not supplied.'))
   if(missing(save)){save <- TRUE}
@@ -47,6 +48,7 @@ mapmakR <- function(x, species, save, outdir, ecoregions, cities, landscape, cap
   if(missing(filetype)){filetype = 'pdf'}
   if(missing(cities)){cities <- TRUE}
   if(missing(buf_prcnt)){buf_prcnt <- 0.025}
+  if(missing(SZName)){SZName <- 'SZName'}; SZName <- dplyr::enquo(SZName)
   fname <- paste0(file.path(outdir, gsub(' ', '_', species)), '_STZmap.', filetype)
 
   sf::st_agr(x) <- 'constant'
@@ -79,7 +81,7 @@ mapmakR <- function(x, species, save, outdir, ecoregions, cities, landscape, cap
   p <- ggplot2::ggplot() +
     ggplot2::geom_sf(
       data = x,
-      ggplot2::aes(fill = factor(SeedZone)),
+      ggplot2::aes(fill = factor(!!SZName)),
       color = NA,
       inherit.aes = TRUE) +
     ggplot2::geom_sf(

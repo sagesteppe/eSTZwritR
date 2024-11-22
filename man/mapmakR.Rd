@@ -14,7 +14,8 @@ mapmakR(
   landscape,
   caption,
   filetype,
-  buf_prcnt
+  buf_prcnt,
+  SeedZone
 )
 }
 \arguments{
@@ -42,6 +43,8 @@ and coordinate reference system information.}
 \item{buf_prcnt}{The amount to buffer the extent around the focal taxons range by. Defaults to 0.025 oor 2.5\%
 but 'png' (or any other format supported by ?ggsave) can be used to create
 a map for embedding in a publication or poster.}
+
+\item{SZName}{Character. The field containing the seed zone, defaults to 'SZName'.}
 }
 \value{
 Writes a PDF (or other specified \code{filetype}) to disk, and returns the ggplot object to console allowing user to modify it for other purposes.

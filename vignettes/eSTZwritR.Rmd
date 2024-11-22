@@ -254,7 +254,7 @@ rm(acth7_stuff, acth7)
 
 ![Directory Structure](./images/DirectoryStructure.png)
 
-```{r, eval = F}
+```{r Directory maker example, eval = F}
 
 dirmakR(
   outpath = '~/Documents/EmpiricalSeedZones', 
