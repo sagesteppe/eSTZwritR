@@ -334,9 +334,3 @@ If you want to download QGIS feel free to do so, it's available [here](https://q
 
 ```
 
-```{r Write out cleaned Data}
-
-acth7
-
-```
-
