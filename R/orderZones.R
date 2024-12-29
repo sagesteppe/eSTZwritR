@@ -101,7 +101,7 @@ orderZones <- function(x, SeedZone, n, rasta, ...){
     ) |>
     dplyr::arrange(MedianGAI) |>
     dplyr::mutate(
-      SuggestedOrder = 1:dplyr::n(), .after = 1,
+      SuggestedOrder = seq_len(dplyr::n()), .after = 1,
       !!SeedZone := as.numeric(!!SeedZone),
       Zones_fct = factor(!!SeedZone, levels = 1:dplyr::n())
     )

@@ -8,7 +8,7 @@ html_preview: false
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 # eSTZwritR ('easy rider') <img src="man/figures/logo.png" align="right" height="138" />
-# Description `
+# Description  
 ```{r, echo = FALSE, message = F}
 badger::badge_codefactor("sagesteppe/eSTZwritR")
 ```
