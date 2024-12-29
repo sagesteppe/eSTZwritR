@@ -1,10 +1,3 @@
----
-output:
-  md_document:
-    variant: gfm
-html_preview: false
----
-
 # eSTZwritR ('easy rider') <img src="man/figures/logo.png" align="right" height="138" />
 # Description 
 
