@@ -80,6 +80,8 @@ handling tasks.</p>
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://sagesteppe.github.io/eSTZwritR/">eSTZwritR</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in get(paste0(generic, ".", class), envir = get_method_env()) : </span></span>
+<span><span class="co">#&gt;   object 'type_sum.accel' not found</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com" class="external-link">patchwork</a></span><span class="op">)</span></span></code></pre></div>
 <p>Here we will load in the example data we will use for all steps of
@@ -592,6 +594,29 @@ ESRI products would be like if they weren’t terrible. If you want to
 download QGIS feel free to do so, it’s available <a href="https://qgis.org/download/" class="external-link">here</a>, but othewise you can just
 read the text and you’ll get an idea of what I mean by seed zone
 names.</p>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
+<span>  SeedZone <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">12</span>,</span>
+<span>  SZName <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'Arid Valley Bottoms'</span>, <span class="st">'Arid Valleys'</span>,  <span class="st">'Central Valleys'</span>, </span>
+<span>             <span class="st">'Plains'</span>, <span class="st">'North/Eastern Plains'</span>, <span class="st">'Northern Alluvial Fans/Slopes'</span>, </span>
+<span>             <span class="st">'Sagebrush Steppe (lower)'</span>, <span class="st">'Sagebrush Steppe (mid)'</span>, <span class="st">'Sagebrush Steppe (upper)'</span>,</span>
+<span>             <span class="st">'Mountain (lower)'</span>, <span class="st">'Moutain (mid)'</span>, <span class="st">'Mountain (high)'</span></span>
+<span>             <span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt;    SeedZone                        SZName</span></span>
+<span><span class="co">#&gt; 1         1           Arid Valley Bottoms</span></span>
+<span><span class="co">#&gt; 2         2                  Arid Valleys</span></span>
+<span><span class="co">#&gt; 3         3               Central Valleys</span></span>
+<span><span class="co">#&gt; 4         4                        Plains</span></span>
+<span><span class="co">#&gt; 5         5          North/Eastern Plains</span></span>
+<span><span class="co">#&gt; 6         6 Northern Alluvial Fans/Slopes</span></span>
+<span><span class="co">#&gt; 7         7      Sagebrush Steppe (lower)</span></span>
+<span><span class="co">#&gt; 8         8        Sagebrush Steppe (mid)</span></span>
+<span><span class="co">#&gt; 9         9      Sagebrush Steppe (upper)</span></span>
+<span><span class="co">#&gt; 10       10              Mountain (lower)</span></span>
+<span><span class="co">#&gt; 11       11                 Moutain (mid)</span></span>
+<span><span class="co">#&gt; 12       12               Mountain (high)</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
