@@ -45,11 +45,9 @@ regionCoding <- function(x, n){
     dplyr::pull(REG_ABB) |>
     paste0(collapse = '-')
 
-  return(
-    list(
-      'SuggestedName' = suggested_name,
-      'RegionsCovered' = pts
-      )
+  list(
+    'SuggestedName' = suggested_name,
+    'RegionsCovered' = pts
     )
 }
 

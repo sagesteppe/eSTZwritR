@@ -18,5 +18,4 @@ buffR <- function(x, buf_prcnt){
   range[['ymax']] <- range[['ymax']] + y_buf
   range[['ymin']] <- range[['ymin']] - y_buf
 
-  return(range)
 }

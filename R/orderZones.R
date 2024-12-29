@@ -103,7 +103,7 @@ orderZones <- function(x, SeedZone, n, rasta, ...){
     dplyr::mutate(
       SuggestedOrder = seq_len(dplyr::n()), .after = 1,
       !!SeedZone := as.numeric(!!SeedZone),
-      Zones_fct = factor(!!SeedZone, levels = 1:dplyr::n())
+      Zones_fct = factor(!!SeedZone, levels = seq_len(dplyr::n()))
     )
 
   # The seed zones, ordered by median aridity index, are now applied to the original

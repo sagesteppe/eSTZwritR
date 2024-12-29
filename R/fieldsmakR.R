@@ -30,7 +30,7 @@ fieldsmakR <- function(x, SeedZone, ID, SZName, AreaAcres){
 
   if(missing(ID)){ # create an ID if not already present.
     if(length(grep('^id*', colnames(x))) == 0){
-       x <- dplyr::mutate(x, ID = 1:nrow(x), .before = 1)} else {
+       x <- dplyr::mutate(x, ID = seq_len(nrow(x)), .before = 1)} else {
          colnames(x)[grep('^id*', colnames(x))] <- 'ID'}
   }
 
@@ -110,5 +110,4 @@ fieldsmakR <- function(x, SeedZone, ID, SZName, AreaAcres){
   cols <- c(four, cnames, 'geometry')
   x <- dplyr::select(x, dplyr::all_of(cols))
 
-  return(x)
 }
