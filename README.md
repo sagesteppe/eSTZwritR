@@ -13,10 +13,6 @@ status](https://github.com/sagesteppe/eSTZwritR/workflows/R-CMD-check/badge.svg)
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 
-[![CodeFactor](https://www.codefactor.io/repository/github/sagesteppe/eSTZwritR/badge)](https://www.codefactor.io/repository/github/sagesteppe/eSTZwritR)
-[![R build
-status](https://github.com/sagesteppe/eSTZwritR/workflows/R-CMD-check/badge.svg)](https://github.com/sagesteppe/eSTZwritR/actions)
-
 An R package for applying standardized file naming, directory structure,
 mapping, and metadata conventions to empirical Seed Transfer Zones
 (eSTZs).
