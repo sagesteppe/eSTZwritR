@@ -139,7 +139,7 @@ We see that we mostly cover the CBG region and CPN region, with some more covera
 The zones from a variety of data products have either no implicit ordering, or rather complex ordering. 
 In these situations it can be difficult to determine which zones are in geographic and environmental proximity to each other. 
 We have a function which users a very simple method to suggest an order for numbering the seed transfer zones in these instances. 
-It will take a little bit of time to run, here we have the number of points used in calculating the order set to a low value, I encourage you to increase this value (to say 5000) when actually determining an order before distributing a data set. 
+It will take a little bit of time to run, here we have the number of points used in calculating the order set to a low value, I encourage you to increase this value (to say 5000) when actually determining an order before distributing a data set.  
 
 ```{r orderZones}
 oz <- orderZones(acth7, SeedZone = zone, n = 1000)
@@ -337,5 +337,13 @@ If you want to download QGIS feel free to do so, it's available [here](https://q
 
 ```{r}
 
+data.frame(
+  SeedZone = 1:12,
+  SZName = c('Arid Valley Bottoms', 'Arid Valleys',  'Central Valleys', 
+             'Plains', 'North/Eastern Plains', 'Northern Alluvial Fans/Slopes', 
+             'Sagebrush Steppe (lower)', 'Sagebrush Steppe (mid)', 'Sagebrush Steppe (upper)',
+             'Mountain (lower)', 'Moutain (mid)', 'Mountain (high)'
+             )
+)
 ```
 
