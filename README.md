@@ -1,17 +1,15 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# eSTZwritR (‘easy rider’) <img src="man/figures/logo.png" align="right" height="138" />
-
-# Description
-
 [![CRAN
 checks](https://badges.cranchecks.info/summary/badger.svg)](https://cran.r-project.org/web/checks/check_results_badger.html)
-[![R build
-status](https://github.com/sagesteppe/eSTZwritR/workflows/R-CMD-check/badge.svg)](https://github.com/sagesteppe/eSTZwritR/actions)
 [![CodeFactor](https://www.codefactor.io/repository/github/sagesteppe/eSTZwritR/badge)](https://www.codefactor.io/repository/github/sagesteppe/eSTZwritR)
 [![Project Status: Active - The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+
+# eSTZwritR (‘easy rider’) <img src="man/figures/logo.png" align="right" height="138" />
+
+# Description
 
 An R package for applying standardized file naming, directory structure,
 mapping, and metadata conventions to empirical Seed Transfer Zones

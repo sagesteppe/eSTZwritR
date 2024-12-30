@@ -7,17 +7,16 @@ html_preview: false
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# eSTZwritR ('easy rider') <img src="man/figures/logo.png" align="right" height="138" />
-# Description  
-
 ```{r, echo = FALSE, results='asis'}
 cat(
   badger::badge_cran_checks("badger"), 
-	badger::badge_github_actions('sagesteppe/eSTZwritR'), 
 	badger::badge_codefactor('sagesteppe/eSTZwritR'), 
 	badger::badge_repostatus("Active")
 )
 ```
+
+# eSTZwritR ('easy rider') <img src="man/figures/logo.png" align="right" height="138" />
+# Description  
 
 An R package for applying standardized file naming, directory structure, mapping, and metadata conventions to empirical Seed Transfer Zones (eSTZs). 
 
