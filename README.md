@@ -1,7 +1,5 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-[![CRAN
-checks](https://badges.cranchecks.info/summary/sagesteppe/eSTZwritR.svg)](https://cran.r-project.org/web/checks/check_results_sagesteppe/eSTZwritR.html)
 [![CodeFactor](https://www.codefactor.io/repository/github/sagesteppe/eSTZwritR/badge)](https://www.codefactor.io/repository/github/sagesteppe/eSTZwritR)
 [![Project Status: Active - The project has reached a stable, usable
 state and is being actively
