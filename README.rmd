@@ -9,7 +9,7 @@ html_preview: false
 
 ```{r, echo = FALSE, results='asis'}
 cat(
-  badger::badge_cran_checks("badger"), 
+  badger::badge_cran_checks("sagesteppe/eSTZwritR"), 
 	badger::badge_codefactor('sagesteppe/eSTZwritR'), 
 	badger::badge_repostatus("Active")
 )
