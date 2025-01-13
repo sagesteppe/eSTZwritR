@@ -4,6 +4,7 @@
 [![Project Status: Active - The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![](https://img.shields.io/badge/doi-DOI:%2010.5281/zenodo.14641975%20-yellow.svg)](https://doi.org/DOI:%2010.5281/zenodo.14641975)
 
 # eSTZwritR (‘easy rider’) <img src="man/figures/logo.png" align="right" height="138" />
 

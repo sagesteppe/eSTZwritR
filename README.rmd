@@ -10,7 +10,8 @@ html_preview: false
 ```{r, echo = FALSE, results='asis'}
 cat(
 	badger::badge_codefactor('sagesteppe/eSTZwritR'), 
-	badger::badge_repostatus("Active")
+	badger::badge_repostatus("Active"), 
+	badger::badge_doi("DOI: 10.5281/zenodo.14641975 ", "yellow")
 )
 ```
 
