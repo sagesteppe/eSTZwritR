@@ -82,16 +82,16 @@ mapmakR <- function(x, species, save, outdir, ecoregions, cities, landscape, cap
 
   p <- ggplot2::ggplot() +
     ggplot2::geom_sf(
+      data = x,
+      ggplot2::aes(fill = factor(!!SZName)),
+      color = NA,
+      inherit.aes = TRUE) +
+    ggplot2::geom_sf(
       data = states,
       fill = 'cornsilk',
       lwd = 0.25,
       color = 'black',
       alpha = 0.5) +
-    ggplot2::geom_sf(
-      data = x,
-      ggplot2::aes(fill = factor(!!SZName)),
-      color = NA,
-      inherit.aes = TRUE) +
 
     ggspatial::annotation_scale(location = "br", width_hint = 0.25) +
     ggspatial::annotation_north_arrow(
