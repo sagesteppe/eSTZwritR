@@ -23,20 +23,21 @@
 #' a map for embedding in a publication or poster.
 #' @param SZName Character. The field containing the seed zone, defaults to 'SZName'.
 #' @examples
-#' #library(eSTZwritR)
+#' library(eSTZwritR)
 #' acth7 <- sf::st_read(file.path(
 #'   system.file(package="eSTZwritR"), "extdata", 'ACTH7.gpkg')
 #' )
 #'
-#' mapmakR(acth7,
+#' p <- mapmakR(acth7,
 #'  species = 'Eriocoma thurberiana',
 #'  save = FALSE,
 #'  landscape = FALSE,
 #'  ecoregions = TRUE,
 #'  cities = TRUE,
-#'  SZName = 'zone',
+#'  SZName = zone,
 #'  caption = 'Data from Johnson et al. 2017. https://doi.org/10.1016/j.rama.2017.01.004'
 #'  )
+#'  plot(p)
 #' @returns Writes a PDF (or other specified `filetype`) to disk, and returns the ggplot object to console allowing user to modify it for other purposes.
 #' @export
 mapmakR <- function(x, species, save, outdir, ecoregions, cities, landscape, caption, filetype, buf_prcnt, SZName){
@@ -81,18 +82,18 @@ mapmakR <- function(x, species, save, outdir, ecoregions, cities, landscape, cap
 
   p <- ggplot2::ggplot() +
     ggplot2::geom_sf(
-      data = x,
-      ggplot2::aes(fill = factor(!!SZName)),
-      color = NA,
-      inherit.aes = TRUE) +
-    ggplot2::geom_sf(
       data = states,
       fill = 'cornsilk',
       lwd = 0.25,
       color = 'black',
       alpha = 0.5) +
+    ggplot2::geom_sf(
+      data = x,
+      ggplot2::aes(fill = factor(!!SZName)),
+      color = NA,
+      inherit.aes = TRUE) +
 
-    suppressMessages(ggspatial::annotation_scale(location = "br", width_hint = 0.25)) +
+    ggspatial::annotation_scale(location = "br", width_hint = 0.25) +
     ggspatial::annotation_north_arrow(
       location = "br", which_north = "true",
       pad_x = ggplot2::unit(0.25, "in"), pad_y = ggplot2::unit(0.25, "in"),
