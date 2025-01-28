@@ -213,3 +213,4 @@ mapmakR <- function(x, species, save, outdir, ecoregions, cities, landscape, cap
   return(p) # also return the plot to user.
 
 }
+
