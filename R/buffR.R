@@ -9,6 +9,8 @@ buffR <- function(x, buf_prcnt){
 
   if(missing(buf_prcnt)){buf_prcnt <- 0.025}
 
+  # convert to planar with meter measurement for calculations.
+
   range <- sf::st_bbox(x)
   x_buf <- (range[['xmax']] - range[['xmin']]) * buf_prcnt
   y_buf <- (range[['ymax']] - range[['ymin']]) * buf_prcnt
@@ -18,4 +20,5 @@ buffR <- function(x, buf_prcnt){
   range[['ymax']] <- range[['ymax']] + y_buf
   range[['ymin']] <- range[['ymin']] - y_buf
 
+  return(range)
 }

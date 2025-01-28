@@ -28,6 +28,7 @@
 #'   system.file(package="eSTZwritR"), "extdata", 'ACTH7.gpkg')
 #' )
 #'
+#'
 #' p <- mapmakR(acth7,
 #'  species = 'Eriocoma thurberiana',
 #'  save = FALSE,
