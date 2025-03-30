@@ -434,8 +434,7 @@ provided below….</p>
 </div>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">acth7_clean</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fieldsmakR.html">fieldsmakR</a></span><span class="op">(</span><span class="va">acth7</span>, SeedZone <span class="op">=</span> <span class="st">'zone'</span><span class="op">)</span></span>
-<span><span class="co">#&gt; There is a column(s), `area_ha`, which we can't figure out the purpose of.</span></span>
-<span><span class="co">#&gt;       It will be returned here, but FYI a list of bioclim variables is here https://www.worldclim.org/data/bioclim.html.</span></span>
+<span><span class="co">#&gt; There is a column(s), `area_ha`, which we can't figure out the purpose of. It will be returned here, but FYI a list of bioclim variables is here: https://www.worldclim.org/data/bioclim.html. If you want to remove this/these columns this should do it: `dplyr::select(x, -c(area_ha))`</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">acth7_clean</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Simple feature collection with 6 features and 5 fields</span></span>
 <span><span class="co">#&gt; Geometry type: POLYGON</span></span>
@@ -466,8 +465,7 @@ function returns</p>
 <span>  <span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/fieldsmakR.html">fieldsmakR</a></span><span class="op">(</span><span class="va">acth7_stuff</span>, SeedZone <span class="op">=</span> <span class="st">'zone'</span><span class="op">)</span></span>
-<span><span class="co">#&gt; There is a column(s), `area_ha`, which we can't figure out the purpose of.</span></span>
-<span><span class="co">#&gt;       It will be returned here, but FYI a list of bioclim variables is here https://www.worldclim.org/data/bioclim.html.</span></span></code></pre></div>
+<span><span class="co">#&gt; There is a column(s), `area_ha`, which we can't figure out the purpose of. It will be returned here, but FYI a list of bioclim variables is here: https://www.worldclim.org/data/bioclim.html. If you want to remove this/these columns this should do it: `dplyr::select(x, -c(area_ha))`</span></span></code></pre></div>
 <p>See that the function can make some modifications to very simple
 abbreviations which we anticipate exist in the wild (range -&gt; R, avg
 -&gt; mean), but we cannot do much with BIO9_m, because we do not know
