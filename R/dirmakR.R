@@ -30,7 +30,7 @@ dirmakR <- function(outpath, sci_name, x, nrcs_code, regioncode, overwrite, estz
   if(length(regioncode)>1){regioncode <- regioncode[[1]]}
 
   node1 <- file.path(outpath,
-                     paste0(gsub(' ', '_', sci_name), estz_type, 'STZ'))
+                     paste0(gsub(' ', '_', sci_name), '_', estz_type, 'STZ'))
 
   if(dir.exists(node1) & overwrite == FALSE) {
     message(node1, ' was found. If you still need this function to run use the argument `overwrite = TRUE`.')

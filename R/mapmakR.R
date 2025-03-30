@@ -8,9 +8,9 @@
 #'
 #' @param x the vector (e.g. shapefile) or raster dataset to plot, note vector data will be coerced
 #' to raster before plotting.
-#' @param species Character string, the name of the species which is being mapped.
+#' @param sci_name Character string, the name of the species which is being mapped.
 #' @param save Boolean, whether to save the file or not. Defaults to TRUE.
-#' @param outdir Character string, a directory to save the map to. Defaults to the current working directory.
+#' @param outpath Character string, a directory to save the map to. Defaults to the current working directory.
 #' @param ecoregions Boolean, whether to draw ecoregions or not. Defaults to TRUE.
 #' @param cities Boolean, whether to draw cities or not, Defaults to TRUE.
 #' @param landscape Boolean, whether to draw the map in a landscape orientation or not. Defaults to TRUE
@@ -30,7 +30,7 @@
 #'
 #'
 #' p <- mapmakR(acth7,
-#'  species = 'Eriocoma thurberiana',
+#'  sci_name = 'Eriocoma thurberiana',
 #'  save = FALSE,
 #'  landscape = FALSE,
 #'  ecoregions = TRUE,
@@ -41,18 +41,18 @@
 #'  plot(p)
 #' @returns Writes a PDF (or other specified `filetype`) to disk, and returns the ggplot object to console allowing user to modify it for other purposes.
 #' @export
-mapmakR <- function(x, species, save, outdir, ecoregions, cities, landscape, caption, filetype, buf_prcnt, SZName){
+mapmakR <- function(x, sci_name, save, outpath, ecoregions, cities, landscape, caption, filetype, buf_prcnt, SZName = SZName){
 
-  if(missing(species))(stop('Species Name Not supplied.'))
+  if(missing(sci_name))(stop('Species Name Not supplied.'))
   if(missing(save)){save <- TRUE}
-  if(missing(outdir)){outdir = getwd()}
+  if(missing(outpath)){outpath = getwd()}
   if(missing(landscape)){landscape = TRUE}
   if(missing(ecoregions)){ecoregions = TRUE}
   if(missing(filetype)){filetype = 'pdf'}
   if(missing(cities)){cities <- TRUE}
   if(missing(buf_prcnt)){buf_prcnt <- 0.025}
-  if(missing(SZName)){SZName <- 'SZName'}; SZName <- dplyr::enquo(SZName)
-  fname <- paste0(file.path(outdir, gsub(' ', '_', species)), '_STZmap.', filetype)
+  SZName <- dplyr::enquo(SZName)
+  fname <- paste0(file.path(outpath, gsub(' ', '_', sci_name)), '_STZmap.', filetype)
 
   sf::st_agr(x) <- 'constant'
   # Buffer the map so that the species only doesn't occupy the entire region.
@@ -81,10 +81,11 @@ mapmakR <- function(x, species, save, outdir, ecoregions, cities, landscape, cap
   states <- tigris::states(cb = TRUE, progress_bar = FALSE, year = 2022) |>
     sf::st_transform(sf::st_crs(x))
 
+  x <- dplyr::mutate(x, SZName = forcats::as_factor(!!SZName))
   p <- ggplot2::ggplot() +
     ggplot2::geom_sf(
       data = x,
-      ggplot2::aes(fill = factor(!!SZName)),
+      ggplot2::aes(fill = SZName),
       color = NA,
       inherit.aes = TRUE) +
     ggplot2::geom_sf(
@@ -178,7 +179,7 @@ mapmakR <- function(x, species, save, outdir, ecoregions, cities, landscape, cap
   ) +
     ggplot2::labs(
       x = NULL, y = NULL, fill = 'Transfer\nZone',
-      title = paste0('*', species, '*'),
+      title = paste0('*', sci_name, '*'),
       subtitle = 'Seed Transfer Zones') +
     ggplot2::theme(
       panel.background = ggplot2::element_rect(fill = "aliceblue"),

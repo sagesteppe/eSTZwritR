@@ -164,7 +164,8 @@ orderZones <- function(x, SeedZone, n, rasta, ...){
   # return the same input item, but with the original zones overwritten.
   rcl <- dplyr::left_join(
     x,
-    dplyr::select(ZoneOrder, !!SeedZone, SuggestedOrder)) |>
+    dplyr::select(ZoneOrder, !!SeedZone, SuggestedOrder),
+    by = dplyr::quo_name(SeedZone)) |>
     dplyr::select(-!!SeedZone, !!SeedZone := SuggestedOrder)
 
   return(
