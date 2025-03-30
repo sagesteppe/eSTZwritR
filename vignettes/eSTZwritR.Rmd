@@ -282,7 +282,7 @@ So when you are actually using the function, focus on only altering maps if the 
 ```{r mapmakR for evaluation}
 map <- mapmakR(
   acth7_clean,
-  species = 'Eriocoma thurberiana', # this will become the title. 
+  sci_name = 'Eriocoma thurberiana', # this will become the title. 
   save = FALSE, # whether to write to disk, defaults to TRUE
   landscape = FALSE, # defaults ot TRUE, we want a landscape page
   ecoregions = TRUE, # whether to add unlabeled L4 ecoregions or not. 
