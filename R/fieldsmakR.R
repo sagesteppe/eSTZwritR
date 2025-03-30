@@ -34,7 +34,7 @@ fieldsmakR <- function(x, SeedZone, ID, SZName, AreaAcres){
          colnames(x)[grep('^id*', colnames(x))] <- 'ID'}
   }
 
-  # ensure geometry has not been abbreviated alal gpkg conventions
+  # ensure geometry has not been abbreviated ala gpkg conventions
   sf::st_geometry(x) <- 'geometry'
 
   # ensure 'SeedZone' is appropriately named.
@@ -46,6 +46,7 @@ fieldsmakR <- function(x, SeedZone, ID, SZName, AreaAcres){
 
   # make all of the geometries valid real quick
   x <- sf::st_make_valid(x)
+
 
   # calculate the area of each row.
   if(missing(AreaAcres)){
@@ -60,7 +61,11 @@ fieldsmakR <- function(x, SeedZone, ID, SZName, AreaAcres){
         as.numeric()
     }
   x <- dplyr::bind_cols(x, AreaAcres = area)
+  } else{
+    colnames(x)[grep(AreaAcres, colnames(x))] <- 'AreaAcres'
   }
+
+  x$AreaAcres <- as.numeric(x$AreaAcres)
 
   # ensure that the main parts of the BIO column name are complete.
   if(any(grepl('bio', colnames(x)))){
@@ -94,20 +99,22 @@ fieldsmakR <- function(x, SeedZone, ID, SZName, AreaAcres){
 
       cnames_unk <- cnames[ grep('^BIO', cnames, invert = TRUE, ignore.case=TRUE) ]
       cnames_unk <- cnames_unk[order(cnames_unk)]
+      cnames_unk <- paste(cnames_unk, collapse = ', ')
       cnames <- c(cnames_bio, cnames_unk)
       message(
-      "There is a column(s), `",  cnames_unk, "`, which we can't figure out the purpose of.
-      It will be returned here, but FYI a list of bioclim variables is here https://www.worldclim.org/data/bioclim.html.")
+      "There is a column(s), `",  cnames_unk, "`, which we can't figure out the purpose of. It will be returned here, but FYI a list of bioclim variables is here: https://www.worldclim.org/data/bioclim.html. ",
+      "If you want to remove this/these columns this should do it: `dplyr::select(x, -c(", cnames_unk, "))`")
 
   } else {
     # if none of the columns are bio simply return them alphabetically.
     cnames <- cnames[order(cnames)]
     message(
-      "There is a column(s), `",  cnames_unk, "`, which we can't figure out the purpose of.
-      It's still attached, but FYI a list of bioclim variables is here https://www.worldclim.org/data/bioclim.html.")
+      "There is a column(s), `", cnames_unk, "`, which we can't figure out the purpose of. It will be returned here, but FYI a list of bioclim variables is here: https://www.worldclim.org/data/bioclim.html. ",
+      "If you want to remove this/these columns this should do it: `dplyr::select(x, -c(", cnames_unk, "))`")
   }
 
-  cols <- c(four, cnames, 'geometry')
-  x <- dplyr::select(x, dplyr::all_of(cols))
+  cols <- c(four, cnames, 'geometry', 'geom')
+  x <- dplyr::select(x, dplyr::any_of(cols))
 
 }
+

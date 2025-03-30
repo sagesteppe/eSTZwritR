@@ -125,11 +125,11 @@ orderZones <- function(x, SeedZone, n, rasta, ...){
   # there was good evidence of a difference between any of them in the first place!
   p <- ggpubr::ggboxplot(
     pts,
-    x = "zone",
+    x =  dplyr::quo_name(SeedZone),
     y = "GAI",
     notch = TRUE,
-    color = "zone",
-    palette = getPalette(length(levels(pts$zone))),
+    color = dplyr::quo_name(SeedZone),
+    palette = getPalette(length(levels(pts[[dplyr::quo_name(SeedZone)]]))),
     outlier.alpha = 0.4
   ) +
     # Add global p-value, unfortunately we cannot change from alpha at 0.05
