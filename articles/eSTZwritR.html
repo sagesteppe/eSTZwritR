@@ -238,7 +238,6 @@ encourage you to increase this value (to say 5000) when actually
 determining an order before distributing a data set.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">oz</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/orderZones.html">orderZones</a></span><span class="op">(</span><span class="va">acth7</span>, SeedZone <span class="op">=</span> <span class="va">zone</span>, n <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Joining with `by = join_by(zone)`</span></span>
 <span></span>
 <span><span class="co"># oz$Summary # i use kable so this looks nice online, </span></span>
 <span><span class="co"># just run oz$Summary to print to console. </span></span>
@@ -512,7 +511,7 @@ pane.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">map</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mapmakR.html">mapmakR</a></span><span class="op">(</span></span>
 <span>  <span class="va">acth7_clean</span>,</span>
-<span>  species <span class="op">=</span> <span class="st">'Eriocoma thurberiana'</span>, <span class="co"># this will become the title. </span></span>
+<span>  sci_name <span class="op">=</span> <span class="st">'Eriocoma thurberiana'</span>, <span class="co"># this will become the title. </span></span>
 <span>  save <span class="op">=</span> <span class="cn">FALSE</span>, <span class="co"># whether to write to disk, defaults to TRUE</span></span>
 <span>  landscape <span class="op">=</span> <span class="cn">FALSE</span>, <span class="co"># defaults ot TRUE, we want a landscape page</span></span>
 <span>  ecoregions <span class="op">=</span> <span class="cn">TRUE</span>, <span class="co"># whether to add unlabeled L4 ecoregions or not. </span></span>
