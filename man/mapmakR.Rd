@@ -6,27 +6,27 @@
 \usage{
 mapmakR(
   x,
-  species,
+  sci_name,
   save,
-  outdir,
+  outpath,
   ecoregions,
   cities,
   landscape,
   caption,
   filetype,
   buf_prcnt,
-  SZName
+  SZName = SZName
 )
 }
 \arguments{
 \item{x}{the vector (e.g. shapefile) or raster dataset to plot, note vector data will be coerced
 to raster before plotting.}
 
-\item{species}{Character string, the name of the species which is being mapped.}
+\item{sci_name}{Character string, the name of the species which is being mapped.}
 
 \item{save}{Boolean, whether to save the file or not. Defaults to TRUE.}
 
-\item{outdir}{Character string, a directory to save the map to. Defaults to the current working directory.}
+\item{outpath}{Character string, a directory to save the map to. Defaults to the current working directory.}
 
 \item{ecoregions}{Boolean, whether to draw ecoregions or not. Defaults to TRUE.}
 
@@ -57,18 +57,20 @@ If you like components of the map, and want to try and make them for a smaller f
 You can visualize source code by typing either: \code{mapmakR} (without a function argument) into the R console, or in a more intuitive format on Github at: https://github.com/sagesteppe/eSTZwritR/blob/main/R/mapmakR.R .
 }
 \examples{
-#library(eSTZwritR)
+library(eSTZwritR)
 acth7 <- sf::st_read(file.path(
   system.file(package="eSTZwritR"), "extdata", 'ACTH7.gpkg')
 )
 
-mapmakR(acth7,
- species = 'Eriocoma thurberiana',
+
+p <- mapmakR(acth7,
+ sci_name = 'Eriocoma thurberiana',
  save = FALSE,
  landscape = FALSE,
  ecoregions = TRUE,
  cities = TRUE,
- SZName = 'zone',
+ SZName = zone,
  caption = 'Data from Johnson et al. 2017. https://doi.org/10.1016/j.rama.2017.01.004'
  )
+ plot(p)
 }
