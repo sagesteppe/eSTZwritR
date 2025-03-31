@@ -167,6 +167,9 @@ orderZones <- function(x, SeedZone, n, rasta, ...){
     by = dplyr::quo_name(SeedZone)) |>
     dplyr::select(-!!SeedZone, !!SeedZone := SuggestedOrder)
 
+  four <- c('ID', 'SeedZone', 'SZName', 'AreaAcres')
+  rcl <- dplyr::relocate(rcl, dplyr::any_of(four))
+
   return(
     list(
       Reclassified = rcl,

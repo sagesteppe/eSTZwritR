@@ -92,9 +92,10 @@ fieldsmakR <- function(x, SeedZone, ID, SZName, AreaAcres){
 
   if(length(cnames)==0){
     # if none of the columns are bio simply return them alphabetically.
-    cnames <- cnames[order(cnames)]
+    cols <- c(four, 'geometry')
   } else if(length(cnames) == length(grep('^bio', cnames, ignore.case=TRUE))){
     cnames <- cnames[order(as.numeric(gsub('[A-z]', '', cnames)))]
+    cols <- c(four, cnames, 'geometry')
   } else if(length(cnames) > length(grep('^bio', cnames, ignore.case=TRUE))){
     # if a mix of columns exist order them by BIO # AND then other columns
     cnames_bio <- cnames[grep('^bio', cnames, ignore.case=TRUE)]
@@ -103,6 +104,7 @@ fieldsmakR <- function(x, SeedZone, ID, SZName, AreaAcres){
     cnames_unk <- cnames[ grep('^bio', cnames, invert = TRUE, ignore.case=TRUE) ]
     cnames_unk <- cnames_unk[order(cnames_unk)]
     cnames <- c(cnames_bio, cnames_unk)
+    cols <- c(four, cnames, 'geometry')
     cnames_unk <- paste(cnames_unk, collapse = ', ')
 
     message(
@@ -110,8 +112,8 @@ fieldsmakR <- function(x, SeedZone, ID, SZName, AreaAcres){
       "If you want to remove this/these columns this should do it: `dplyr::select(x, -c(", cnames_unk, "))`")
   }
 
-  cols <- c(four, cnames, 'geometry')
-  x <- dplyr::select(x, dplyr::any_of(cols))
+  x <- dplyr::select(x, dplyr::any_of(cols)) |>
+    dplyr::relocate( dplyr::any_of(cols))
 
 }
 
