@@ -60,6 +60,10 @@ orderZones <- function(x, SeedZone, n, rasta, ...){
   if(missing(rasta)){rasta <- 'cont'} # if the user supplied a raster use that instead.
   if(typeof(rasta)!='S4'){
 
+  # if the SZNames are simply a copy of the SeedZone numbers, than we will have to
+    # update those on exit so that they reflect the new assignment.
+  namesMatchNumbers <- all(x[[dplyr::quo_name(SeedZone)]] == x[['SZName']])
+
   r <- terra::rast(
       file.path(
         system.file(package="eSTZwritR"),  "extdata",
@@ -169,6 +173,11 @@ orderZones <- function(x, SeedZone, n, rasta, ...){
 
   four <- c('ID', 'SeedZone', 'SZName', 'AreaAcres')
   rcl <- dplyr::relocate(rcl, dplyr::any_of(four))
+
+  # now update the SZName to SeedZone if they came in paired.
+  if(namesMatchNumbers==TRUE){
+    rcl[["SZName"]] <-rcl[['SeedZone']]
+  }
 
   return(
     list(
