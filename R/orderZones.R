@@ -74,8 +74,7 @@ orderZones <- function(x, SeedZone, n, rasta, ...){
   # the aridity values from the raster, we can then determine which zones are more
   # arid than others.
   pts <- sf::st_sample(x, size = n, ...) |>
-    sf::st_as_sf() |>
-    sf::st_transform(terra::crs(r))
+    sf::st_as_sf()
   sf::st_agr(pts) <- 'constant'
 
   pts <- sf::st_intersection(pts, x) |>
@@ -96,20 +95,20 @@ orderZones <- function(x, SeedZone, n, rasta, ...){
     dplyr::group_by(!!SeedZone) |> # more arid areas have a lower order.
     sf::st_drop_geometry() |>
     dplyr::summarise(
-      MedianGAI = stats::median(GAI),
+      MedianGAI = stats::median(GAI, na.rm = TRUE),
       n = dplyr::n()
     ) |>
     dplyr::arrange(MedianGAI) |>
     dplyr::mutate(
       SuggestedOrder = seq_len(dplyr::n()), .after = 1,
       !!SeedZone := as.numeric(!!SeedZone),
-      Zones_fct = factor(!!SeedZone, levels = seq_len(dplyr::n()))
+      Zones_fct = forcats::as_factor(!!SeedZone)
     )
 
   # The seed zones, ordered by median aridity index, are now applied to the original
   # random points we extracted raster values too. This will allow for easy comparisons
   # of the different STZs to one another, i.e. we can order the groups in a plot.
-  pts <- dplyr::mutate(pts, !!SeedZone := factor(!!SeedZone, levels = ZoneOrder$Zones_fct))
+  pts <- dplyr::mutate(pts, !!SeedZone := forcats::as_factor(!!SeedZone))
 
   # some products have many zones proposed, RColorBrewer will be hoity-toity if the
   # number of colors requested from it exceeds it's recommended number of colors.
@@ -177,3 +176,4 @@ orderZones <- function(x, SeedZone, n, rasta, ...){
     )
   )
 }
+
