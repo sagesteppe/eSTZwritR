@@ -28,17 +28,18 @@
 #' @export
 fieldsmakR <- function(x, SeedZone, ID, SZName, AreaAcres){
 
-  if(missing(ID)){ # create an ID if not already present.
-    if(length(grep('^id*', colnames(x))) == 0){
-       x <- dplyr::mutate(x, ID = seq_len(nrow(x)), .before = 1)} else {
-         colnames(x)[grep('^id*', colnames(x))] <- 'ID'}
-  }
-
   # ensure geometry has not been abbreviated ala gpkg conventions
   sf::st_geometry(x) <- 'geometry'
 
   # ensure 'SeedZone' is appropriately named.
   colnames(x)[grep(SeedZone, colnames(x))] <- 'SeedZone'
+
+  if(missing(ID)){ # create an ID if not already present.
+    if(length(grep('^id*', colnames(x))) == 0){
+      x <- dplyr::arrange(x, SeedZone) |>
+        dplyr::mutate(ID = seq_len(nrow(x)), .before = 1)} else {
+        colnames(x)[grep('^id*', colnames(x))] <- 'ID'}
+  }
 
   if(missing(SZName)){ # copy these names to this column
     x <- dplyr::mutate(x, SZName = x$SeedZone, .before = 1)
@@ -69,19 +70,19 @@ fieldsmakR <- function(x, SeedZone, ID, SZName, AreaAcres){
   x$AreaAcres <- as.numeric(x$AreaAcres)
 
   # ensure that the main parts of the BIO column name are complete.
-  if(any(grepl('bio', colnames(x)))){
+  if(any(grepl('bio', colnames(x), ignore.case = TRUE))){
 
     # operate only on these columns
-    bio_cols <- sf::st_drop_geometry(x[ grep('bio', colnames(x)) ])
+    bio_cols <- sf::st_drop_geometry(x[ grep('bio', colnames(x), ignore.case = TRUE) ])
     colnames(bio_cols) <- tolower(colnames(bio_cols)) # so that stats are formatted correctly.
 
     colnames(bio_cols) <- gsub('bio', 'BIO', colnames(bio_cols), ignore.case = TRUE) # Ensure this portion is uppercase
     colnames(bio_cols) <- gsub('-| ', '_', colnames(bio_cols), ignore.case = TRUE) # Ensure any spacer is an underscore
-    colnames(bio_cols) <- gsub('_range', '_R', colnames(bio_cols), ignore.case = TRUE) # ensure that appropriate statistic abbreviations are used.
+    colnames(bio_cols) <- gsub('_range|_rng|_r', '_R', colnames(bio_cols), ignore.case = TRUE) # ensure that appropriate statistic abbreviations are used.
     colnames(bio_cols) <- gsub('_average|_avg', '_mean', colnames(bio_cols), ignore.case = TRUE) # ensure that appropriate statistic abbreviations are used.
-    colnames(bio_cols) <- gsub('_sd', '_SD', colnames(bio_cols), ignore.case = TRUE) # ensure that appropriate statistic abbreviations are used.
+    colnames(bio_cols) <- gsub('_sd|_std|_SD', '_SD', colnames(bio_cols), ignore.case = TRUE) # ensure that appropriate statistic abbreviations are used.
 
-    x <- dplyr::bind_cols(x[ -grep('bio', colnames(x)) ], bio_cols)
+    x <- dplyr::bind_cols(x[ -grep('bio', colnames(x), ignore.case = TRUE) ], bio_cols)
 
   }
 
@@ -89,32 +90,26 @@ fieldsmakR <- function(x, SeedZone, ID, SZName, AreaAcres){
   four <- c('ID', 'SeedZone', 'SZName', 'AreaAcres')
   cnames <- colnames(x)[ ! colnames(x) %in% c(four, 'geometry')]
 
-  if(length(cnames) > 0){ # if only bio columns are present order them by bio number
-    if(length(cnames) == length(grep('^bio', cnames, ignore.case=TRUE))){
-      cnames <- cnames[order(as.numeric(gsub('[A-z]', '', cnames)))]
-    } else if (length(cnames) > length(grep('^bio', cnames, ignore.case=TRUE)))
+  if(length(cnames)==0){
+    # if none of the columns are bio simply return them alphabetically.
+    cnames <- cnames[order(cnames)]
+  } else if(length(cnames) == length(grep('^bio', cnames, ignore.case=TRUE))){
+    cnames <- cnames[order(as.numeric(gsub('[A-z]', '', cnames)))]
+  } else if(length(cnames) > length(grep('^bio', cnames, ignore.case=TRUE))){
+    # if a mix of columns exist order them by BIO # AND then other columns
+    cnames_bio <- cnames[grep('^bio', cnames, ignore.case=TRUE)]
+    cnames_bio <- cnames_bio[order(as.numeric(gsub('[A-z]', '', cnames_bio)))]
 
-      # if a mix of columns exist order them by BIO # AND then other columns alp
-      cnames_bio <- cnames[grep('^BIO', cnames, ignore.case=TRUE)]
-      cnames_bio <- cnames_bio[order(as.numeric(gsub('[A-z]', '', cnames_bio)))]
-
-      cnames_unk <- cnames[ grep('^BIO', cnames, invert = TRUE, ignore.case=TRUE) ]
-      cnames_unk <- cnames_unk[order(cnames_unk)]
-      cnames_unk <- paste(cnames_unk, collapse = ', ')
-      cnames <- c(cnames_bio, cnames_unk)
-      message(
+    cnames_unk <- cnames[ grep('^bio', cnames, invert = TRUE, ignore.case=TRUE) ]
+    cnames_unk <- cnames_unk[order(cnames_unk)]
+    cnames_unk <- paste(cnames_unk, collapse = ', ')
+    cnames <- c(cnames_bio, cnames_unk)
+    message(
       "There is a column(s), `",  cnames_unk, "`, which we can't figure out the purpose of. It will be returned here, but FYI a list of bioclim variables is here: https://www.worldclim.org/data/bioclim.html. ",
       "If you want to remove this/these columns this should do it: `dplyr::select(x, -c(", cnames_unk, "))`")
+  }
 
-  }# else {
-    # if none of the columns are bio simply return them alphabetically.
-  #  cnames <- cnames[order(cnames)]
-  #  message(
-  #    "There is a column(s), `", cnames_unk, "`, which we can't figure out the purpose of. It will be returned here, but FYI a list of bioclim variables is here: https://www.worldclim.org/data/bioclim.html. ",
-  #    "If you want to remove this/these columns this should do it: `dplyr::select(x, -c(", cnames_unk, "))`")
-#  }
-
-  cols <- c(four, cnames, 'geometry', 'geom')
+  cols <- c(four, cnames, 'geometry')
   x <- dplyr::select(x, dplyr::any_of(cols))
 
 }
