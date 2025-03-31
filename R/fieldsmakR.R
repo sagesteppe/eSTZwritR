@@ -102,8 +102,9 @@ fieldsmakR <- function(x, SeedZone, ID, SZName, AreaAcres){
 
     cnames_unk <- cnames[ grep('^bio', cnames, invert = TRUE, ignore.case=TRUE) ]
     cnames_unk <- cnames_unk[order(cnames_unk)]
-    cnames_unk <- paste(cnames_unk, collapse = ', ')
     cnames <- c(cnames_bio, cnames_unk)
+    cnames_unk <- paste(cnames_unk, collapse = ', ')
+
     message(
       "There is a column(s), `",  cnames_unk, "`, which we can't figure out the purpose of. It will be returned here, but FYI a list of bioclim variables is here: https://www.worldclim.org/data/bioclim.html. ",
       "If you want to remove this/these columns this should do it: `dplyr::select(x, -c(", cnames_unk, "))`")
