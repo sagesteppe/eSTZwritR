@@ -34,9 +34,11 @@ fieldsmakR <- function(x, SeedZone, ID, SZName, AreaAcres){
   # ensure 'SeedZone' is appropriately named.
   colnames(x)[grep(SeedZone, colnames(x))] <- 'SeedZone'
 
+  x <- dplyr::arrange(x, SeedZone)
+
   if(missing(ID)){ # create an ID if not already present.
     if(length(grep('^id*', colnames(x))) == 0){
-      x <- dplyr::arrange(x, SeedZone) |>
+      x <- x |>
         dplyr::mutate(ID = seq_len(nrow(x)), .before = 1)} else {
         colnames(x)[grep('^id*', colnames(x))] <- 'ID'}
   }
@@ -44,7 +46,7 @@ fieldsmakR <- function(x, SeedZone, ID, SZName, AreaAcres){
   if(missing(SZName)){ # copy these names to this column
     x <- dplyr::mutate(x, SZName = x$SeedZone, .before = 1)
   } else {
-    colnames(x)[grep(SZName, colnames(x))] <- 'SZName'
+    colnames(x)[grep(paste0('^', SZName, '*'), colnames(x))] <- 'SZName'
   }
 
   # make all of the geometries valid real quick
