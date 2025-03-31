@@ -17,7 +17,8 @@
 #' degree of useful information in their order regarding the range of the zones
 #' across the species.
 #' @param x an sf/tibble/dataframe containing the spatial data which will be distributed as a final product
-#' @param SeedZone name of the column containing the provisional SeedZones
+#' @param SeedZone name of the column containing the provisional SeedZones. Defulats to SeedZone.
+#' @param SZName Name of the column containing the SZNames, this is to check against the SeedZone value. If the SZNames are determined to perfectly match the SeedZone values, they will be updated on function exit. Defaults to SZName.
 #' @param n sample size of points across the entire shapefile for calculating an order, defaults to 2500. Note that this shouldn't
 #' exceed the number of raster cells of the products used to generate the stz, or results will be replicated.
 #' @param rasta Either a terra::spatrast object or, a character string of either "coarse" or 'cont' - short for contiguous USA.
@@ -52,9 +53,10 @@
 #' 'Summary' a dataframe containing the original zones, and final zones, as well as the calculated median and the number of samples used to calculate the median.
 #' 'Plot' a ggpubr boxplot of the results of a kruskal-wallis test amongst seed zones.
 #' @export
-orderZones <- function(x, SeedZone, n, rasta, ...){
+orderZones <- function(x, SeedZone = SeedZone, SZName = SZName,  n, rasta, ...){
 
   SeedZone <- dplyr::enquo(SeedZone)
+  SZName <- dplyr::enquo(SZName)
   sf::st_agr(x) <- 'constant'
   if(missing(n)){n <- 2500}
   if(missing(rasta)){rasta <- 'cont'} # if the user supplied a raster use that instead.
@@ -62,7 +64,7 @@ orderZones <- function(x, SeedZone, n, rasta, ...){
 
   # if the SZNames are simply a copy of the SeedZone numbers, than we will have to
     # update those on exit so that they reflect the new assignment.
-  namesMatchNumbers <- all(x[[dplyr::quo_name(SeedZone)]] == x[['SZName']])
+  namesMatchNumbers <- all(x[[dplyr::quo_name(SeedZone)]] == x[[dplyr::quo_name(SZName)]])
 
   r <- terra::rast(
       file.path(
@@ -175,8 +177,8 @@ orderZones <- function(x, SeedZone, n, rasta, ...){
   rcl <- dplyr::relocate(rcl, dplyr::any_of(four))
 
   # now update the SZName to SeedZone if they came in paired.
-  if(namesMatchNumbers==TRUE){
-    rcl[["SZName"]] <-rcl[['SeedZone']]
+  if(namesMatchNumbers){
+    rcl[[dplyr::quo_name(SZName)]] <- rcl[[dplyr::quo_name(SeedZone)]]
   }
 
   return(
