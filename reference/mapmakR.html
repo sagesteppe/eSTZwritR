@@ -57,6 +57,8 @@ You can visualize source code by typing either: <code>mapmakR</code> (without a 
 <span>  <span class="va">outpath</span>,</span>
 <span>  <span class="va">ecoregions</span>,</span>
 <span>  <span class="va">cities</span>,</span>
+<span>  <span class="va">city_reduce</span>,</span>
+<span>  <span class="va">city_reduce_no</span>,</span>
 <span>  <span class="va">landscape</span>,</span>
 <span>  <span class="va">caption</span>,</span>
 <span>  <span class="va">filetype</span>,</span>
@@ -92,6 +94,17 @@ to raster before plotting.</p></dd>
 
 <dt id="arg-cities">cities<a class="anchor" aria-label="anchor" href="#arg-cities"></a></dt>
 <dd><p>Boolean, whether to draw cities or not, Defaults to TRUE.</p></dd>
+
+
+<dt id="arg-city-reduce">city_reduce<a class="anchor" aria-label="anchor" href="#arg-city-reduce"></a></dt>
+<dd><p>Character string. One of "Distance", "Population", defaults to 'Distance'. Maps of very large domains (get 10+ western states) feel cluttered if too many cities are added to them.
+If cities==TRUE and cities &gt; city_reduce_no, then this argument utilizes a method to reduce the number of mapped cities to city_reduce_no.</p>
+<p>Method "Distance" (the default) will sample 250 regularly spaced grid points and restrict them to the eSTZ surface, and calculate pairwise distances between all points and all cities.
+Only the city_reduce_no will be retained. Method "Population" will simply keep the largest city_reduce_no cities. It may be a better alternative for showing the map to people from more distal geographic regions.</p></dd>
+
+
+<dt id="arg-city-reduce-no">city_reduce_no<a class="anchor" aria-label="anchor" href="#arg-city-reduce-no"></a></dt>
+<dd><p>Numeric. Max number of cities to to include on map, defaults to 20.</p></dd>
 
 
 <dt id="arg-landscape">landscape<a class="anchor" aria-label="anchor" href="#arg-landscape"></a></dt>
@@ -149,10 +162,9 @@ a map for embedding in a publication or poster.</p></dd>
 <span class="r-in"><span> caption <span class="op">=</span> <span class="st">'Data from Johnson et al. 2017. https://doi.org/10.1016/j.rama.2017.01.004'</span></span></span>
 <span class="r-in"><span> <span class="op">)</span></span></span>
 <span class="r-in"><span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in ggrepel::geom_text_repel(data = cities.sf, ggplot2::aes(label = City,     geometry = geom), stat = "sf_coordinates"):</span> Problem while computing aesthetics.</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Error occurred in the 8th layer.</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Caused by error:</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> object 'City' not found</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>st_point_on_surface may not give correct results for longitude/latitude data</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Scale on map varies by more than 10%, scale bar may be inaccurate</span>
+<span class="r-plt img"><img src="mapmakR-1.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
