@@ -3,7 +3,7 @@ pkgdown: 2.1.1
 pkgdown_sha: ~
 articles:
   eSTZwritR: eSTZwritR.html
-last_built: 2025-03-31T23:02Z
+last_built: 2025-03-31T23:57Z
 urls:
   reference: https://sagesteppe.github.io/eSTZwritR/reference
   article: https://sagesteppe.github.io/eSTZwritR/articles
