@@ -13,6 +13,12 @@
 #' @param outpath Character string, a directory to save the map to. Defaults to the current working directory.
 #' @param ecoregions Boolean, whether to draw ecoregions or not. Defaults to TRUE.
 #' @param cities Boolean, whether to draw cities or not, Defaults to TRUE.
+#' @param city_reduce Character string. One of "Distance", "Population", defaults to 'Distance'. Maps of very large domains (get 10+ western states) feel cluttered if too many cities are added to them.
+#' If cities==TRUE and cities > city_reduce_no, then this argument utilizes a method to reduce the number of mapped cities to city_reduce_no.
+#'
+#' Method "Distance" (the default) will sample 250 regularly spaced grid points and restrict them to the eSTZ surface, and calculate pairwise distances between all points and all cities.
+#' Only the city_reduce_no will be retained. Method "Population" will simply keep the largest city_reduce_no cities. It may be a better alternative for showing the map to people from more distal geographic regions.
+#' @param city_reduce_no Numeric. Max number of cities to to include on map, defaults to 20.
 #' @param landscape Boolean, whether to draw the map in a landscape orientation or not. Defaults to TRUE
 #' @param caption Character string, text for a caption. It's best to mention any published product related to the data set.
 #' Defaults to omitting any caption, except for the data sources (if omernik and cities are used),
@@ -41,7 +47,7 @@
 #'  plot(p)
 #' @returns Writes a PDF (or other specified `filetype`) to disk, and returns the ggplot object to console allowing user to modify it for other purposes.
 #' @export
-mapmakR <- function(x, sci_name, save, outpath, ecoregions, cities, landscape, caption, filetype, buf_prcnt, SZName = SZName){
+mapmakR <- function(x, sci_name, save, outpath, ecoregions, cities, city_reduce, city_reduce_no, landscape, caption, filetype, buf_prcnt, SZName = SZName){
 
   if(missing(sci_name))(stop('Species Name Not supplied.'))
   if(missing(save)){save <- TRUE}
@@ -50,6 +56,8 @@ mapmakR <- function(x, sci_name, save, outpath, ecoregions, cities, landscape, c
   if(missing(ecoregions)){ecoregions = TRUE}
   if(missing(filetype)){filetype = 'pdf'}
   if(missing(cities)){cities <- TRUE}
+  if(missing(city_reduce)){city_reduce <- 'Distance'}
+  if(missing(city_reduce_no)){city_reduce_no <- 20}
   if(missing(buf_prcnt)){buf_prcnt <- 0.025}
   SZName <- dplyr::enquo(SZName)
   fname <- paste0(file.path(outpath, gsub(' ', '_', sci_name)), '_STZmap.', filetype)
@@ -57,7 +65,7 @@ mapmakR <- function(x, sci_name, save, outpath, ecoregions, cities, landscape, c
   sf::st_agr(x) <- 'constant'
   # Buffer the map so that the species only doesn't occupy the entire region.
   extent <- buffR(x, buf_prcnt)
-  if(cities == TRUE){
+  if(cities){
     cities.sf <- sf::st_read(
       file.path(
         system.file(package ='eSTZwritR'), 'extdata', 'Carto_cities.gpkg'), quiet = TRUE) |>
@@ -66,7 +74,19 @@ mapmakR <- function(x, sci_name, save, outpath, ecoregions, cities, landscape, c
     cities.sf <- sf::st_crop(cities.sf, x)
   }
 
-  if(ecoregions == TRUE){
+#  if(nrow(cities.sf) > city_reduce_no){
+#    if(city_reduce=='Population'){
+#      cities.sf <- dplyr::slice_max(cities.sf, .by = Population, n = city_reduce_no)
+#    } else if(city_reduce=='Distance'){
+
+#      pts <- sf::st_sample(x, size = 250, type = 'regular')
+
+#      pts <- pts[lengths(st_intersects(x, pts), >0)]
+#      sf::st_distance(cities.sf, pts, pairwise = TRUE)
+#    }
+#  }
+
+  if(ecoregions){
     omernik <- sf::st_transform(omernik, sf::st_crs(x))
     sf::st_agr(omernik) <- 'constant'
   }
@@ -83,6 +103,12 @@ mapmakR <- function(x, sci_name, save, outpath, ecoregions, cities, landscape, c
 
   x <- dplyr::mutate(x, SZName = forcats::as_factor(!!SZName))
   p <- ggplot2::ggplot() +
+    ggplot2::geom_sf(
+      data = countries,
+      fill = 'cornsilk',
+      color = NA,
+      inherit.aes = FALSE
+    ) +
     ggplot2::geom_sf(
       data = x,
       ggplot2::aes(fill = SZName),
@@ -197,6 +223,15 @@ mapmakR <- function(x, sci_name, save, outpath, ecoregions, cities, landscape, c
       legend.position='bottom',
       legend.justification = "left",
     )
+  }
+
+  # If there are tons of seed zones, then increase the number of columns, this only
+  # seems to be an issue with > 30 categories, where ggplot maxes out default columns
+  # to 5. When this happens the map is shrunk to make up for the vertical space
+  # consumed by the legend.
+  lvls <- length(unique(x[['SZName']]))
+  if(lvls>30){
+    p <- p + ggplot2::guides(fill = ggplot2::guide_legend(ncol = round(lvls/5)))
   }
 
 # save file to location

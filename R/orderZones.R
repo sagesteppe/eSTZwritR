@@ -17,7 +17,7 @@
 #' degree of useful information in their order regarding the range of the zones
 #' across the species.
 #' @param x an sf/tibble/dataframe containing the spatial data which will be distributed as a final product
-#' @param SeedZone name of the column containing the provisional SeedZones. Defulats to SeedZone.
+#' @param SeedZone name of the column containing the provisional SeedZones. Defaults to SeedZone, and must be numeric.
 #' @param SZName Name of the column containing the SZNames, this is to check against the SeedZone value. If the SZNames are determined to perfectly match the SeedZone values, they will be updated on function exit. Defaults to SZName.
 #' @param n sample size of points across the entire shapefile for calculating an order, defaults to 2500. Note that this shouldn't
 #' exceed the number of raster cells of the products used to generate the stz, or results will be replicated.
