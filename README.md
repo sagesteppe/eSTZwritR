@@ -49,7 +49,16 @@ sharing conventions.
 ## Documentation
 
 A paper describing the impetus behind the creation of eSTZwritR, and
-broadly outlining it’s functionality is available here (COMING SOON!).
+broadly outlining it’s functionality is available
+[here](https://github.com/sagesteppe/EmpiricalSeedZones/blob/main/manuscript/Empirical-seed-transfer-zones-require-conventions-for-data-sharing-to-increase-their-utilization-by-practitioners.pdf).
+
+A poster on the project for the National Native Seed Conference 2025 is
+available here
+
+<figure>
+<embed src="./man/figures/Poster4NNSC2025.pdf" />
+<figcaption aria-hidden="true">Seed Zone Poster</figcaption>
+</figure>
 
 A vignette showcasing the usage of the package is available
 [here](https://sagesteppe.github.io/eSTZwritR/articles/eSTZwritR.html).
