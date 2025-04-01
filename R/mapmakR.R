@@ -80,7 +80,7 @@ mapmakR <- function(x, sci_name, save, outpath, ecoregions, cities, city_reduce,
     } else if(city_reduce=='Distance'){
 
       pts <- sf::st_sample(x, size = 250, type = 'regular')|>
-        sf::st_set_crs(sf::st_crs(x))
+        sf::st_set_crs(sf::st_crs(x))|>
         sf::st_as_sf()
 
         pts <- pts[which(lengths(sf::st_intersects(pts, x)) > 0),]
