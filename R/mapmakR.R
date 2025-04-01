@@ -85,8 +85,12 @@ mapmakR <- function(x, sci_name, save, outpath, ecoregions, cities, city_reduce,
 
         pts <- pts[which(lengths(sf::st_intersects(pts, x)) > 0),]
         cities.sf <- cities.sf[
-          apply(st_distance(pts, cities.sf), MARGIN = 2, mean)[1:city_reduce_no],
-        ]
+          order(
+           apply(
+             sf::st_distance(
+               pts, cities.sf),
+             MARGIN = 2, mean, na.rm = TRUE)
+           )[1:city_reduce_no], ]
     }
   }
 
