@@ -11,6 +11,8 @@ mapmakR(
   outpath,
   ecoregions,
   cities,
+  city_reduce,
+  city_reduce_no,
   landscape,
   caption,
   filetype,
@@ -31,6 +33,14 @@ to raster before plotting.}
 \item{ecoregions}{Boolean, whether to draw ecoregions or not. Defaults to TRUE.}
 
 \item{cities}{Boolean, whether to draw cities or not, Defaults to TRUE.}
+
+\item{city_reduce}{Character string. One of "Distance", "Population", defaults to 'Distance'. Maps of very large domains (get 10+ western states) feel cluttered if too many cities are added to them.
+If cities==TRUE and cities > city_reduce_no, then this argument utilizes a method to reduce the number of mapped cities to city_reduce_no.
+
+Method "Distance" (the default) will sample 250 regularly spaced grid points and restrict them to the eSTZ surface, and calculate pairwise distances between all points and all cities.
+Only the city_reduce_no will be retained. Method "Population" will simply keep the largest city_reduce_no cities. It may be a better alternative for showing the map to people from more distal geographic regions.}
+
+\item{city_reduce_no}{Numeric. Max number of cities to to include on map, defaults to 20.}
 
 \item{landscape}{Boolean, whether to draw the map in a landscape orientation or not. Defaults to TRUE}
 

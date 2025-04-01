@@ -9,7 +9,7 @@ orderZones(x, SeedZone = SeedZone, SZName = SZName, n, rasta, ...)
 \arguments{
 \item{x}{an sf/tibble/dataframe containing the spatial data which will be distributed as a final product}
 
-\item{SeedZone}{name of the column containing the provisional SeedZones. Defulats to SeedZone.}
+\item{SeedZone}{name of the column containing the provisional SeedZones. Defaults to SeedZone, and must be numeric.}
 
 \item{SZName}{Name of the column containing the SZNames, this is to check against the SeedZone value. If the SZNames are determined to perfectly match the SeedZone values, they will be updated on function exit. Defaults to SZName.}
 

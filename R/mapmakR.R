@@ -49,7 +49,7 @@
 #' @export
 mapmakR <- function(x, sci_name, save, outpath, ecoregions, cities, city_reduce, city_reduce_no, landscape, caption, filetype, buf_prcnt, SZName = SZName){
 
-  if(missing(sci_name))(stop('Species Name Not supplied.'))
+  if(missing(sci_name))(stop('sci_name Name Not supplied.'))
   if(missing(save)){save <- TRUE}
   if(missing(outpath)){outpath = getwd()}
   if(missing(landscape)){landscape = TRUE}
@@ -74,17 +74,21 @@ mapmakR <- function(x, sci_name, save, outpath, ecoregions, cities, city_reduce,
     cities.sf <- sf::st_crop(cities.sf, x)
   }
 
-#  if(nrow(cities.sf) > city_reduce_no){
-#    if(city_reduce=='Population'){
-#      cities.sf <- dplyr::slice_max(cities.sf, .by = Population, n = city_reduce_no)
-#    } else if(city_reduce=='Distance'){
+  if(nrow(cities.sf) > city_reduce_no){
+    if(city_reduce=='population'){
+      cities.sf <- dplyr::slice_max(cities.sf, order_by = Population, n = city_reduce_no)
+    } else if(city_reduce=='Distance'){
 
-#      pts <- sf::st_sample(x, size = 250, type = 'regular')
+      pts <- sf::st_sample(x, size = 250, type = 'regular')|>
+        sf::st_set_crs(sf::st_crs(x))
+        sf::st_as_sf()
 
-#      pts <- pts[lengths(st_intersects(x, pts), >0)]
-#      sf::st_distance(cities.sf, pts, pairwise = TRUE)
-#    }
-#  }
+        pts <- pts[which(lengths(sf::st_intersects(pts, x)) > 0),]
+        cities.sf <- cities.sf[
+          apply(st_distance(pts, cities.sf), MARGIN = 2, mean)[1:city_reduce_no],
+        ]
+    }
+  }
 
   if(ecoregions){
     omernik <- sf::st_transform(omernik, sf::st_crs(x))
