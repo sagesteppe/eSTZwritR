@@ -77,7 +77,7 @@ across the species.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">orderZones</span><span class="op">(</span><span class="va">x</span>, <span class="va">SeedZone</span>, <span class="va">n</span>, <span class="va">rasta</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">orderZones</span><span class="op">(</span><span class="va">x</span>, SeedZone <span class="op">=</span> <span class="va">SeedZone</span>, SZName <span class="op">=</span> <span class="va">SZName</span>, <span class="va">n</span>, <span class="va">rasta</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -89,7 +89,11 @@ across the species.</p>
 
 
 <dt id="arg-seedzone">SeedZone<a class="anchor" aria-label="anchor" href="#arg-seedzone"></a></dt>
-<dd><p>name of the column containing the provisional SeedZones</p></dd>
+<dd><p>name of the column containing the provisional SeedZones. Defulats to SeedZone.</p></dd>
+
+
+<dt id="arg-szname">SZName<a class="anchor" aria-label="anchor" href="#arg-szname"></a></dt>
+<dd><p>Name of the column containing the SZNames, this is to check against the SeedZone value. If the SZNames are determined to perfectly match the SeedZone values, they will be updated on function exit. Defaults to SZName.</p></dd>
 
 
 <dt id="arg-n">n<a class="anchor" aria-label="anchor" href="#arg-n"></a></dt>
