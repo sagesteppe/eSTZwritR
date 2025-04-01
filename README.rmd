@@ -53,7 +53,7 @@ A paper describing the impetus behind the creation of eSTZwritR, and broadly out
 
 A poster on the project for the National Native Seed Conference 2025 is available here 
 
-![Seed Zone Poster](./man/figures/Poster4NNSC2025.pdf)
+![Seed Zone Poster](./man/figures/Poster4NNSC2025.png)
 
 A vignette showcasing the usage of the package is available [here](https://sagesteppe.github.io/eSTZwritR/articles/eSTZwritR.html). 
 

@@ -56,7 +56,7 @@ A poster on the project for the National Native Seed Conference 2025 is
 available here
 
 <figure>
-<embed src="./man/figures/Poster4NNSC2025.pdf" />
+<img src="./man/figures/Poster4NNSC2025.png" alt="Seed Zone Poster" />
 <figcaption aria-hidden="true">Seed Zone Poster</figcaption>
 </figure>
 
