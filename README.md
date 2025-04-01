@@ -45,11 +45,11 @@ sharing conventions.
 
 | Function | Purpose | Output |
 |:--:|:--:|:--:|
-| regionCoding | determine DOI Regions | Character string for file naming |
-| dirmakR | create Directory | Directory, spatial data |
-| mapmakR | create Map | PDF or png map (for publications) |
-| fieldsmakR | ensure fields (columns) are named | sf object to local location |
-| orderZones | ordering seed zone numbers | updated vector data, plot, summary |
+| `regionCoding` | determine DOI Regions | Character string for file naming |
+| `dirmakR` | create Directory | Directory, spatial data |
+| `mapmakR` | create Map | PDF or png map (for publications) |
+| `fieldsmakR` | ensure fields (columns) are named | sf object to local location |
+| `orderZones` | ordering seed zone numbers | updated vector data, plot, summary |
 
 ## Documentation
 
