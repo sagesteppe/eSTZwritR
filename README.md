@@ -11,22 +11,27 @@ developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.re
 # Description
 
 An R package for applying standardized file naming, directory structure,
-mapping, and metadata conventions to empirical Seed Transfer Zones
-(eSTZs).
+mapping, for empirical Seed Transfer Zones (eSTZs) in the United States.
 
 ## Overview
 
 The goal of this package is to standardize eSTZ documentation to
-accelerate the sharing of these resources among natural resource
-professionals.
+streamline the sharing of these resources among natural resource
+professionals, and for researchers to be able to collectively utilize
+the products.
 
 ## :arrow_double_down: Installation
 
-eSTZwritR is available only on github. It can be installed using
-`remotes` or `devtools` like so:
+eSTZwritR is available only on github, with no plans for submission to
+CRAN. It can be installed using `remotes` or `devtools` (or `pak` etc.)
+like so:
 
     install.packages('devtools')
     devtools::install_github('sagesteppe/eSTZwritR')
+
+It relies on `sf` which on occasion can be difficult to install. If you
+have install problems (read them…), but `sf` is a likely culprit as it
+requires several external binaries and libraries.
 
 Once installed it can be attached for use like any other package from
 github or CRAN
@@ -51,17 +56,22 @@ sharing conventions.
 A paper describing the impetus behind the creation of eSTZwritR, and
 broadly outlining it’s functionality is available
 [here](https://github.com/sagesteppe/EmpiricalSeedZones/blob/main/manuscript/Empirical-seed-transfer-zones-require-conventions-for-data-sharing-to-increase-their-utilization-by-practitioners.pdf).
+Note that as of April 1 2025, this paper is in revision for publication
+in *Restoration Ecology*.
 
 A poster on the project for the National Native Seed Conference 2025 is
-available here
+below. It contains all of the proposed conventions, it is also located
+in the ./man/figures subdirectory, where you can download a high
+resolution copy and zoom in on it.
 
-<figure>
-<img src="./man/figures/Poster4NNSC2025.png" alt="Seed Zone Poster" />
-<figcaption aria-hidden="true">Seed Zone Poster</figcaption>
-</figure>
+![](./man/figures/Poster4NNSC2025.png)
 
 A vignette showcasing the usage of the package is available
 [here](https://sagesteppe.github.io/eSTZwritR/articles/eSTZwritR.html).
+This vignette includes the images in the ‘Suggestions’ portion of the
+above poster in the relevant areas so you can get a better idea of
+specific suggestions (most of which are not included in the text
+portions of the manuscript.)
 
 ## Citation
 
