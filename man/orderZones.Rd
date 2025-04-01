@@ -4,12 +4,14 @@
 \alias{orderZones}
 \title{Suggest seed zones names, or at least numeric orders, based on input polygons}
 \usage{
-orderZones(x, SeedZone, n, rasta, ...)
+orderZones(x, SeedZone = SeedZone, SZName = SZName, n, rasta, ...)
 }
 \arguments{
 \item{x}{an sf/tibble/dataframe containing the spatial data which will be distributed as a final product}
 
-\item{SeedZone}{name of the column containing the provisional SeedZones}
+\item{SeedZone}{name of the column containing the provisional SeedZones. Defulats to SeedZone.}
+
+\item{SZName}{Name of the column containing the SZNames, this is to check against the SeedZone value. If the SZNames are determined to perfectly match the SeedZone values, they will be updated on function exit. Defaults to SZName.}
 
 \item{n}{sample size of points across the entire shapefile for calculating an order, defaults to 2500. Note that this shouldn't
 exceed the number of raster cells of the products used to generate the stz, or results will be replicated.}
