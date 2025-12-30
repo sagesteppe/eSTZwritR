@@ -236,8 +236,7 @@ the number of points used in calculating the order set to a low value, I
 encourage you to increase this value (to say 5000) when actually
 determining an order before distributing a data set.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">oz</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/orderZones.html">orderZones</a></span><span class="op">(</span><span class="va">acth7</span>, SeedZone <span class="op">=</span> <span class="va">zone</span>, n <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span>
-<span></span>
+<code class="sourceCode R"><span><span class="va">oz</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/orderZones.html">orderZones</a></span><span class="op">(</span><span class="va">acth7</span>, SeedZone <span class="op">=</span> <span class="va">zone</span>, n <span class="op">=</span> <span class="fl">200</span><span class="op">)</span></span>
 <span><span class="co"># oz$Summary # i use kable so this looks nice online, </span></span>
 <span><span class="co"># just run oz$Summary to print to console. </span></span>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">oz</span><span class="op">$</span><span class="va">Summary</span><span class="op">)</span></span></code></pre></div>
@@ -254,85 +253,71 @@ determining an order before distributing a data set.</p>
 <td align="right">12</td>
 <td align="right">1</td>
 <td align="left">12</td>
-<td align="right">0.10430</td>
-<td align="right">77</td>
+<td align="right">0.1010</td>
+<td align="right">17</td>
 </tr>
 <tr class="even">
 <td align="right">9</td>
 <td align="right">2</td>
 <td align="left">9</td>
-<td align="right">0.11930</td>
-<td align="right">28</td>
+<td align="right">0.1274</td>
+<td align="right">5</td>
 </tr>
 <tr class="odd">
 <td align="right">11</td>
 <td align="right">3</td>
 <td align="left">11</td>
-<td align="right">0.15055</td>
-<td align="right">160</td>
+<td align="right">0.1373</td>
+<td align="right">28</td>
 </tr>
 <tr class="even">
 <td align="right">8</td>
 <td align="right">4</td>
 <td align="left">8</td>
-<td align="right">0.16760</td>
-<td align="right">329</td>
+<td align="right">0.1606</td>
+<td align="right">78</td>
 </tr>
 <tr class="odd">
-<td align="right">7</td>
+<td align="right">4</td>
 <td align="right">5</td>
-<td align="left">7</td>
-<td align="right">0.17995</td>
-<td align="right">90</td>
+<td align="left">4</td>
+<td align="right">0.1798</td>
+<td align="right">13</td>
 </tr>
 <tr class="even">
 <td align="right">10</td>
 <td align="right">6</td>
 <td align="left">10</td>
-<td align="right">0.19610</td>
-<td align="right">7</td>
+<td align="right">0.1937</td>
+<td align="right">4</td>
 </tr>
 <tr class="odd">
-<td align="right">4</td>
 <td align="right">7</td>
-<td align="left">4</td>
-<td align="right">0.19710</td>
-<td align="right">85</td>
+<td align="right">7</td>
+<td align="left">7</td>
+<td align="right">0.1968</td>
+<td align="right">10</td>
 </tr>
 <tr class="even">
 <td align="right">5</td>
 <td align="right">8</td>
 <td align="left">5</td>
-<td align="right">0.20585</td>
-<td align="right">164</td>
+<td align="right">0.2087</td>
+<td align="right">35</td>
 </tr>
 <tr class="odd">
-<td align="right">1</td>
+<td align="right">2</td>
 <td align="right">9</td>
-<td align="left">1</td>
-<td align="right">0.21485</td>
-<td align="right">2</td>
-</tr>
-<tr class="even">
-<td align="right">2</td>
-<td align="right">10</td>
 <td align="left">2</td>
-<td align="right">0.23940</td>
-<td align="right">21</td>
-</tr>
-<tr class="odd">
-<td align="right">6</td>
-<td align="right">11</td>
-<td align="left">6</td>
-<td align="right">0.28620</td>
-<td align="right">28</td>
+<td align="right">0.2383</td>
+<td align="right">5</td>
 </tr>
 <tr class="even">
-<td align="right">3</td>
-<td align="right">12</td>
-<td align="left">3</td>
-<td align="right">0.32470</td>
-<td align="right">9</td>
+<td align="right">6</td>
+<td align="right">10</td>
+<td align="left">6</td>
+<td align="right">0.2760</td>
+<td align="right">5</td>
 </tr>
 </tbody>
 </table>
@@ -340,7 +325,7 @@ determining an order before distributing a data set.</p>
 there actually any merit to this order?</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">oz</span><span class="op">$</span><span class="va">PlotKruskal</span></span></code></pre></div>
-<p><img src="eSTZwritR_files/figure-html/orderZones%20KruskalWallis-1.png" width="700"></p>
+<p><img src="eSTZwritR_files/figure-html/orderZones%20KruskalWallis-1.png" class="r-plt" alt="" width="700"></p>
 <p>We can check that with the results from a Kruskal-Wallis test
 implemented using ggpubr. First visual impressions give an indication
 that a trend is present throughout the data, but that the differences
@@ -354,7 +339,7 @@ one group differs from the others, i.e. they were not drawn from the
 same distribution.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">oz</span><span class="op">$</span><span class="va">PlotDunns</span></span></code></pre></div>
-<p><img src="eSTZwritR_files/figure-html/orderZones%20Dunns-1.png" width="700"></p>
+<p><img src="eSTZwritR_files/figure-html/orderZones%20Dunns-1.png" class="r-plt" alt="" width="700"></p>
 <p>In this squished plot what we have depicted are the results from
 pairwise comparisons of all seed transfer zones using a Dunn’s test,
 with Holm’s p-adjustment method for multiple comparisons. If a line is
@@ -386,7 +371,7 @@ them - is their any intuitive sensibility here?</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">'Ordered'</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">p1</span> <span class="op">+</span> <span class="va">p2</span></span></code></pre></div>
-<p><img src="eSTZwritR_files/figure-html/Maps%20of%20Ordered%20Seed%20Zones-1.png" width="700"></p>
+<p><img src="eSTZwritR_files/figure-html/Maps%20of%20Ordered%20Seed%20Zones-1.png" class="r-plt" alt="" width="700"></p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html" class="external-link">rm</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span><span class="op">)</span></span></code></pre></div>
 <p>The differences are not very loud, given the difficulty of
@@ -432,7 +417,7 @@ provided below….</p>
 </div>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">acth7_clean</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fieldsmakR.html">fieldsmakR</a></span><span class="op">(</span><span class="va">acth7</span>, SeedZone <span class="op">=</span> <span class="st">'zone'</span><span class="op">)</span></span>
-<span><span class="co">#&gt; There is a column(s), `area_ha`, which we can't figure out the purpose of. It will be returned here, but FYI a list of bioclim variables is here: https://www.worldclim.org/data/bioclim.html. If you want to remove this/these columns this should do it: `dplyr::select(x, -c(area_ha))`</span></span>
+<span><span class="co">#&gt; There is a column(s), `area_ha`, which we can't figure out the purpose of. It will be returned here, but FYI a list of bioclim variables is here: https://www.worldclim.org/data/bioclim.html. If you want to remove this/these columns this should do it: `dplyr::select(x, -c('area_ha'))`</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">acth7_clean</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Simple feature collection with 6 features and 5 fields</span></span>
 <span><span class="co">#&gt; Geometry type: POLYGON</span></span>
@@ -463,7 +448,27 @@ function returns</p>
 <span>  <span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/fieldsmakR.html">fieldsmakR</a></span><span class="op">(</span><span class="va">acth7_stuff</span>, SeedZone <span class="op">=</span> <span class="st">'zone'</span><span class="op">)</span></span>
-<span><span class="co">#&gt; There is a column(s), `area_ha`, which we can't figure out the purpose of. It will be returned here, but FYI a list of bioclim variables is here: https://www.worldclim.org/data/bioclim.html. If you want to remove this/these columns this should do it: `dplyr::select(x, -c(area_ha))`</span></span></code></pre></div>
+<span><span class="co">#&gt; There is a column(s), `area_ha`, which we can't figure out the purpose of. It will be returned here, but FYI a list of bioclim variables is here: https://www.worldclim.org/data/bioclim.html. If you want to remove this/these columns this should do it: `dplyr::select(x, -c('area_ha'))`</span></span>
+<span><span class="co">#&gt; Simple feature collection with 3380 features and 8 fields</span></span>
+<span><span class="co">#&gt; Geometry type: POLYGON</span></span>
+<span><span class="co">#&gt; Dimension:     XY</span></span>
+<span><span class="co">#&gt; Bounding box:  xmin: -121.5447 ymin: 36.53208 xmax: -111.0114 ymax: 46.35708</span></span>
+<span><span class="co">#&gt; Geodetic CRS:  WGS 84</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3,380 × 9</span></span></span>
+<span><span class="co">#&gt;       ID SeedZone SZName AreaAcres BIO1_R BIO9_m BIO12_mean area_ha</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>     1        1      1     <span style="text-decoration: underline;">4</span>780. 0.058<span style="text-decoration: underline;">4</span> 0.804       0.179   <span style="text-decoration: underline;">1</span>935.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>     2        1      1   <span style="text-decoration: underline;">176</span>473. 0.440  0.154       0.420  <span style="text-decoration: underline;">71</span>416.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>     3        1      1     <span style="text-decoration: underline;">3</span>298. 0.224  0.893       0.537   <span style="text-decoration: underline;">1</span>335.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>     4        1      1     <span style="text-decoration: underline;">1</span>485. 0.955  0.871       0.253    601.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>     5        1      1     <span style="text-decoration: underline;">1</span>485. 0.148  0.859       0.430    601.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>     6        1      1    <span style="text-decoration: underline;">42</span>091. 0.351  0.630       0.754  <span style="text-decoration: underline;">17</span>034.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>     7        1      1     <span style="text-decoration: underline;">1</span>318. 0.570  0.396       0.356    533.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>     8        1      1     <span style="text-decoration: underline;">1</span>317. 0.033<span style="text-decoration: underline;">4</span> 0.551       0.936    533.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>     9        1      1     <span style="text-decoration: underline;">6</span>916. 0.461  0.433       0.634   <span style="text-decoration: underline;">2</span>799.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>    10        1      1     <span style="text-decoration: underline;">1</span>484. 0.534  0.077<span style="text-decoration: underline;">5</span>      0.605    600.</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 3,370 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 1 more variable: geometry &lt;POLYGON [°]&gt;</span></span></span></code></pre></div>
 <p>See that the function can make some modifications to very simple
 abbreviations which we anticipate exist in the wild (range -&gt; R, avg
 -&gt; mean), but we cannot do much with BIO9_m, because we do not know
@@ -482,8 +487,7 @@ readily interpretable to other users.</p>
 <img src="images/DirectoryStructure.png" alt="Directory Structure"><div class="figcaption">Directory Structure</div>
 </div>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
-<span><span class="fu"><a href="../reference/dirmakR.html">dirmakR</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/dirmakR.html">dirmakR</a></span><span class="op">(</span></span>
 <span>  outpath <span class="op">=</span> <span class="st">'~/Documents/EmpiricalSeedZones'</span>, </span>
 <span>  sci_name <span class="op">=</span> <span class="st">'Eriocoma_thurberiana'</span>, </span>
 <span>  x <span class="op">=</span> <span class="va">acth7_clean</span>, </span>
@@ -525,9 +529,9 @@ output directory <code>outdir</code> to save our map too. Note that
 <em>all</em> ancillary information for our projects go into the
 <code>Information</code> sub-directory.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
-<span><span class="fu"><a href="../reference/mapmakR.html">mapmakR</a></span><span class="op">(</span><span class="va">acth7_clean</span>,</span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/mapmakR.html">mapmakR</a></span><span class="op">(</span><span class="va">acth7_clean</span>,</span>
 <span>  species <span class="op">=</span> <span class="st">'Eriocoma thurberiana'</span>, <span class="co"># this will become the title. </span></span>
+<span>  save <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  outdir <span class="op">=</span> <span class="st">'~/Documents/EmpiricalSeedZones/Eriocoma_thurberianacgSTZ/Information'</span>,</span>
 <span>  landscape <span class="op">=</span> <span class="cn">FALSE</span>, <span class="co"># defaults ot TRUE, we want a landscape page</span></span>
 <span>  caption <span class="op">=</span> </span>
@@ -570,8 +574,7 @@ download QGIS feel free to do so, it’s available <a href="https://qgis.org/dow
 read the text and you’ll get an idea of what I mean by seed zone
 names.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  SeedZone <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">12</span>,</span>
 <span>  SZName <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'Arid Valley Bottoms'</span>, <span class="st">'Arid Valleys'</span>,  <span class="st">'Central Valleys'</span>, </span>
 <span>             <span class="st">'Plains'</span>, <span class="st">'North/Eastern Plains'</span>, <span class="st">'Northern Alluvial Fans/Slopes'</span>, </span>
@@ -604,7 +607,7 @@ names.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>

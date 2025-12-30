@@ -77,7 +77,15 @@ across the species.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">orderZones</span><span class="op">(</span><span class="va">x</span>, SeedZone <span class="op">=</span> <span class="va">SeedZone</span>, SZName <span class="op">=</span> <span class="va">SZName</span>, <span class="va">n</span>, <span class="va">rasta</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">orderZones</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  SeedZone <span class="op">=</span> <span class="va">SeedZone</span>,</span>
+<span>  SZName <span class="op">=</span> <span class="va">SZName</span>,</span>
+<span>  n <span class="op">=</span> <span class="fl">2500</span>,</span>
+<span>  rasta <span class="op">=</span> <span class="st">"cont"</span>,</span>
+<span>  precision <span class="op">=</span> <span class="fl">1000</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -107,6 +115,10 @@ GAI coarse has been aggregated by a factor of 2 from it's native 1km resolution 
 If neither of the rasters contained in the package meet your requirements, resubmit the GAI raster.</p></dd>
 
 
+<dt id="arg-precision">precision<a class="anchor" aria-label="anchor" href="#arg-precision"></a></dt>
+<dd><p>Decrease the precision of coordinates to speed up extract operation. Works well given the raster template</p></dd>
+
+
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
 <dd><p>additional parameters passed onto sf::st_sample</p></dd>
 
@@ -123,8 +135,7 @@ was submitted, with the #' seedzone values over written by the ones resulting fr
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">acth7</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">st_read</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span>package<span class="op">=</span><span class="st">"eSTZwritR"</span><span class="op">)</span>, <span class="st">"extdata"</span>, <span class="st">'ACTH7.gpkg'</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span>  <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/valid.html" class="external-link">st_make_valid</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span> </span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Reading layer `ACTH7' from data source </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   `/home/runner/work/_temp/Library/eSTZwritR/extdata/ACTH7.gpkg' </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   using driver `GPKG'</span>
@@ -133,26 +144,34 @@ was submitted, with the #' seedzone values over written by the ones resulting fr
 <span class="r-out co"><span class="r-pr">#&gt;</span> Dimension:     XY</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Bounding box:  xmin: -121.5447 ymin: 36.53208 xmax: -111.0114 ymax: 46.35708</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Geodetic CRS:  WGS 84</span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">zoneOrder_suggestions</span> <span class="op">&lt;-</span> <span class="fu">orderZones</span><span class="op">(</span><span class="va">acth7</span>, SeedZone <span class="op">=</span> <span class="va">zone</span>, n <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co">## arbirarily small example for cran test, use 2500 in practice.</span></span></span>
+<span class="r-in"><span><span class="va">zoneOrder_suggestions</span> <span class="op">&lt;-</span> <span class="fu">orderZones</span><span class="op">(</span><span class="va">acth7</span>, SeedZone <span class="op">=</span> <span class="va">zone</span>, n <span class="op">=</span> <span class="fl">200</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">zoneOrder_suggestions</span><span class="op">$</span><span class="va">Summary</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 12 × 5</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     zone SuggestedOrder Zones_fct MedianGAI     n</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>    12              1 12            0.109    63</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>     9              2 9             0.127    39</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>    11              3 11            0.143   200</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>     8              4 8             0.164   334</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>     7              5 7             0.178    68</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>    10              6 10            0.197     7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>     4              7 4             0.202    81</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>     5              8 5             0.208   153</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>     2              9 2             0.225    24</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>     1             10 1             0.243     4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span>     3             11 3             0.301     7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span>     6             12 6             0.353    18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>    12              1 12            0.108    14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>     9              2 9             0.131     8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>    11              3 11            0.145    40</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>     8              4 8             0.165    60</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>     7              5 7             0.175    20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>    10              6 10            0.187     4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>     4              7 4             0.198    10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>     5              8 5             0.241    34</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>     1              9 1             0.248     1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>     2             10 2             0.281     2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span>     6             11 6             0.293     6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span>     3             12 3             0.323     1</span>
 <span class="r-in"><span><span class="va">zoneOrder_suggestions</span><span class="op">$</span><span class="va">PlotKruskal</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Notch went outside hinges</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Do you want `notch = FALSE`?</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Notch went outside hinges</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Do you want `notch = FALSE`?</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Notch went outside hinges</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Do you want `notch = FALSE`?</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Notch went outside hinges</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Do you want `notch = FALSE`?</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Notch went outside hinges</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Do you want `notch = FALSE`?</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Notch went outside hinges</span>
@@ -167,44 +186,52 @@ was submitted, with the #' seedzone values over written by the ones resulting fr
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Do you want `notch = FALSE`?</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Notch went outside hinges</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Do you want `notch = FALSE`?</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Notch went outside hinges</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Do you want `notch = FALSE`?</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Notch went outside hinges</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Do you want `notch = FALSE`?</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Notch went outside hinges</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Do you want `notch = FALSE`?</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Notch went outside hinges</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Do you want `notch = FALSE`?</span>
 <span class="r-plt img"><img src="orderZones-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">acth7</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Simple feature collection with 4967 features and 4 fields</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Geometry type: POLYGON</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Geometry type: MULTIPOLYGON</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Dimension:     XY</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Bounding box:  xmin: -121.5447 ymin: 36.53208 xmax: -111.0114 ymax: 46.35708</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Geodetic CRS:  WGS 84</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> First 10 features:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     ID GRIDCODE area_ha zone                           geom</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1   13       42    2200   11 POLYGON ((-117.5447 46.3570...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2   19       32     774    8 POLYGON ((-117.4364 46.2820...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3   24       42     774   11 POLYGON ((-116.728 46.27374...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4   26       42    2916   11 POLYGON ((-117.653 46.29874...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5   38       41    1608   10 POLYGON ((-116.7114 46.1987...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6   44       41     834   10 POLYGON ((-116.7614 46.2404...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7   58       42    1251   11 POLYGON ((-117.8864 46.2320...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8   70       32    1371    8 POLYGON ((-117.4447 46.2154...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9   76       42    3930   11 POLYGON ((-117.453 46.21541...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10 107       31    1490    7 POLYGON ((-116.8614 46.1987...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1   13       42    2200   11 MULTIPOLYGON (((-117.5447 4...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2   19       32     774    8 MULTIPOLYGON (((-117.4364 4...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3   24       42     774   11 MULTIPOLYGON (((-116.728 46...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4   26       42    2916   11 MULTIPOLYGON (((-117.653 46...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5   38       41    1608   10 MULTIPOLYGON (((-116.7114 4...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6   44       41     834   10 MULTIPOLYGON (((-116.7614 4...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7   58       42    1251   11 MULTIPOLYGON (((-117.8864 4...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8   70       32    1371    8 MULTIPOLYGON (((-117.4447 4...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9   76       42    3930   11 MULTIPOLYGON (((-117.453 46...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10 107       31    1490    7 MULTIPOLYGON (((-116.8614 4...</span>
 <span class="r-in"><span><span class="va">zoneOrder_suggestions</span><span class="op">$</span><span class="va">Reclassified</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Simple feature collection with 4967 features and 5 fields</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Geometry type: POLYGON</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Geometry type: MULTIPOLYGON</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Dimension:     XY</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Bounding box:  xmin: -121.5447 ymin: 36.53208 xmax: -111.0114 ymax: 46.35708</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Geodetic CRS:  WGS 84</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> First 10 features:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     ID GRIDCODE area_ha zone                           geom SZName</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1   13       42    2200    3 POLYGON ((-117.5447 46.3570...      3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2   19       32     774    4 POLYGON ((-117.4364 46.2820...      4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3   24       42     774    3 POLYGON ((-116.728 46.27374...      3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4   26       42    2916    3 POLYGON ((-117.653 46.29874...      3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5   38       41    1608    6 POLYGON ((-116.7114 46.1987...      6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6   44       41     834    6 POLYGON ((-116.7614 46.2404...      6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7   58       42    1251    3 POLYGON ((-117.8864 46.2320...      3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8   70       32    1371    4 POLYGON ((-117.4447 46.2154...      4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9   76       42    3930    3 POLYGON ((-117.453 46.21541...      3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10 107       31    1490    5 POLYGON ((-116.8614 46.1987...      5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1   13       42    2200    3 MULTIPOLYGON (((-117.5447 4...      3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2   19       32     774    4 MULTIPOLYGON (((-117.4364 4...      4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3   24       42     774    3 MULTIPOLYGON (((-116.728 46...      3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4   26       42    2916    3 MULTIPOLYGON (((-117.653 46...      3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5   38       41    1608    6 MULTIPOLYGON (((-116.7114 4...      6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6   44       41     834    6 MULTIPOLYGON (((-116.7614 4...      6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7   58       42    1251    3 MULTIPOLYGON (((-117.8864 4...      3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8   70       32    1371    4 MULTIPOLYGON (((-117.4447 4...      4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9   76       42    3930    3 MULTIPOLYGON (((-117.453 46...      3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10 107       31    1490    5 MULTIPOLYGON (((-116.8614 4...      5</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># if you want to see the extent of the continental raster</span></span></span>
 <span class="r-in"><span><span class="co"># note that the Olympic peninsula and BC get so much rain they essentially</span></span></span>
@@ -226,7 +253,7 @@ was submitted, with the #' seedzone values over written by the ones resulting fr
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>
