@@ -28,6 +28,7 @@ Create a directory following standard conventions to ensure appropriate
 placement of subdirectories and naming conventions.
 }
 \examples{
+\dontrun{
 acth7 <- sf::st_read(file.path(
   system.file(package="eSTZwritR"), "extdata", 'ACTH7.gpkg')
 )
@@ -38,4 +39,5 @@ dirmakR('.',
    regioncode =  'CGB-CPN',
    estz_type = 'cg'
    )
+}
 }

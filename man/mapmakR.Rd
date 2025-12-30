@@ -7,16 +7,16 @@
 mapmakR(
   x,
   sci_name,
-  save,
+  save = TRUE,
   outpath,
-  ecoregions,
-  cities,
-  city_reduce,
-  city_reduce_no,
-  landscape,
+  ecoregions = TRUE,
+  cities = TRUE,
+  city_reduce = "Distance",
+  city_reduce_no = 20,
+  landscape = TRUE,
   caption,
-  filetype,
-  buf_prcnt,
+  filetype = "pdf",
+  buf_prcnt = 0.025,
   SZName = SZName
 )
 }

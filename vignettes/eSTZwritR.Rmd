@@ -142,8 +142,7 @@ We have a function which users a very simple method to suggest an order for numb
 It will take a little bit of time to run, here we have the number of points used in calculating the order set to a low value, I encourage you to increase this value (to say 5000) when actually determining an order before distributing a data set.  
 
 ```{r orderZones}
-oz <- orderZones(acth7, SeedZone = zone, n = 1000)
-
+oz <- orderZones(acth7, SeedZone = zone, n = 200)
 # oz$Summary # i use kable so this looks nice online, 
 # just run oz$Summary to print to console. 
 knitr::kable(oz$Summary)
@@ -255,7 +254,6 @@ rm(acth7_stuff, acth7)
 ![Directory Structure](./images/DirectoryStructure.png)
 
 ```{r Directory maker example, eval = F}
-
 dirmakR(
   outpath = '~/Documents/EmpiricalSeedZones', 
   sci_name = 'Eriocoma_thurberiana', 
@@ -298,9 +296,9 @@ The code to save the map is simple and below, we let one of our arguments revert
 Note that *all* ancillary information for our projects go into the `Information` sub-directory. 
 
 ```{r mapmakr for real, eval = F}
-
 mapmakR(acth7_clean,
   species = 'Eriocoma thurberiana', # this will become the title. 
+  save = FALSE,
   outdir = '~/Documents/EmpiricalSeedZones/Eriocoma_thurberianacgSTZ/Information',
   landscape = FALSE, # defaults ot TRUE, we want a landscape page
   caption = 
@@ -336,7 +334,6 @@ QGIS is totally free, works on essentially all operating systems and most flavou
 If you want to download QGIS feel free to do so, it's available [here](https://qgis.org/download/), but othewise you can just read the text and you'll get an idea of what I mean by seed zone names. 
 
 ```{r}
-
 data.frame(
   SeedZone = 1:12,
   SZName = c('Arid Valley Bottoms', 'Arid Valleys',  'Central Valleys', 

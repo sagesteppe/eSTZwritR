@@ -4,7 +4,15 @@
 \alias{orderZones}
 \title{Suggest seed zones names, or at least numeric orders, based on input polygons}
 \usage{
-orderZones(x, SeedZone = SeedZone, SZName = SZName, n, rasta, ...)
+orderZones(
+  x,
+  SeedZone = SeedZone,
+  SZName = SZName,
+  n = 2500,
+  rasta = "cont",
+  precision = 1000,
+  ...
+)
 }
 \arguments{
 \item{x}{an sf/tibble/dataframe containing the spatial data which will be distributed as a final product}
@@ -19,6 +27,8 @@ exceed the number of raster cells of the products used to generate the stz, or r
 \item{rasta}{Either a terra::spatrast object or, a character string of either "coarse" or 'cont' - short for contiguous USA.
 GAI coarse has been aggregated by a factor of 2 from it's native 1km resolution to 4k, GAI cont is in the native resolution, but only covers the USA and a degree or so of Canada.
 If neither of the rasters contained in the package meet your requirements, resubmit the GAI raster.}
+
+\item{precision}{Decrease the precision of coordinates to speed up extract operation. Works well given the raster template}
 
 \item{...}{additional parameters passed onto sf::st_sample}
 }
@@ -49,10 +59,9 @@ across the species.
 \examples{
 acth7 <- sf::st_read(file.path(
   system.file(package="eSTZwritR"), "extdata", 'ACTH7.gpkg')
-) |>
-  sf::st_make_valid()
-
-zoneOrder_suggestions <- orderZones(acth7, SeedZone = zone, n = 1000)
+) 
+## arbirarily small example for cran test, use 2500 in practice.
+zoneOrder_suggestions <- orderZones(acth7, SeedZone = zone, n = 200)
 
 zoneOrder_suggestions$Summary
 zoneOrder_suggestions$PlotKruskal

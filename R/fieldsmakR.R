@@ -7,7 +7,8 @@
 #' @param ID a string specifying this columns names, If not supplied will create one.
 #' @param SZName a string containing a name for the SeedZone column to be used in conversation, such as 'Productivity high, Phenology late' or 'SW midmontane', if not supplied will copy 'SeedZone' column values
 #' @param AreaAcres a string containing the name for the column containing an area measurement, if not supplied this value will be calculated using epsg:5070
-#' @examples \dontrun{
+#' @examples 
+#' \dontrun{
 #' df <- data.frame(
 #'   id = 1:10,
 #'   gridcode = sample(1:10, replace = FALSE),
@@ -34,17 +35,19 @@ fieldsmakR <- function(x, SeedZone, ID, SZName, AreaAcres){
   # ensure 'SeedZone' is appropriately named.
   colnames(x)[grep(SeedZone, colnames(x))] <- 'SeedZone'
 
-  x <- dplyr::arrange(x, SeedZone)
+  x <- dplyr::arrange(x, .data[['SeedZone']])
 
   if(missing(ID)){ # create an ID if not already present.
     if(length(grep('^id*', colnames(x))) == 0){
       x <- x |>
-        dplyr::mutate(ID = seq_len(nrow(x)), .before = 1)} else {
-        colnames(x)[grep('^id*', colnames(x))] <- 'ID'}
+        dplyr::mutate(ID = seq_len(nrow(x)), .before = 1)
+    } else {
+      colnames(x)[grep('^id*', colnames(x))] <- 'ID'
+    }
   }
 
   if(missing(SZName)){ # copy these names to this column
-    x <- dplyr::mutate(x, SZName = x$SeedZone, .before = 1)
+    x <- dplyr::mutate(x, SZName = .data[['SeedZone']], .before = 1)
   } else {
     colnames(x)[grep(paste0('^', SZName, '*'), colnames(x))] <- 'SZName'
   }
@@ -64,8 +67,8 @@ fieldsmakR <- function(x, SeedZone, ID, SZName, AreaAcres){
         units::set_units('acre') |>
         as.numeric()
     }
-  x <- dplyr::bind_cols(x, AreaAcres = area)
-  } else{
+    x <- dplyr::bind_cols(x, AreaAcres = area)
+  } else {
     colnames(x)[grep(AreaAcres, colnames(x))] <- 'AreaAcres'
   }
 
@@ -111,11 +114,11 @@ fieldsmakR <- function(x, SeedZone, ID, SZName, AreaAcres){
 
     message(
       "There is a column(s), `",  cnames_unk, "`, which we can't figure out the purpose of. It will be returned here, but FYI a list of bioclim variables is here: https://www.worldclim.org/data/bioclim.html. ",
-      "If you want to remove this/these columns this should do it: `dplyr::select(x, -c(", cnames_unk, "))`")
+      "If you want to remove this/these columns this should do it: `dplyr::select(x, -c(", paste0("'", cnames_unk, "'", collapse = ", "), "))`")
   }
 
   x <- dplyr::select(x, dplyr::any_of(cols)) |>
-    dplyr::relocate( dplyr::any_of(cols))
+    dplyr::relocate(dplyr::any_of(cols))
 
+  return(x)
 }
-

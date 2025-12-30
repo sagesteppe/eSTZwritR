@@ -24,14 +24,14 @@
 #' @param rasta Either a terra::spatrast object or, a character string of either "coarse" or 'cont' - short for contiguous USA.
 #'  GAI coarse has been aggregated by a factor of 2 from it's native 1km resolution to 4k, GAI cont is in the native resolution, but only covers the USA and a degree or so of Canada.
 #'  If neither of the rasters contained in the package meet your requirements, resubmit the GAI raster.
+#' @param precision Decrease the precision of coordinates to speed up extract operation. Works well given the raster template
 #' @param ... additional parameters passed onto sf::st_sample
 #' @examples
 #' acth7 <- sf::st_read(file.path(
 #'   system.file(package="eSTZwritR"), "extdata", 'ACTH7.gpkg')
-#' ) |>
-#'   sf::st_make_valid()
-#'
-#' zoneOrder_suggestions <- orderZones(acth7, SeedZone = zone, n = 1000)
+#' ) 
+#' ## arbirarily small example for cran test, use 2500 in practice.
+#' zoneOrder_suggestions <- orderZones(acth7, SeedZone = zone, n = 200)
 #'
 #' zoneOrder_suggestions$Summary
 #' zoneOrder_suggestions$PlotKruskal
@@ -53,13 +53,13 @@
 #' 'Summary' a dataframe containing the original zones, and final zones, as well as the calculated median and the number of samples used to calculate the median.
 #' 'Plot' a ggpubr boxplot of the results of a kruskal-wallis test amongst seed zones.
 #' @export
-orderZones <- function(x, SeedZone = SeedZone, SZName = SZName,  n, rasta, ...){
+orderZones <- function(x, SeedZone = SeedZone, SZName = SZName,  n = 2500, rasta = 'cont', precision = 1000, ...){
 
   SeedZone <- dplyr::enquo(SeedZone)
   SZName <- dplyr::enquo(SZName)
+
   sf::st_agr(x) <- 'constant'
-  if(missing(n)){n <- 2500}
-  if(missing(rasta)){rasta <- 'cont'} # if the user supplied a raster use that instead.
+
   if(typeof(rasta)!='S4'){
 
   # if the SZNames are simply a copy of the SeedZone numbers, than we will have to
@@ -190,4 +190,3 @@ orderZones <- function(x, SeedZone = SeedZone, SZName = SZName,  n, rasta, ...){
     )
   )
 }
-

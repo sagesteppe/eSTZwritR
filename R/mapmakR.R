@@ -47,18 +47,12 @@
 #'  plot(p)
 #' @returns Writes a PDF (or other specified `filetype`) to disk, and returns the ggplot object to console allowing user to modify it for other purposes.
 #' @export
-mapmakR <- function(x, sci_name, save, outpath, ecoregions, cities, city_reduce, city_reduce_no, landscape, caption, filetype, buf_prcnt, SZName = SZName){
+mapmakR <- function(x, sci_name, save = TRUE, outpath, ecoregions = TRUE, cities = TRUE, city_reduce = 'Distance', city_reduce_no = 20, 
+  landscape = TRUE, caption, filetype = 'pdf', buf_prcnt = 0.025, SZName = SZName){
 
   if(missing(sci_name))(stop('sci_name Name Not supplied.'))
-  if(missing(save)){save <- TRUE}
   if(missing(outpath)){outpath = getwd()}
-  if(missing(landscape)){landscape = TRUE}
-  if(missing(ecoregions)){ecoregions = TRUE}
-  if(missing(filetype)){filetype = 'pdf'}
-  if(missing(cities)){cities <- TRUE}
-  if(missing(city_reduce)){city_reduce <- 'Distance'}
-  if(missing(city_reduce_no)){city_reduce_no <- 20}
-  if(missing(buf_prcnt)){buf_prcnt <- 0.025}
+  
   SZName <- dplyr::enquo(SZName)
   fname <- paste0(file.path(outpath, gsub(' ', '_', sci_name)), '_STZmap.', filetype)
 
