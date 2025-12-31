@@ -3,7 +3,7 @@ output:
   md_document:
     variant: gfm
 html_preview: false
-title: "eSTZwritR: Standardized Documentation for Empirical Seed Transfer Zones"
+title: "eSTZwritR: Documentation for Empirical STZs"
 description: "R package for applying standardized file naming, directory structure, and mapping conventions to empirical Seed Transfer Zones (eSTZs) in the United States"
 ---
 
@@ -30,6 +30,7 @@ The goal of this package is to standardize eSTZ documentation to streamline the 
 ## Installation
 eSTZwritR is available only on github, with no plans for submission to CRAN. 
 It can be installed using `remotes` or `devtools` (or `pak` etc.) like so:
+
 ```
 install.packages('devtools')
 devtools::install_github('sagesteppe/eSTZwritR')
