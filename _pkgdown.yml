@@ -92,9 +92,7 @@ navbar:
       icon: fab fa-github fa-lg
       href: https://github.com/sagesteppe/eSTZwritR
       aria-label: "View source code on GitHub"
-    search:
-      icon: fas fa-search
-      aria-label: "Search documentation"
+
 reference:
 - title: Main Functions
   desc: User facing functions
