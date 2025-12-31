@@ -11,3 +11,5 @@ Makefile
 ^Eriocoma_thurberiana_cgSTZ$
 data-raw
 Eriocoma_thurberiana_cgSTZ
+^static
+^robots.txt

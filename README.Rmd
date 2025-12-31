@@ -14,14 +14,13 @@ cat(
 	badger::badge_codefactor('sagesteppe/eSTZwritR'), "\n",
 	badger::badge_repostatus("Active"), "\n",
 	badger::badge_doi("DOI: 10.5281/zenodo.14641975 ", "yellow"), "\n",
-  badger::badge_github_actions("R-CMD-check", "sagesteppe/eSTZwritR")
+  badger::badge_github_actions("R-CMD-check", "sagesteppe/eSTZwritR"), "\n"
 )
 ```
 
 <!-- badges: end -->
 
 # eSTZwritR ('easy rider') <img src="man/figures/logo.png" align="right" height="138" />
-# Description  
 
 An R package for applying standardized file naming, directory structure, mapping, for empirical Seed Transfer Zones (eSTZs) in the United States. 
 
@@ -58,12 +57,13 @@ eSTZwritR requires only five user-facing functions to implement all data sharing
    
 ## Documentation  
 A paper describing the impetus behind the creation of eSTZwritR, and broadly outlining it's functionality is available [here](https://github.com/sagesteppe/EmpiricalSeedZones/blob/main/manuscript/Empirical-seed-transfer-zones-require-conventions-for-data-sharing-to-increase-their-utilization-by-practitioners.pdf). 
-Note that as of April 1 2025, this paper is in revision for publication in *Restoration Ecology*. 
 
 A poster on the project for the National Native Seed Conference 2025 is below. 
 It contains all of the proposed conventions, it is also located in the ./man/figures subdirectory, where you can download a high resolution copy and zoom in on it. 
 
 ![Conference poster for National Native Seed Conference 2025 presenting eSTZwritR conventions for documenting empirical seed transfer zones, including file naming standards, directory structure, mapping guidelines, and field naming conventions with visual examples and workflow diagrams](./reference/figures/Poster4NNSC2025.png)
+
+<br>
 
 A vignette showcasing the usage of the package is available [here](https://sagesteppe.github.io/eSTZwritR/articles/eSTZwritR.html). 
 This vignette includes the images in the 'Suggestions' portion of the above poster in the relevant areas so you can get a better idea of specific suggestions (most of which are not included in the text portions of the manuscript.)
@@ -75,11 +75,11 @@ Wieferich, B., Benkendorf, R.C. 2024. eSTZwritR
 A bibtex entry for latex users is:
 
 @Misc{wieferich2024estz,  
-title = {eSTZwritR},  
-author = {Wieferich, B and Benkendorf R.C.},  
-year = {2024},  
-url = {https://github.com/sagesteppe/eSTZwritR},  
-doi = {10.5281/zenodo.14641975}
+  title = {eSTZwritR},  
+  author = {Wieferich, B and Benkendorf R.C.},  
+  year = {2024},  
+  url = {https://github.com/sagesteppe/eSTZwritR},  
+  doi = {10.5281/zenodo.14641975}
 }
 
 Or use R to display citations:
