@@ -1,11 +1,12 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-<!-- badges: start -->
-
-[![R-CMD-check](https://github.com/sagesteppe/flyer/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/sagesteppe/eSTZwritR/actions/workflows/R-CMD-check.yaml)
 
 [![CodeFactor](https://www.codefactor.io/repository/github/sagesteppe/eSTZwritR/badge)](https://www.codefactor.io/repository/github/sagesteppe/eSTZwritR)
-[![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![Project Status: Active - The project has reached a stable, usable
+state and is being actively
+developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![](https://img.shields.io/badge/doi-DOI:%2010.5281/zenodo.14641975%20-yellow.svg)](https://doi.org/DOI:%2010.5281/zenodo.14641975)
+[![R build
+status](https://github.com/R-CMD-check/workflows/sagesteppe/eSTZwritR/badge.svg)](https://github.com/R-CMD-check/actions)
 
 <!-- badges: end -->
 
@@ -23,7 +24,7 @@ streamline the sharing of these resources among natural resource
 professionals, and for researchers to be able to collectively utilize
 the products.
 
-## :arrow_double_down: Installation
+## Installation
 
 eSTZwritR is available only on github, with no plans for submission to
 CRAN. It can be installed using `remotes` or `devtools` (or `pak` etc.)
@@ -46,13 +47,13 @@ github or CRAN
 eSTZwritR requires only five user-facing functions to implement all data
 sharing conventions.
 
-| Function | Purpose | Output |
-|:--:|:--:|:--:|
-| `regionCoding` | determine DOI Regions | Character string for file naming |
-| `dirmakR` | create Directory | Directory, spatial data |
-| `mapmakR` | create Map | PDF or png map (for publications) |
-| `fieldsmakR` | ensure fields (columns) are named | sf object to local location |
-| `orderZones` | ordering seed zone numbers | updated vector data, plot, summary |
+|    Function    |              Purpose              |               Output               |
+| :------------: | :-------------------------------: | :--------------------------------: |
+| `regionCoding` |       determine DOI Regions       |  Character string for file naming  |
+|   `dirmakR`    |         create Directory          |      Directory, spatial data       |
+|   `mapmakR`    |            create Map             | PDF or png map (for publications)  |
+|  `fieldsmakR`  | ensure fields (columns) are named |    sf object to local location     |
+|  `orderZones`  |    ordering seed zone numbers     | updated vector data, plot, summary |
 
 ## Documentation
 
@@ -67,7 +68,11 @@ below. It contains all of the proposed conventions, it is also located
 in the ./man/figures subdirectory, where you can download a high
 resolution copy and zoom in on it.
 
-![](./man/figures/Poster4NNSC2025.png)
+![Conference poster for National Native Seed Conference 2025 presenting
+eSTZwritR conventions for documenting empirical seed transfer zones,
+including file naming standards, directory structure, mapping
+guidelines, and field naming conventions with visual examples and
+workflow diagrams](./reference/figures/Poster4NNSC2025.png)
 
 A vignette showcasing the usage of the package is available
 [here](https://sagesteppe.github.io/eSTZwritR/articles/eSTZwritR.html).
@@ -87,8 +92,13 @@ title = {eSTZwritR},
 author = {Wieferich, B and Benkendorf R.C.},  
 year = {2024},  
 url = {<https://github.com/sagesteppe/eSTZwritR>},  
-}
+doi = {10.5281/zenodo.14641975} }
 
-Or use R to display citations using
+Or use R to display citations:
 
-    citations('eSTZwritR')
+``` r
+citation('eSTZwritR')
+```
+
+For complete citation information, see the [citation
+page](authors.html#citation).
