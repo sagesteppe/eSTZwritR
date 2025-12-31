@@ -9,6 +9,9 @@
 
 ## Citation
 
+Source:
+[`DESCRIPTION`](https://github.com/sagesteppe/eSTZwritR/blob/main/DESCRIPTION)
+
 Wieferich B, Benkendorf R (2025). *eSTZwritR: A simple package for
 documenting and sharing empirical Seed Transfer Zones (eSTZs)*. R
 package version 0.1.1, <https://sagesteppe.github.io/eSTZwritR/>.
