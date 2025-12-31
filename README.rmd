@@ -3,6 +3,8 @@ output:
   md_document:
     variant: gfm
 html_preview: false
+title: "eSTZwritR: Standardized Documentation for Empirical Seed Transfer Zones"
+description: "R package for applying standardized file naming, directory structure, and mapping conventions to empirical Seed Transfer Zones (eSTZs) in the United States"
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -26,7 +28,7 @@ An R package for applying standardized file naming, directory structure, mapping
 ## Overview
 The goal of this package is to standardize eSTZ documentation to streamline the sharing of these resources among natural resource professionals, and for researchers to be able to collectively utilize the products. 
 
-## :arrow_double_down: Installation
+## Installation
 eSTZwritR is available only on github, with no plans for submission to CRAN. 
 It can be installed using `remotes` or `devtools` (or `pak` etc.) like so:
 ```
@@ -61,24 +63,28 @@ Note that as of April 1 2025, this paper is in revision for publication in *Rest
 A poster on the project for the National Native Seed Conference 2025 is below. 
 It contains all of the proposed conventions, it is also located in the ./man/figures subdirectory, where you can download a high resolution copy and zoom in on it. 
 
-![](./man/figures/Poster4NNSC2025.png)
+![Conference poster for National Native Seed Conference 2025 presenting eSTZwritR conventions for documenting empirical seed transfer zones, including file naming standards, directory structure, mapping guidelines, and field naming conventions with visual examples and workflow diagrams](./reference/figures/Poster4NNSC2025.png)
 
 A vignette showcasing the usage of the package is available [here](https://sagesteppe.github.io/eSTZwritR/articles/eSTZwritR.html). 
 This vignette includes the images in the 'Suggestions' portion of the above poster in the relevant areas so you can get a better idea of specific suggestions (most of which are not included in the text portions of the manuscript.)
 
-## Citation  
-Wieferich, B., Benkendorf, R.C. 2024. eSTZwritR  
+## Citation
 
-A bibtex entry for latex users is: 
+Wieferich, B., Benkendorf, R.C. 2024. eSTZwritR
+
+A bibtex entry for latex users is:
 
 @Misc{wieferich2024estz,  
-  title = {eSTZwritR},  
-  author = {Wieferich, B and Benkendorf R.C.},  
-  year = {2024},  
-  url = {https://github.com/sagesteppe/eSTZwritR},   
-}  
+title = {eSTZwritR},  
+author = {Wieferich, B and Benkendorf R.C.},  
+year = {2024},  
+url = {https://github.com/sagesteppe/eSTZwritR},  
+doi = {10.5281/zenodo.14641975}
+}
 
-Or use R to display citations using
+Or use R to display citations:
+```r
+citation('eSTZwritR')
 ```
-citations('eSTZwritR')
-```
+
+For complete citation information, see the [citation page](authors.html#citation).

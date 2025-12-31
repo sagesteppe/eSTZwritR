@@ -35,4 +35,6 @@ Suggests:
     rmarkdown,
     tidyverse
 VignetteBuilder: knitr
-URL: https://sagesteppe.github.io/eSTZwritR/
+URL: https://sagesteppe.github.io/eSTZwritR/, 
+     https://github.com/sagesteppe/eSTZwritR
+BugReports: https://github.com/sagesteppe/eSTZwritR/issues
