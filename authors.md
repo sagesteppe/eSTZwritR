@@ -12,14 +12,14 @@
 Source:
 [`DESCRIPTION`](https://github.com/sagesteppe/eSTZwritR/blob/main/DESCRIPTION)
 
-Wieferich B, Benkendorf R (2025). *eSTZwritR: A simple package for
+Wieferich B, Benkendorf R (2026). *eSTZwritR: A simple package for
 documenting and sharing empirical Seed Transfer Zones (eSTZs)*. R
 package version 0.1.1, <https://sagesteppe.github.io/eSTZwritR/>.
 
     @Manual{,
       title = {eSTZwritR: A simple package for documenting and sharing empirical Seed Transfer Zones (eSTZs)},
       author = {Brianna Wieferich and Reed Benkendorf},
-      year = {2025},
+      year = {2026},
       note = {R package version 0.1.1},
       url = {https://sagesteppe.github.io/eSTZwritR/},
     }
