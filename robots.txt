@@ -1,6 +1,6 @@
 User-agent: *
 Allow: /
-Sitemap: https://sagesteppe.github.io/BarnebyLives/eSTZwritR.xml
+Sitemap: https://sagesteppe.github.io/BarnebyLives/docs/eSTZwritR.xml
 
 # AI Crawler specific directives
 User-agent: GPTBot
