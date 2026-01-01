@@ -123,13 +123,10 @@
 <!-- badges: end -->
 <div class="section level1">
 <div class="page-header">
-<img src="logo.png" class="logo" alt=""><h1 id="estzwritr-easy-rider-">eSTZwritR (‘easy rider’) <a class="anchor" aria-label="anchor" href="#estzwritr-easy-rider-"></a>
+<img src="logo.png" class="logo" alt=""><h1 id="estzwritr-easy-rider">eSTZwritR (‘easy rider’)<a class="anchor" aria-label="anchor" href="#estzwritr-easy-rider"></a>
 </h1>
 </div>
-</div>
-<div class="section level1">
-<h1 id="description">Description<a class="anchor" aria-label="anchor" href="#description"></a>
-</h1>
+<p><img src="reference/figures/logo.png" align="right" height="138" alt="eSTWwritR package hexagonal logo"></p>
 <p>An R package for applying standardized file naming, directory structure, mapping, for empirical Seed Transfer Zones (eSTZs) in the United States.</p>
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
@@ -140,8 +137,9 @@
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <p>eSTZwritR is available only on github, with no plans for submission to CRAN. It can be installed using <code>remotes</code> or <code>devtools</code> (or <code>pak</code> etc.) like so:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">'devtools'</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">'sagesteppe/eSTZwritR'</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">'devtools'</span><span class="op">)</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">'sagesteppe/eSTZwritR'</span><span class="op">)</span></span></code></pre></div>
 <p>It relies on <code>sf</code> which on occasion can be difficult to install. If you have install problems (read them…), but <code>sf</code> is a likely culprit as it requires several external binaries and libraries.</p>
 <p>Once installed it can be attached for use like any other package from github or CRAN</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">library</span>(eSTZwritR)</span></code></pre></div>
@@ -193,11 +191,12 @@
 <div class="section level2">
 <h2 id="documentation">Documentation<a class="anchor" aria-label="anchor" href="#documentation"></a>
 </h2>
-<p>A paper describing the impetus behind the creation of eSTZwritR, and broadly outlining it’s functionality is available <a href="https://github.com/sagesteppe/EmpiricalSeedZones/blob/main/manuscript/Empirical-seed-transfer-zones-require-conventions-for-data-sharing-to-increase-their-utilization-by-practitioners.pdf" class="external-link">here</a>. Note that as of April 1 2025, this paper is in revision for publication in <em>Restoration Ecology</em>.</p>
+<p>A paper describing the impetus behind the creation of eSTZwritR, and broadly outlining it’s functionality is available <a href="https://github.com/sagesteppe/EmpiricalSeedZones/blob/main/manuscript/Empirical-seed-transfer-zones-require-conventions-for-data-sharing-to-increase-their-utilization-by-practitioners.pdf" class="external-link">here</a>.</p>
 <p>A poster on the project for the National Native Seed Conference 2025 is below. It contains all of the proposed conventions, it is also located in the ./man/figures subdirectory, where you can download a high resolution copy and zoom in on it.</p>
 <div class="float">
 <img src="./reference/figures/Poster4NNSC2025.png" alt="Conference poster for National Native Seed Conference 2025 presenting eSTZwritR conventions for documenting empirical seed transfer zones, including file naming standards, directory structure, mapping guidelines, and field naming conventions with visual examples and workflow diagrams"><div class="figcaption">Conference poster for National Native Seed Conference 2025 presenting eSTZwritR conventions for documenting empirical seed transfer zones, including file naming standards, directory structure, mapping guidelines, and field naming conventions with visual examples and workflow diagrams</div>
 </div>
+<p><br></p>
 <p>A vignette showcasing the usage of the package is available <a href="https://sagesteppe.github.io/eSTZwritR/articles/eSTZwritR.html">here</a>. This vignette includes the images in the ‘Suggestions’ portion of the above poster in the relevant areas so you can get a better idea of specific suggestions (most of which are not included in the text portions of the manuscript.)</p>
 </div>
 <div class="section level2">

@@ -1,6 +1,6 @@
 # eSTZwritR (‘easy rider’)
 
-# Description
+![eSTWwritR package hexagonal logo](reference/figures/logo.png)
 
 An R package for applying standardized file naming, directory structure,
 mapping, for empirical Seed Transfer Zones (eSTZs) in the United States.
@@ -18,7 +18,7 @@ eSTZwritR is available only on github, with no plans for submission to
 CRAN. It can be installed using `remotes` or `devtools` (or `pak` etc.)
 like so:
 
-``` R
+``` r
 install.packages('devtools')
 devtools::install_github('sagesteppe/eSTZwritR')
 ```
@@ -52,8 +52,6 @@ sharing conventions.
 A paper describing the impetus behind the creation of eSTZwritR, and
 broadly outlining it’s functionality is available
 [here](https://github.com/sagesteppe/EmpiricalSeedZones/blob/main/manuscript/Empirical-seed-transfer-zones-require-conventions-for-data-sharing-to-increase-their-utilization-by-practitioners.pdf).
-Note that as of April 1 2025, this paper is in revision for publication
-in *Restoration Ecology*.
 
 A poster on the project for the National Native Seed Conference 2025 is
 below. It contains all of the proposed conventions, it is also located
@@ -71,6 +69,8 @@ eSTZwritR conventions for documenting empirical seed transfer zones,
 including file naming standards, directory structure, mapping
 guidelines, and field naming conventions with visual examples and
 workflow diagrams
+
+  
 
 A vignette showcasing the usage of the package is available
 [here](https://sagesteppe.github.io/eSTZwritR/articles/eSTZwritR.html).

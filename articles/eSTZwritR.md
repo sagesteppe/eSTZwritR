@@ -36,14 +36,14 @@ rather complex eSTZ, composed of many polygons.
 acth7 <- sf::st_read(file.path(
    system.file(package="eSTZwritR"), "extdata", 'ACTH7.gpkg')
 )
-#> Reading layer `ACTH7' from data source 
-#>   `/home/runner/work/_temp/Library/eSTZwritR/extdata/ACTH7.gpkg' 
-#>   using driver `GPKG'
-#> Simple feature collection with 4967 features and 4 fields
-#> Geometry type: MULTIPOLYGON
-#> Dimension:     XY
-#> Bounding box:  xmin: -121.5447 ymin: 36.53208 xmax: -111.0114 ymax: 46.35708
-#> Geodetic CRS:  WGS 84
+Reading layer `ACTH7' from data source 
+  `/home/runner/work/_temp/Library/eSTZwritR/extdata/ACTH7.gpkg' 
+  using driver `GPKG'
+Simple feature collection with 4967 features and 4 fields
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: -121.5447 ymin: 36.53208 xmax: -111.0114 ymax: 46.35708
+Geodetic CRS:  WGS 84
 ```
 
 We will perform a few minor alteration on this data set which you may
@@ -52,7 +52,6 @@ understanding these operations is tangential to the rest of the
 vignette.
 
 ``` r
-
 # This step was already run during creation of the package. simple feature 
 # geometries have certain rules about what constitutes a valid geometry. One
 # of the most important rules (or at least the most violated) is that a polygon 
@@ -77,14 +76,14 @@ acth7 <- acth7 |>
   st_cast('POLYGON') |>
   # just making sure everything goes OK. 
   st_make_valid()
-#> Warning in st_cast.sf(summarise(group_by(acth7, zone), geom = st_union(geom)),
-#> : repeating attributes for all sub-geometries for which they may not be
-#> constant
+Warning in st_cast.sf(summarise(group_by(acth7, zone), geom = st_union(geom)),
+: repeating attributes for all sub-geometries for which they may not be
+constant
 
 polygonsEnd <- nrow(acth7)
 message('\nThis data set now has: ', polygonsStart - polygonsEnd, ' fewer polygons')
-#> 
-#> This data set now has: 1587 fewer polygons
+
+This data set now has: 1587 fewer polygons
 
 # You'll notice we lost some info! 
 # We lost columns containing the GRIDCODE - this is from when the data were converted
@@ -129,18 +128,18 @@ of roughly the spatial extent which the data product covers.
 ``` r
 rc <- regionCoding(acth7)
 str(rc) # the returned data is a list of two objects, a vector and a data frame. 
-#> List of 2
-#>  $ SuggestedName : chr "CGB-CPN"
-#>  $ RegionsCovered:'data.frame':  3 obs. of  2 variables:
-#>   ..$ REG_ABB: chr [1:3] "CGB" "CPN" "UCB"
-#>   ..$ n      : int [1:3] 447 441 125
+List of 2
+ $ SuggestedName : chr "CGB-CPN"
+ $ RegionsCovered:'data.frame': 3 obs. of  2 variables:
+  ..$ REG_ABB: chr [1:3] "CGB" "CPN" "UCB"
+  ..$ n      : int [1:3] 447 441 125
 
 # Either format works to extract the data from the list.
 rc$SuggestedName == rc[['SuggestedName']] 
-#> [1] TRUE
+[1] TRUE
 # I use this method (less typing), even though I like the look of the other method more... 
 rc$SuggestedName 
-#> [1] "CGB-CPN"
+[1] "CGB-CPN"
 ```
 
 The `SuggestedName` vector contains the name which the function proposes
@@ -311,22 +310,22 @@ Field Names
 
 ``` r
 acth7_clean <- fieldsmakR(acth7, SeedZone = 'zone')
-#> There is a column(s), `area_ha`, which we can't figure out the purpose of. It will be returned here, but FYI a list of bioclim variables is here: https://www.worldclim.org/data/bioclim.html. If you want to remove this/these columns this should do it: `dplyr::select(x, -c('area_ha'))`
+There is a column(s), `area_ha`, which we can't figure out the purpose of. It will be returned here, but FYI a list of bioclim variables is here: https://www.worldclim.org/data/bioclim.html. If you want to remove this/these columns this should do it: `dplyr::select(x, -c('area_ha'))`
 head(acth7_clean)
-#> Simple feature collection with 6 features and 5 fields
-#> Geometry type: POLYGON
-#> Dimension:     XY
-#> Bounding box:  xmin: -118.4614 ymin: 38.99874 xmax: -111.828 ymax: 39.59041
-#> Geodetic CRS:  WGS 84
-#> # A tibble: 6 × 6
-#>      ID SeedZone SZName AreaAcres area_ha                               geometry
-#>   <int>    <int>  <int>     <dbl>   <dbl>                          <POLYGON [°]>
-#> 1     1        1      1     4780.   1935. ((-111.853 39.13208, -111.853 39.1237…
-#> 2     2        1      1   176473.  71416. ((-118.1864 39.41541, -118.178 39.415…
-#> 3     3        1      1     3298.   1335. ((-116.003 39.07374, -116.003 39.0820…
-#> 4     4        1      1     1485.    601. ((-118.1614 39.02374, -118.1864 39.02…
-#> 5     5        1      1     1485.    601. ((-118.353 39.00708, -118.3614 39.007…
-#> 6     6        1      1    42091.  17034. ((-113.1197 39.29874, -113.1197 39.30…
+Simple feature collection with 6 features and 5 fields
+Geometry type: POLYGON
+Dimension:     XY
+Bounding box:  xmin: -118.4614 ymin: 38.99874 xmax: -111.828 ymax: 39.59041
+Geodetic CRS:  WGS 84
+ [38;5;246m# A tibble: 6 × 6 [39m
+     ID SeedZone SZName AreaAcres area_ha                               geometry
+   [3m [38;5;246m<int> [39m [23m     [3m [38;5;246m<int> [39m [23m   [3m [38;5;246m<int> [39m [23m      [3m [38;5;246m<dbl> [39m [23m    [3m [38;5;246m<dbl> [39m [23m                           [3m [38;5;246m<POLYGON [°]> [39m [23m
+ [38;5;250m1 [39m     1        1      1      [4m4 [24m780.    [4m1 [24m935. ((-111.853 39.13208, -111.853 39.1237…
+ [38;5;250m2 [39m     2        1      1    [4m1 [24m [4m7 [24m [4m6 [24m473.   [4m7 [24m [4m1 [24m416. ((-118.1864 39.41541, -118.178 39.415…
+ [38;5;250m3 [39m     3        1      1      [4m3 [24m298.    [4m1 [24m335. ((-116.003 39.07374, -116.003 39.0820…
+ [38;5;250m4 [39m     4        1      1      [4m1 [24m485.    601. ((-118.1614 39.02374, -118.1864 39.02…
+ [38;5;250m5 [39m     5        1      1      [4m1 [24m485.    601. ((-118.353 39.00708, -118.3614 39.007…
+ [38;5;250m6 [39m     6        1      1     [4m4 [24m [4m2 [24m091.   [4m1 [24m [4m7 [24m034. ((-113.1197 39.29874, -113.1197 39.30…
 ```
 
 by default we try NOT to remove any columns, this way you don’t have to
@@ -346,27 +345,27 @@ acth7_stuff <- acth7 |>
   )
 
 fieldsmakR(acth7_stuff, SeedZone = 'zone')
-#> There is a column(s), `area_ha`, which we can't figure out the purpose of. It will be returned here, but FYI a list of bioclim variables is here: https://www.worldclim.org/data/bioclim.html. If you want to remove this/these columns this should do it: `dplyr::select(x, -c('area_ha'))`
-#> Simple feature collection with 3380 features and 8 fields
-#> Geometry type: POLYGON
-#> Dimension:     XY
-#> Bounding box:  xmin: -121.5447 ymin: 36.53208 xmax: -111.0114 ymax: 46.35708
-#> Geodetic CRS:  WGS 84
-#> # A tibble: 3,380 × 9
-#>       ID SeedZone SZName AreaAcres BIO1_R BIO9_m BIO12_mean area_ha
-#>    <int>    <int>  <int>     <dbl>  <dbl>  <dbl>      <dbl>   <dbl>
-#>  1     1        1      1     4780. 0.0584 0.804       0.179   1935.
-#>  2     2        1      1   176473. 0.440  0.154       0.420  71416.
-#>  3     3        1      1     3298. 0.224  0.893       0.537   1335.
-#>  4     4        1      1     1485. 0.955  0.871       0.253    601.
-#>  5     5        1      1     1485. 0.148  0.859       0.430    601.
-#>  6     6        1      1    42091. 0.351  0.630       0.754  17034.
-#>  7     7        1      1     1318. 0.570  0.396       0.356    533.
-#>  8     8        1      1     1317. 0.0334 0.551       0.936    533.
-#>  9     9        1      1     6916. 0.461  0.433       0.634   2799.
-#> 10    10        1      1     1484. 0.534  0.0775      0.605    600.
-#> # ℹ 3,370 more rows
-#> # ℹ 1 more variable: geometry <POLYGON [°]>
+There is a column(s), `area_ha`, which we can't figure out the purpose of. It will be returned here, but FYI a list of bioclim variables is here: https://www.worldclim.org/data/bioclim.html. If you want to remove this/these columns this should do it: `dplyr::select(x, -c('area_ha'))`
+Simple feature collection with 3380 features and 8 fields
+Geometry type: POLYGON
+Dimension:     XY
+Bounding box:  xmin: -121.5447 ymin: 36.53208 xmax: -111.0114 ymax: 46.35708
+Geodetic CRS:  WGS 84
+ [38;5;246m# A tibble: 3,380 × 9 [39m
+      ID SeedZone SZName AreaAcres BIO1_R BIO9_m BIO12_mean area_ha
+    [3m [38;5;246m<int> [39m [23m     [3m [38;5;246m<int> [39m [23m   [3m [38;5;246m<int> [39m [23m      [3m [38;5;246m<dbl> [39m [23m   [3m [38;5;246m<dbl> [39m [23m   [3m [38;5;246m<dbl> [39m [23m       [3m [38;5;246m<dbl> [39m [23m    [3m [38;5;246m<dbl> [39m [23m
+ [38;5;250m 1 [39m     1        1      1      [4m4 [24m780. 0.058 [4m4 [24m 0.804       0.179    [4m1 [24m935.
+ [38;5;250m 2 [39m     2        1      1    [4m1 [24m [4m7 [24m [4m6 [24m473. 0.440  0.154       0.420   [4m7 [24m [4m1 [24m416.
+ [38;5;250m 3 [39m     3        1      1      [4m3 [24m298. 0.224  0.893       0.537    [4m1 [24m335.
+ [38;5;250m 4 [39m     4        1      1      [4m1 [24m485. 0.955  0.871       0.253    601.
+ [38;5;250m 5 [39m     5        1      1      [4m1 [24m485. 0.148  0.859       0.430    601.
+ [38;5;250m 6 [39m     6        1      1     [4m4 [24m [4m2 [24m091. 0.351  0.630       0.754   [4m1 [24m [4m7 [24m034.
+ [38;5;250m 7 [39m     7        1      1      [4m1 [24m318. 0.570  0.396       0.356    533.
+ [38;5;250m 8 [39m     8        1      1      [4m1 [24m317. 0.033 [4m4 [24m 0.551       0.936    533.
+ [38;5;250m 9 [39m     9        1      1      [4m6 [24m916. 0.461  0.433       0.634    [4m2 [24m799.
+ [38;5;250m10 [39m    10        1      1      [4m1 [24m484. 0.534  0.077 [4m5 [24m      0.605    600.
+ [38;5;246m# ℹ 3,370 more rows [39m
+ [38;5;246m# ℹ 1 more variable: geometry <POLYGON [°]> [39m
 ```
 
 See that the function can make some modifications to very simple
@@ -490,17 +489,17 @@ data.frame(
              'Mountain (lower)', 'Moutain (mid)', 'Mountain (high)'
              )
 )
-#>    SeedZone                        SZName
-#> 1         1           Arid Valley Bottoms
-#> 2         2                  Arid Valleys
-#> 3         3               Central Valleys
-#> 4         4                        Plains
-#> 5         5          North/Eastern Plains
-#> 6         6 Northern Alluvial Fans/Slopes
-#> 7         7      Sagebrush Steppe (lower)
-#> 8         8        Sagebrush Steppe (mid)
-#> 9         9      Sagebrush Steppe (upper)
-#> 10       10              Mountain (lower)
-#> 11       11                 Moutain (mid)
-#> 12       12               Mountain (high)
+   SeedZone                        SZName
+1         1           Arid Valley Bottoms
+2         2                  Arid Valleys
+3         3               Central Valleys
+4         4                        Plains
+5         5          North/Eastern Plains
+6         6 Northern Alluvial Fans/Slopes
+7         7      Sagebrush Steppe (lower)
+8         8        Sagebrush Steppe (mid)
+9         9      Sagebrush Steppe (upper)
+10       10              Mountain (lower)
+11       11                 Moutain (mid)
+12       12               Mountain (high)
 ```

@@ -153,87 +153,85 @@ Vance-Borland. “Genecology of Thurber’s Needlegrass (<em>Achnatherum
 thurberianum</em> (Piper) Barkworth) in the Western United States.”
 Rangeland Ecology &amp; Management 70.4 (2017): 509-517. They represent
 a rather complex eSTZ, composed of many polygons.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">acth7</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">st_read</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span></span>
-<span>   <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span>package<span class="op">=</span><span class="st">"eSTZwritR"</span><span class="op">)</span>, <span class="st">"extdata"</span>, <span class="st">'ACTH7.gpkg'</span><span class="op">)</span></span>
-<span><span class="op">)</span></span>
-<span><span class="co">#&gt; Reading layer `ACTH7' from data source </span></span>
-<span><span class="co">#&gt;   `/home/runner/work/_temp/Library/eSTZwritR/extdata/ACTH7.gpkg' </span></span>
-<span><span class="co">#&gt;   using driver `GPKG'</span></span>
-<span><span class="co">#&gt; Simple feature collection with 4967 features and 4 fields</span></span>
-<span><span class="co">#&gt; Geometry type: MULTIPOLYGON</span></span>
-<span><span class="co">#&gt; Dimension:     XY</span></span>
-<span><span class="co">#&gt; Bounding box:  xmin: -121.5447 ymin: 36.53208 xmax: -111.0114 ymax: 46.35708</span></span>
-<span><span class="co">#&gt; Geodetic CRS:  WGS 84</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>acth7 <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_read</span>(<span class="fu">file.path</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>   <span class="fu">system.file</span>(<span class="at">package=</span><span class="st">"eSTZwritR"</span>), <span class="st">"extdata"</span>, <span class="st">'ACTH7.gpkg'</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>)</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>Reading layer <span class="st">`</span><span class="at">ACTH7' from data source </span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="at">  </span><span class="st">`</span><span class="sc">/</span>home<span class="sc">/</span>runner<span class="sc">/</span>work<span class="sc">/</span>_temp<span class="sc">/</span>Library<span class="sc">/</span>eSTZwritR<span class="sc">/</span>extdata<span class="sc">/</span>ACTH7.gpkg<span class="st">' </span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="st">  using driver `GPKG'</span></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>Simple feature collection with <span class="dv">4967</span> features and <span class="dv">4</span> fields</span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>Geometry type<span class="sc">:</span> MULTIPOLYGON</span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>Dimension<span class="sc">:</span>     XY</span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a>Bounding box<span class="sc">:</span>  xmin<span class="sc">:</span> <span class="sc">-</span><span class="fl">121.5447</span> ymin<span class="sc">:</span> <span class="fl">36.53208</span> xmax<span class="sc">:</span> <span class="sc">-</span><span class="fl">111.0114</span> ymax<span class="sc">:</span> <span class="fl">46.35708</span></span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a>Geodetic CRS<span class="sc">:</span>  WGS <span class="dv">84</span></span></code></pre></div>
 <p>We will perform a few minor alteration on this data set which you may
 find useful in your own workflow. They are documented inline,
 understanding these operations is tangential to the rest of the
 vignette.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
-<span><span class="co"># This step was already run during creation of the package. simple feature </span></span>
-<span><span class="co"># geometries have certain rules about what constitutes a valid geometry. One</span></span>
-<span><span class="co"># of the most important rules (or at least the most violated) is that a polygon </span></span>
-<span><span class="co"># should not cross itself. We can easily fix that and several other types of</span></span>
-<span><span class="co"># errors using sf::st_make_valid() - this should be a common part of any spatial </span></span>
-<span><span class="co"># analysts workflow.</span></span>
-<span><span class="va">acth7</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/valid.html" class="external-link">st_make_valid</a></span><span class="op">(</span><span class="va">acth7</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># We also want to ensure that spatially contiguous polygons of the same seed zone</span></span>
-<span><span class="co"># are merged. This allows for more accurate assessments of the area covered by </span></span>
-<span><span class="co"># each seed zone in traditional data.frame/tibble type calculations. It also </span></span>
-<span><span class="co"># allows us to provide a unique ID to each polygon. </span></span>
-<span></span>
-<span><span class="va">polygonsStart</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">acth7</span><span class="op">)</span></span>
-<span><span class="va">acth7</span> <span class="op">&lt;-</span> <span class="va">acth7</span> <span class="op">|&gt;</span></span>
-<span>  <span class="co"># first we define a grouping variable, all polygons from these levels will be combined</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">zone</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="co"># now we union (or dissolve) all polygons by the levels specified above, into</span></span>
-<span>  <span class="co"># one multipolygon object per level. </span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>geom <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_combine.html" class="external-link">st_union</a></span><span class="op">(</span><span class="va">geom</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="co"># now we split apart the multipolygon into contiguous pieces. </span></span>
-<span>  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_cast.html" class="external-link">st_cast</a></span><span class="op">(</span><span class="st">'POLYGON'</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="co"># just making sure everything goes OK. </span></span>
-<span>  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/valid.html" class="external-link">st_make_valid</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning in st_cast.sf(summarise(group_by(acth7, zone), geom = st_union(geom)),</span></span>
-<span><span class="co">#&gt; : repeating attributes for all sub-geometries for which they may not be</span></span>
-<span><span class="co">#&gt; constant</span></span>
-<span></span>
-<span><span class="va">polygonsEnd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">acth7</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="st">'\nThis data set now has: '</span>, <span class="va">polygonsStart</span> <span class="op">-</span> <span class="va">polygonsEnd</span>, <span class="st">' fewer polygons'</span><span class="op">)</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; This data set now has: 1587 fewer polygons</span></span>
-<span></span>
-<span><span class="co"># You'll notice we lost some info! </span></span>
-<span><span class="co"># We lost columns containing the GRIDCODE - this is from when the data were converted</span></span>
-<span><span class="co"># from raster, area_ha, and ID for each polygon. The area_ha can be recalculated, </span></span>
-<span><span class="co"># and we can create new ID's for the polygons. We could use a left join to get the</span></span>
-<span><span class="co"># GRIDCODE back on. BUT take this is a lesson, some of these polygon geometry </span></span>
-<span><span class="co"># maintenance steps should be done early! Realistically before many analysis in </span></span>
-<span><span class="co"># the paper are done perhaps! We'll show you how to make some new IDs and </span></span>
-<span><span class="co"># calculate the areas again. </span></span>
-<span></span>
-<span><span class="va">acth7</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="va">acth7</span>, ID <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">acth7</span><span class="op">)</span>, .before <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># we can calculate the area like this</span></span>
-<span><span class="va">acth7</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html" class="external-link">st_transform</a></span><span class="op">(</span><span class="va">acth7</span>, <span class="fl">5070</span><span class="op">)</span> <span class="co"># we will put the data into an Equal area projection</span></span>
-<span><span class="co"># this type of projection minimizes the distortion of area. </span></span>
-<span></span>
-<span><span class="co"># now we calculate the area using geodesic_areas (accounting for the curvature of the earth)</span></span>
-<span><span class="co"># we then convert the data into 'hectares' and will then drop some data attributes. </span></span>
-<span><span class="co"># see ?units for more info. </span></span>
-<span><span class="va">acth7</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="va">acth7</span>, area_ha <span class="op">=</span> </span>
-<span>                  <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span></span>
-<span>                    <span class="fu">units</span><span class="fu">::</span><span class="fu"><a href="https://r-quantities.github.io/units/reference/units.html" class="external-link">set_units</a></span><span class="op">(</span></span>
-<span>                      <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_measures.html" class="external-link">st_area</a></span><span class="op">(</span><span class="va">acth7</span><span class="op">)</span>, <span class="st">"hectare"</span><span class="op">)</span><span class="op">)</span>, .before <span class="op">=</span> <span class="va">geom</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># here we go! geodesic areas calculated from an equal area projection! This should</span></span>
-<span><span class="co"># be pretty well representative of how large each polygon is. </span></span>
-<span></span>
-<span><span class="co"># now we will convert these data back to geographic coordinates system WGS84</span></span>
-<span><span class="va">acth7</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html" class="external-link">st_transform</a></span><span class="op">(</span><span class="va">acth7</span>, <span class="fl">4326</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/rm.html" class="external-link">rm</a></span><span class="op">(</span><span class="va">polygonsStart</span>, <span class="va">polygonsEnd</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="co"># This step was already run during creation of the package. simple feature </span></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="co"># geometries have certain rules about what constitutes a valid geometry. One</span></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="co"># of the most important rules (or at least the most violated) is that a polygon </span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="co"># should not cross itself. We can easily fix that and several other types of</span></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="co"># errors using sf::st_make_valid() - this should be a common part of any spatial </span></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="co"># analysts workflow.</span></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>acth7 <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_make_valid</span>(acth7)</span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="co"># We also want to ensure that spatially contiguous polygons of the same seed zone</span></span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="co"># are merged. This allows for more accurate assessments of the area covered by </span></span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a><span class="co"># each seed zone in traditional data.frame/tibble type calculations. It also </span></span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="co"># allows us to provide a unique ID to each polygon. </span></span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a></span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a>polygonsStart <span class="ot">&lt;-</span> <span class="fu">nrow</span>(acth7)</span>
+<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a>acth7 <span class="ot">&lt;-</span> acth7 <span class="sc">|&gt;</span></span>
+<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a>  <span class="co"># first we define a grouping variable, all polygons from these levels will be combined</span></span>
+<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a>  <span class="fu">group_by</span>(zone) <span class="sc">|&gt;</span></span>
+<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a>  <span class="co"># now we union (or dissolve) all polygons by the levels specified above, into</span></span>
+<span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a>  <span class="co"># one multipolygon object per level. </span></span>
+<span id="cb4-21"><a href="#cb4-21" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">geom =</span> <span class="fu">st_union</span>(geom)) <span class="sc">|&gt;</span></span>
+<span id="cb4-22"><a href="#cb4-22" tabindex="-1"></a>  <span class="co"># now we split apart the multipolygon into contiguous pieces. </span></span>
+<span id="cb4-23"><a href="#cb4-23" tabindex="-1"></a>  <span class="fu">st_cast</span>(<span class="st">'POLYGON'</span>) <span class="sc">|&gt;</span></span>
+<span id="cb4-24"><a href="#cb4-24" tabindex="-1"></a>  <span class="co"># just making sure everything goes OK. </span></span>
+<span id="cb4-25"><a href="#cb4-25" tabindex="-1"></a>  <span class="fu">st_make_valid</span>()</span>
+<span id="cb4-26"><a href="#cb4-26" tabindex="-1"></a>Warning <span class="cf">in</span> <span class="fu">st_cast.sf</span>(<span class="fu">summarise</span>(<span class="fu">group_by</span>(acth7, zone), <span class="at">geom =</span> <span class="fu">st_union</span>(geom)),</span>
+<span id="cb4-27"><a href="#cb4-27" tabindex="-1"></a><span class="sc">:</span> repeating attributes <span class="cf">for</span> all sub<span class="sc">-</span>geometries <span class="cf">for</span> which they may not be</span>
+<span id="cb4-28"><a href="#cb4-28" tabindex="-1"></a>constant</span>
+<span id="cb4-29"><a href="#cb4-29" tabindex="-1"></a></span>
+<span id="cb4-30"><a href="#cb4-30" tabindex="-1"></a>polygonsEnd <span class="ot">&lt;-</span> <span class="fu">nrow</span>(acth7)</span>
+<span id="cb4-31"><a href="#cb4-31" tabindex="-1"></a><span class="fu">message</span>(<span class="st">'</span><span class="sc">\n</span><span class="st">This data set now has: '</span>, polygonsStart <span class="sc">-</span> polygonsEnd, <span class="st">' fewer polygons'</span>)</span>
+<span id="cb4-32"><a href="#cb4-32" tabindex="-1"></a></span>
+<span id="cb4-33"><a href="#cb4-33" tabindex="-1"></a>This data set now has<span class="sc">:</span> <span class="dv">1587</span> fewer polygons</span>
+<span id="cb4-34"><a href="#cb4-34" tabindex="-1"></a></span>
+<span id="cb4-35"><a href="#cb4-35" tabindex="-1"></a><span class="co"># You'll notice we lost some info! </span></span>
+<span id="cb4-36"><a href="#cb4-36" tabindex="-1"></a><span class="co"># We lost columns containing the GRIDCODE - this is from when the data were converted</span></span>
+<span id="cb4-37"><a href="#cb4-37" tabindex="-1"></a><span class="co"># from raster, area_ha, and ID for each polygon. The area_ha can be recalculated, </span></span>
+<span id="cb4-38"><a href="#cb4-38" tabindex="-1"></a><span class="co"># and we can create new ID's for the polygons. We could use a left join to get the</span></span>
+<span id="cb4-39"><a href="#cb4-39" tabindex="-1"></a><span class="co"># GRIDCODE back on. BUT take this is a lesson, some of these polygon geometry </span></span>
+<span id="cb4-40"><a href="#cb4-40" tabindex="-1"></a><span class="co"># maintenance steps should be done early! Realistically before many analysis in </span></span>
+<span id="cb4-41"><a href="#cb4-41" tabindex="-1"></a><span class="co"># the paper are done perhaps! We'll show you how to make some new IDs and </span></span>
+<span id="cb4-42"><a href="#cb4-42" tabindex="-1"></a><span class="co"># calculate the areas again. </span></span>
+<span id="cb4-43"><a href="#cb4-43" tabindex="-1"></a></span>
+<span id="cb4-44"><a href="#cb4-44" tabindex="-1"></a>acth7 <span class="ot">&lt;-</span> <span class="fu">mutate</span>(acth7, <span class="at">ID =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(acth7), <span class="at">.before =</span> <span class="dv">1</span>)</span>
+<span id="cb4-45"><a href="#cb4-45" tabindex="-1"></a></span>
+<span id="cb4-46"><a href="#cb4-46" tabindex="-1"></a><span class="co"># we can calculate the area like this</span></span>
+<span id="cb4-47"><a href="#cb4-47" tabindex="-1"></a>acth7 <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_transform</span>(acth7, <span class="dv">5070</span>) <span class="co"># we will put the data into an Equal area projection</span></span>
+<span id="cb4-48"><a href="#cb4-48" tabindex="-1"></a><span class="co"># this type of projection minimizes the distortion of area. </span></span>
+<span id="cb4-49"><a href="#cb4-49" tabindex="-1"></a></span>
+<span id="cb4-50"><a href="#cb4-50" tabindex="-1"></a><span class="co"># now we calculate the area using geodesic_areas (accounting for the curvature of the earth)</span></span>
+<span id="cb4-51"><a href="#cb4-51" tabindex="-1"></a><span class="co"># we then convert the data into 'hectares' and will then drop some data attributes. </span></span>
+<span id="cb4-52"><a href="#cb4-52" tabindex="-1"></a><span class="co"># see ?units for more info. </span></span>
+<span id="cb4-53"><a href="#cb4-53" tabindex="-1"></a>acth7 <span class="ot">&lt;-</span> <span class="fu">mutate</span>(acth7, <span class="at">area_ha =</span> </span>
+<span id="cb4-54"><a href="#cb4-54" tabindex="-1"></a>                  <span class="fu">as.numeric</span>(</span>
+<span id="cb4-55"><a href="#cb4-55" tabindex="-1"></a>                    units<span class="sc">::</span><span class="fu">set_units</span>(</span>
+<span id="cb4-56"><a href="#cb4-56" tabindex="-1"></a>                      <span class="fu">st_area</span>(acth7), <span class="st">"hectare"</span>)), <span class="at">.before =</span> geom)</span>
+<span id="cb4-57"><a href="#cb4-57" tabindex="-1"></a></span>
+<span id="cb4-58"><a href="#cb4-58" tabindex="-1"></a><span class="co"># here we go! geodesic areas calculated from an equal area projection! This should</span></span>
+<span id="cb4-59"><a href="#cb4-59" tabindex="-1"></a><span class="co"># be pretty well representative of how large each polygon is. </span></span>
+<span id="cb4-60"><a href="#cb4-60" tabindex="-1"></a></span>
+<span id="cb4-61"><a href="#cb4-61" tabindex="-1"></a><span class="co"># now we will convert these data back to geographic coordinates system WGS84</span></span>
+<span id="cb4-62"><a href="#cb4-62" tabindex="-1"></a>acth7 <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_transform</span>(acth7, <span class="dv">4326</span>)</span>
+<span id="cb4-63"><a href="#cb4-63" tabindex="-1"></a></span>
+<span id="cb4-64"><a href="#cb4-64" tabindex="-1"></a><span class="fu">rm</span>(polygonsStart, polygonsEnd)</span></code></pre></div>
 <div class="section level3">
 <h3 id="region-coding">Region Coding<a class="anchor" aria-label="anchor" href="#region-coding"></a>
 </h3>
@@ -243,21 +241,20 @@ zones listed on the file will not be comprehensive, as we restrict the
 number of listed areas to two zones. However, they should give an OK
 indication of roughly the spatial extent which the data product
 covers.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">rc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/regionCoding.html">regionCoding</a></span><span class="op">(</span><span class="va">acth7</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">rc</span><span class="op">)</span> <span class="co"># the returned data is a list of two objects, a vector and a data frame. </span></span>
-<span><span class="co">#&gt; List of 2</span></span>
-<span><span class="co">#&gt;  $ SuggestedName : chr "CGB-CPN"</span></span>
-<span><span class="co">#&gt;  $ RegionsCovered:'data.frame':  3 obs. of  2 variables:</span></span>
-<span><span class="co">#&gt;   ..$ REG_ABB: chr [1:3] "CGB" "CPN" "UCB"</span></span>
-<span><span class="co">#&gt;   ..$ n      : int [1:3] 447 441 125</span></span>
-<span></span>
-<span><span class="co"># Either format works to extract the data from the list.</span></span>
-<span><span class="va">rc</span><span class="op">$</span><span class="va">SuggestedName</span> <span class="op">==</span> <span class="va">rc</span><span class="op">[[</span><span class="st">'SuggestedName'</span><span class="op">]</span><span class="op">]</span> </span>
-<span><span class="co">#&gt; [1] TRUE</span></span>
-<span><span class="co"># I use this method (less typing), even though I like the look of the other method more... </span></span>
-<span><span class="va">rc</span><span class="op">$</span><span class="va">SuggestedName</span> </span>
-<span><span class="co">#&gt; [1] "CGB-CPN"</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>rc <span class="ot">&lt;-</span> <span class="fu">regionCoding</span>(acth7)</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="fu">str</span>(rc) <span class="co"># the returned data is a list of two objects, a vector and a data frame. </span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>List of <span class="dv">2</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a> <span class="sc">$</span> SuggestedName <span class="sc">:</span> chr <span class="st">"CGB-CPN"</span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a> <span class="sc">$</span> RegionsCovered<span class="sc">:</span><span class="st">'data.frame'</span><span class="sc">:</span> <span class="dv">3</span> obs. of  <span class="dv">2</span> variables<span class="sc">:</span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>  ..<span class="sc">$</span> REG_ABB<span class="sc">:</span> chr [<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>] <span class="st">"CGB"</span> <span class="st">"CPN"</span> <span class="st">"UCB"</span></span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>  ..<span class="sc">$</span> n      <span class="sc">:</span> int [<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>] <span class="dv">447</span> <span class="dv">441</span> <span class="dv">125</span></span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a><span class="co"># Either format works to extract the data from the list.</span></span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>rc<span class="sc">$</span>SuggestedName <span class="sc">==</span> rc[[<span class="st">'SuggestedName'</span>]] </span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a>[<span class="dv">1</span>] <span class="cn">TRUE</span></span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a><span class="co"># I use this method (less typing), even though I like the look of the other method more... </span></span>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a>rc<span class="sc">$</span>SuggestedName </span>
+<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"CGB-CPN"</span></span></code></pre></div>
 <p>The <code>SuggestedName</code> vector contains the name which the
 function proposes to use</p>
 <p>We can look at the regions (well very small ones may be missed) which
@@ -480,60 +477,58 @@ provided below….</p>
 <div class="float">
 <img src="images/FieldNames_Variables.png" alt="Field Names"><div class="figcaption">Field Names</div>
 </div>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">acth7_clean</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fieldsmakR.html">fieldsmakR</a></span><span class="op">(</span><span class="va">acth7</span>, SeedZone <span class="op">=</span> <span class="st">'zone'</span><span class="op">)</span></span>
-<span><span class="co">#&gt; There is a column(s), `area_ha`, which we can't figure out the purpose of. It will be returned here, but FYI a list of bioclim variables is here: https://www.worldclim.org/data/bioclim.html. If you want to remove this/these columns this should do it: `dplyr::select(x, -c('area_ha'))`</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">acth7_clean</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Simple feature collection with 6 features and 5 fields</span></span>
-<span><span class="co">#&gt; Geometry type: POLYGON</span></span>
-<span><span class="co">#&gt; Dimension:     XY</span></span>
-<span><span class="co">#&gt; Bounding box:  xmin: -118.4614 ymin: 38.99874 xmax: -111.828 ymax: 39.59041</span></span>
-<span><span class="co">#&gt; Geodetic CRS:  WGS 84</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 6</span></span></span>
-<span><span class="co">#&gt;      ID SeedZone SZName AreaAcres area_ha                               geometry</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                          <span style="color: #949494; font-style: italic;">&lt;POLYGON [°]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1        1      1     <span style="text-decoration: underline;">4</span>780.   <span style="text-decoration: underline;">1</span>935. ((-111.853 39.13208, -111.853 39.1237…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2        1      1   <span style="text-decoration: underline;">176</span>473.  <span style="text-decoration: underline;">71</span>416. ((-118.1864 39.41541, -118.178 39.415…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3        1      1     <span style="text-decoration: underline;">3</span>298.   <span style="text-decoration: underline;">1</span>335. ((-116.003 39.07374, -116.003 39.0820…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4        1      1     <span style="text-decoration: underline;">1</span>485.    601. ((-118.1614 39.02374, -118.1864 39.02…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>     5        1      1     <span style="text-decoration: underline;">1</span>485.    601. ((-118.353 39.00708, -118.3614 39.007…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>     6        1      1    <span style="text-decoration: underline;">42</span>091.  <span style="text-decoration: underline;">17</span>034. ((-113.1197 39.29874, -113.1197 39.30…</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>acth7_clean <span class="ot">&lt;-</span> <span class="fu">fieldsmakR</span>(acth7, <span class="at">SeedZone =</span> <span class="st">'zone'</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>There is a <span class="fu">column</span>(s), <span class="st">`</span><span class="at">area_ha</span><span class="st">`</span>, which we can<span class="st">'t figure out the purpose of. It will be returned here, but FYI a list of bioclim variables is here: https://www.worldclim.org/data/bioclim.html. If you want to remove this/these columns this should do it: `dplyr::select(x, -c('</span>area_ha<span class="st">'))`</span></span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a><span class="st">head(acth7_clean)</span></span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a><span class="st">Simple feature collection with 6 features and 5 fields</span></span>
+<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a><span class="st">Geometry type: POLYGON</span></span>
+<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a><span class="st">Dimension:     XY</span></span>
+<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a><span class="st">Bounding box:  xmin: -118.4614 ymin: 38.99874 xmax: -111.828 ymax: 39.59041</span></span>
+<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a><span class="st">Geodetic CRS:  WGS 84</span></span>
+<span id="cb13-9"><a href="#cb13-9" tabindex="-1"></a><span class="st"> [38;5;246m# A tibble: 6 × 6 [39m</span></span>
+<span id="cb13-10"><a href="#cb13-10" tabindex="-1"></a><span class="st">     ID SeedZone SZName AreaAcres area_ha                               geometry</span></span>
+<span id="cb13-11"><a href="#cb13-11" tabindex="-1"></a><span class="st">   [3m [38;5;246m&lt;int&gt; [39m [23m     [3m [38;5;246m&lt;int&gt; [39m [23m   [3m [38;5;246m&lt;int&gt; [39m [23m      [3m [38;5;246m&lt;dbl&gt; [39m [23m    [3m [38;5;246m&lt;dbl&gt; [39m [23m                           [3m [38;5;246m&lt;POLYGON [°]&gt; [39m [23m</span></span>
+<span id="cb13-12"><a href="#cb13-12" tabindex="-1"></a><span class="st"> [38;5;250m1 [39m     1        1      1      [4m4 [24m780.    [4m1 [24m935. ((-111.853 39.13208, -111.853 39.1237…</span></span>
+<span id="cb13-13"><a href="#cb13-13" tabindex="-1"></a><span class="st"> [38;5;250m2 [39m     2        1      1    [4m1 [24m [4m7 [24m [4m6 [24m473.   [4m7 [24m [4m1 [24m416. ((-118.1864 39.41541, -118.178 39.415…</span></span>
+<span id="cb13-14"><a href="#cb13-14" tabindex="-1"></a><span class="st"> [38;5;250m3 [39m     3        1      1      [4m3 [24m298.    [4m1 [24m335. ((-116.003 39.07374, -116.003 39.0820…</span></span>
+<span id="cb13-15"><a href="#cb13-15" tabindex="-1"></a><span class="st"> [38;5;250m4 [39m     4        1      1      [4m1 [24m485.    601. ((-118.1614 39.02374, -118.1864 39.02…</span></span>
+<span id="cb13-16"><a href="#cb13-16" tabindex="-1"></a><span class="st"> [38;5;250m5 [39m     5        1      1      [4m1 [24m485.    601. ((-118.353 39.00708, -118.3614 39.007…</span></span>
+<span id="cb13-17"><a href="#cb13-17" tabindex="-1"></a><span class="st"> [38;5;250m6 [39m     6        1      1     [4m4 [24m [4m2 [24m091.   [4m1 [24m [4m7 [24m034. ((-113.1197 39.29874, -113.1197 39.30…</span></span></code></pre></div>
 <p>by default we try NOT to remove any columns, this way you don’t have
 to backtrack to recompute a variable. Please consider removing the
 column yourself, or rename it as necessary. I’ll re-familiarize you with
 this in a chunk further down.</p>
 <p>We can also make the problem a little more difficult and see what the
 function returns</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">acth7_stuff</span> <span class="op">&lt;-</span> <span class="va">acth7</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
-<span>    bio1_range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html" class="external-link">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>, </span>
-<span>    bio12_avg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html" class="external-link">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>, </span>
-<span>    bio9_m <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html" class="external-link">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>, </span>
-<span>  <span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="../reference/fieldsmakR.html">fieldsmakR</a></span><span class="op">(</span><span class="va">acth7_stuff</span>, SeedZone <span class="op">=</span> <span class="st">'zone'</span><span class="op">)</span></span>
-<span><span class="co">#&gt; There is a column(s), `area_ha`, which we can't figure out the purpose of. It will be returned here, but FYI a list of bioclim variables is here: https://www.worldclim.org/data/bioclim.html. If you want to remove this/these columns this should do it: `dplyr::select(x, -c('area_ha'))`</span></span>
-<span><span class="co">#&gt; Simple feature collection with 3380 features and 8 fields</span></span>
-<span><span class="co">#&gt; Geometry type: POLYGON</span></span>
-<span><span class="co">#&gt; Dimension:     XY</span></span>
-<span><span class="co">#&gt; Bounding box:  xmin: -121.5447 ymin: 36.53208 xmax: -111.0114 ymax: 46.35708</span></span>
-<span><span class="co">#&gt; Geodetic CRS:  WGS 84</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3,380 × 9</span></span></span>
-<span><span class="co">#&gt;       ID SeedZone SZName AreaAcres BIO1_R BIO9_m BIO12_mean area_ha</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>     1        1      1     <span style="text-decoration: underline;">4</span>780. 0.058<span style="text-decoration: underline;">4</span> 0.804       0.179   <span style="text-decoration: underline;">1</span>935.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>     2        1      1   <span style="text-decoration: underline;">176</span>473. 0.440  0.154       0.420  <span style="text-decoration: underline;">71</span>416.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>     3        1      1     <span style="text-decoration: underline;">3</span>298. 0.224  0.893       0.537   <span style="text-decoration: underline;">1</span>335.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>     4        1      1     <span style="text-decoration: underline;">1</span>485. 0.955  0.871       0.253    601.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>     5        1      1     <span style="text-decoration: underline;">1</span>485. 0.148  0.859       0.430    601.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>     6        1      1    <span style="text-decoration: underline;">42</span>091. 0.351  0.630       0.754  <span style="text-decoration: underline;">17</span>034.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>     7        1      1     <span style="text-decoration: underline;">1</span>318. 0.570  0.396       0.356    533.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>     8        1      1     <span style="text-decoration: underline;">1</span>317. 0.033<span style="text-decoration: underline;">4</span> 0.551       0.936    533.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>     9        1      1     <span style="text-decoration: underline;">6</span>916. 0.461  0.433       0.634   <span style="text-decoration: underline;">2</span>799.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>    10        1      1     <span style="text-decoration: underline;">1</span>484. 0.534  0.077<span style="text-decoration: underline;">5</span>      0.605    600.</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 3,370 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 1 more variable: geometry &lt;POLYGON [°]&gt;</span></span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a>acth7_stuff <span class="ot">&lt;-</span> acth7 <span class="sc">|&gt;</span></span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a>    <span class="at">bio1_range =</span> <span class="fu">runif</span>(<span class="at">n =</span> dplyr<span class="sc">::</span><span class="fu">n</span>()), </span>
+<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a>    <span class="at">bio12_avg =</span> <span class="fu">runif</span>(<span class="at">n =</span> dplyr<span class="sc">::</span><span class="fu">n</span>()), </span>
+<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a>    <span class="at">bio9_m =</span> <span class="fu">runif</span>(<span class="at">n =</span> dplyr<span class="sc">::</span><span class="fu">n</span>()), </span>
+<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a>  )</span>
+<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a><span class="fu">fieldsmakR</span>(acth7_stuff, <span class="at">SeedZone =</span> <span class="st">'zone'</span>)</span>
+<span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a>There is a <span class="fu">column</span>(s), <span class="st">`</span><span class="at">area_ha</span><span class="st">`</span>, which we can<span class="st">'t figure out the purpose of. It will be returned here, but FYI a list of bioclim variables is here: https://www.worldclim.org/data/bioclim.html. If you want to remove this/these columns this should do it: `dplyr::select(x, -c('</span>area_ha<span class="st">'))`</span></span>
+<span id="cb14-10"><a href="#cb14-10" tabindex="-1"></a><span class="st">Simple feature collection with 3380 features and 8 fields</span></span>
+<span id="cb14-11"><a href="#cb14-11" tabindex="-1"></a><span class="st">Geometry type: POLYGON</span></span>
+<span id="cb14-12"><a href="#cb14-12" tabindex="-1"></a><span class="st">Dimension:     XY</span></span>
+<span id="cb14-13"><a href="#cb14-13" tabindex="-1"></a><span class="st">Bounding box:  xmin: -121.5447 ymin: 36.53208 xmax: -111.0114 ymax: 46.35708</span></span>
+<span id="cb14-14"><a href="#cb14-14" tabindex="-1"></a><span class="st">Geodetic CRS:  WGS 84</span></span>
+<span id="cb14-15"><a href="#cb14-15" tabindex="-1"></a><span class="st"> [38;5;246m# A tibble: 3,380 × 9 [39m</span></span>
+<span id="cb14-16"><a href="#cb14-16" tabindex="-1"></a><span class="st">      ID SeedZone SZName AreaAcres BIO1_R BIO9_m BIO12_mean area_ha</span></span>
+<span id="cb14-17"><a href="#cb14-17" tabindex="-1"></a><span class="st">    [3m [38;5;246m&lt;int&gt; [39m [23m     [3m [38;5;246m&lt;int&gt; [39m [23m   [3m [38;5;246m&lt;int&gt; [39m [23m      [3m [38;5;246m&lt;dbl&gt; [39m [23m   [3m [38;5;246m&lt;dbl&gt; [39m [23m   [3m [38;5;246m&lt;dbl&gt; [39m [23m       [3m [38;5;246m&lt;dbl&gt; [39m [23m    [3m [38;5;246m&lt;dbl&gt; [39m [23m</span></span>
+<span id="cb14-18"><a href="#cb14-18" tabindex="-1"></a><span class="st"> [38;5;250m 1 [39m     1        1      1      [4m4 [24m780. 0.058 [4m4 [24m 0.804       0.179    [4m1 [24m935.</span></span>
+<span id="cb14-19"><a href="#cb14-19" tabindex="-1"></a><span class="st"> [38;5;250m 2 [39m     2        1      1    [4m1 [24m [4m7 [24m [4m6 [24m473. 0.440  0.154       0.420   [4m7 [24m [4m1 [24m416.</span></span>
+<span id="cb14-20"><a href="#cb14-20" tabindex="-1"></a><span class="st"> [38;5;250m 3 [39m     3        1      1      [4m3 [24m298. 0.224  0.893       0.537    [4m1 [24m335.</span></span>
+<span id="cb14-21"><a href="#cb14-21" tabindex="-1"></a><span class="st"> [38;5;250m 4 [39m     4        1      1      [4m1 [24m485. 0.955  0.871       0.253    601.</span></span>
+<span id="cb14-22"><a href="#cb14-22" tabindex="-1"></a><span class="st"> [38;5;250m 5 [39m     5        1      1      [4m1 [24m485. 0.148  0.859       0.430    601.</span></span>
+<span id="cb14-23"><a href="#cb14-23" tabindex="-1"></a><span class="st"> [38;5;250m 6 [39m     6        1      1     [4m4 [24m [4m2 [24m091. 0.351  0.630       0.754   [4m1 [24m [4m7 [24m034.</span></span>
+<span id="cb14-24"><a href="#cb14-24" tabindex="-1"></a><span class="st"> [38;5;250m 7 [39m     7        1      1      [4m1 [24m318. 0.570  0.396       0.356    533.</span></span>
+<span id="cb14-25"><a href="#cb14-25" tabindex="-1"></a><span class="st"> [38;5;250m 8 [39m     8        1      1      [4m1 [24m317. 0.033 [4m4 [24m 0.551       0.936    533.</span></span>
+<span id="cb14-26"><a href="#cb14-26" tabindex="-1"></a><span class="st"> [38;5;250m 9 [39m     9        1      1      [4m6 [24m916. 0.461  0.433       0.634    [4m2 [24m799.</span></span>
+<span id="cb14-27"><a href="#cb14-27" tabindex="-1"></a><span class="st"> [38;5;250m10 [39m    10        1      1      [4m1 [24m484. 0.534  0.077 [4m5 [24m      0.605    600.</span></span>
+<span id="cb14-28"><a href="#cb14-28" tabindex="-1"></a><span class="st"> [38;5;246m# ℹ 3,370 more rows [39m</span></span>
+<span id="cb14-29"><a href="#cb14-29" tabindex="-1"></a><span class="st"> [38;5;246m# ℹ 1 more variable: geometry &lt;POLYGON [°]&gt; [39m</span></span></code></pre></div>
 <p>See that the function can make some modifications to very simple
 abbreviations which we anticipate exist in the wild (range -&gt; R, avg
 -&gt; mean), but we cannot do much with BIO9_m, because we do not know
@@ -638,28 +633,27 @@ ESRI products would be like if they weren’t terrible. If you want to
 download QGIS feel free to do so, it’s available <a href="https://qgis.org/download/" class="external-link">here</a>, but othewise you can just
 read the text and you’ll get an idea of what I mean by seed zone
 names.</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
-<span>  SeedZone <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">12</span>,</span>
-<span>  SZName <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'Arid Valley Bottoms'</span>, <span class="st">'Arid Valleys'</span>,  <span class="st">'Central Valleys'</span>, </span>
-<span>             <span class="st">'Plains'</span>, <span class="st">'North/Eastern Plains'</span>, <span class="st">'Northern Alluvial Fans/Slopes'</span>, </span>
-<span>             <span class="st">'Sagebrush Steppe (lower)'</span>, <span class="st">'Sagebrush Steppe (mid)'</span>, <span class="st">'Sagebrush Steppe (upper)'</span>,</span>
-<span>             <span class="st">'Mountain (lower)'</span>, <span class="st">'Moutain (mid)'</span>, <span class="st">'Mountain (high)'</span></span>
-<span>             <span class="op">)</span></span>
-<span><span class="op">)</span></span>
-<span><span class="co">#&gt;    SeedZone                        SZName</span></span>
-<span><span class="co">#&gt; 1         1           Arid Valley Bottoms</span></span>
-<span><span class="co">#&gt; 2         2                  Arid Valleys</span></span>
-<span><span class="co">#&gt; 3         3               Central Valleys</span></span>
-<span><span class="co">#&gt; 4         4                        Plains</span></span>
-<span><span class="co">#&gt; 5         5          North/Eastern Plains</span></span>
-<span><span class="co">#&gt; 6         6 Northern Alluvial Fans/Slopes</span></span>
-<span><span class="co">#&gt; 7         7      Sagebrush Steppe (lower)</span></span>
-<span><span class="co">#&gt; 8         8        Sagebrush Steppe (mid)</span></span>
-<span><span class="co">#&gt; 9         9      Sagebrush Steppe (upper)</span></span>
-<span><span class="co">#&gt; 10       10              Mountain (lower)</span></span>
-<span><span class="co">#&gt; 11       11                 Moutain (mid)</span></span>
-<span><span class="co">#&gt; 12       12               Mountain (high)</span></span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
+<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a>  <span class="at">SeedZone =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>,</span>
+<span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a>  <span class="at">SZName =</span> <span class="fu">c</span>(<span class="st">'Arid Valley Bottoms'</span>, <span class="st">'Arid Valleys'</span>,  <span class="st">'Central Valleys'</span>, </span>
+<span id="cb20-4"><a href="#cb20-4" tabindex="-1"></a>             <span class="st">'Plains'</span>, <span class="st">'North/Eastern Plains'</span>, <span class="st">'Northern Alluvial Fans/Slopes'</span>, </span>
+<span id="cb20-5"><a href="#cb20-5" tabindex="-1"></a>             <span class="st">'Sagebrush Steppe (lower)'</span>, <span class="st">'Sagebrush Steppe (mid)'</span>, <span class="st">'Sagebrush Steppe (upper)'</span>,</span>
+<span id="cb20-6"><a href="#cb20-6" tabindex="-1"></a>             <span class="st">'Mountain (lower)'</span>, <span class="st">'Moutain (mid)'</span>, <span class="st">'Mountain (high)'</span></span>
+<span id="cb20-7"><a href="#cb20-7" tabindex="-1"></a>             )</span>
+<span id="cb20-8"><a href="#cb20-8" tabindex="-1"></a>)</span>
+<span id="cb20-9"><a href="#cb20-9" tabindex="-1"></a>   SeedZone                        SZName</span>
+<span id="cb20-10"><a href="#cb20-10" tabindex="-1"></a><span class="dv">1</span>         <span class="dv">1</span>           Arid Valley Bottoms</span>
+<span id="cb20-11"><a href="#cb20-11" tabindex="-1"></a><span class="dv">2</span>         <span class="dv">2</span>                  Arid Valleys</span>
+<span id="cb20-12"><a href="#cb20-12" tabindex="-1"></a><span class="dv">3</span>         <span class="dv">3</span>               Central Valleys</span>
+<span id="cb20-13"><a href="#cb20-13" tabindex="-1"></a><span class="dv">4</span>         <span class="dv">4</span>                        Plains</span>
+<span id="cb20-14"><a href="#cb20-14" tabindex="-1"></a><span class="dv">5</span>         <span class="dv">5</span>          North<span class="sc">/</span>Eastern Plains</span>
+<span id="cb20-15"><a href="#cb20-15" tabindex="-1"></a><span class="dv">6</span>         <span class="dv">6</span> Northern Alluvial Fans<span class="sc">/</span>Slopes</span>
+<span id="cb20-16"><a href="#cb20-16" tabindex="-1"></a><span class="dv">7</span>         <span class="dv">7</span>      Sagebrush <span class="fu">Steppe</span> (lower)</span>
+<span id="cb20-17"><a href="#cb20-17" tabindex="-1"></a><span class="dv">8</span>         <span class="dv">8</span>        Sagebrush <span class="fu">Steppe</span> (mid)</span>
+<span id="cb20-18"><a href="#cb20-18" tabindex="-1"></a><span class="dv">9</span>         <span class="dv">9</span>      Sagebrush <span class="fu">Steppe</span> (upper)</span>
+<span id="cb20-19"><a href="#cb20-19" tabindex="-1"></a><span class="dv">10</span>       <span class="dv">10</span>              <span class="fu">Mountain</span> (lower)</span>
+<span id="cb20-20"><a href="#cb20-20" tabindex="-1"></a><span class="dv">11</span>       <span class="dv">11</span>                 <span class="fu">Moutain</span> (mid)</span>
+<span id="cb20-21"><a href="#cb20-21" tabindex="-1"></a><span class="dv">12</span>       <span class="dv">12</span>               <span class="fu">Mountain</span> (high)</span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
