@@ -10,9 +10,12 @@ status](https://github.com/R-CMD-check/workflows/sagesteppe/eSTZwritR/badge.svg)
 
 <!-- badges: end -->
 
-# eSTZwritR (‘easy rider’) <img src="man/figures/logo.png" align="right" height="138" />
+# eSTZwritR (‘easy rider’)
 
-# Description
+<img src="man/figures/logo.png"
+     align="right"
+     height="138"
+     alt="eSTWwritR package hexagonal logo"/>
 
 An R package for applying standardized file naming, directory structure,
 mapping, for empirical Seed Transfer Zones (eSTZs) in the United States.
@@ -30,8 +33,10 @@ eSTZwritR is available only on github, with no plans for submission to
 CRAN. It can be installed using `remotes` or `devtools` (or `pak` etc.)
 like so:
 
-    install.packages('devtools')
-    devtools::install_github('sagesteppe/eSTZwritR')
+``` r
+install.packages('devtools')
+devtools::install_github('sagesteppe/eSTZwritR')
+```
 
 It relies on `sf` which on occasion can be difficult to install. If you
 have install problems (read them…), but `sf` is a likely culprit as it
@@ -60,8 +65,6 @@ sharing conventions.
 A paper describing the impetus behind the creation of eSTZwritR, and
 broadly outlining it’s functionality is available
 [here](https://github.com/sagesteppe/EmpiricalSeedZones/blob/main/manuscript/Empirical-seed-transfer-zones-require-conventions-for-data-sharing-to-increase-their-utilization-by-practitioners.pdf).
-Note that as of April 1 2025, this paper is in revision for publication
-in *Restoration Ecology*.
 
 A poster on the project for the National Native Seed Conference 2025 is
 below. It contains all of the proposed conventions, it is also located
@@ -72,7 +75,9 @@ resolution copy and zoom in on it.
 eSTZwritR conventions for documenting empirical seed transfer zones,
 including file naming standards, directory structure, mapping
 guidelines, and field naming conventions with visual examples and
-workflow diagrams](./reference/figures/Poster4NNSC2025.png)
+workflow diagrams](./man/figures/Poster4NNSC2025.png)
+
+<br>
 
 A vignette showcasing the usage of the package is available
 [here](https://sagesteppe.github.io/eSTZwritR/articles/eSTZwritR.html).

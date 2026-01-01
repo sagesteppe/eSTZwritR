@@ -20,7 +20,11 @@ cat(
 
 <!-- badges: end -->
 
-# eSTZwritR ('easy rider') <img src="man/figures/logo.png" align="right" height="138" />
+# eSTZwritR ('easy rider')
+<img src="man/figures/logo.png"
+     align="right"
+     height="138"
+     alt="eSTWwritR package hexagonal logo"/>
 
 An R package for applying standardized file naming, directory structure, mapping, for empirical Seed Transfer Zones (eSTZs) in the United States. 
 
@@ -31,7 +35,7 @@ The goal of this package is to standardize eSTZ documentation to streamline the 
 eSTZwritR is available only on github, with no plans for submission to CRAN. 
 It can be installed using `remotes` or `devtools` (or `pak` etc.) like so:
 
-```
+```r
 install.packages('devtools')
 devtools::install_github('sagesteppe/eSTZwritR')
 ```
@@ -62,7 +66,7 @@ A paper describing the impetus behind the creation of eSTZwritR, and broadly out
 A poster on the project for the National Native Seed Conference 2025 is below. 
 It contains all of the proposed conventions, it is also located in the ./man/figures subdirectory, where you can download a high resolution copy and zoom in on it. 
 
-![Conference poster for National Native Seed Conference 2025 presenting eSTZwritR conventions for documenting empirical seed transfer zones, including file naming standards, directory structure, mapping guidelines, and field naming conventions with visual examples and workflow diagrams](./reference/figures/Poster4NNSC2025.png)
+![Conference poster for National Native Seed Conference 2025 presenting eSTZwritR conventions for documenting empirical seed transfer zones, including file naming standards, directory structure, mapping guidelines, and field naming conventions with visual examples and workflow diagrams](./man/figures/Poster4NNSC2025.png)
 
 <br>
 
@@ -84,6 +88,7 @@ A bibtex entry for latex users is:
 }
 
 Or use R to display citations:
+
 ```r
 citation('eSTZwritR')
 ```
