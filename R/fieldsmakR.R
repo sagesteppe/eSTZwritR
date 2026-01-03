@@ -120,5 +120,5 @@ fieldsmakR <- function(x, SeedZone, ID, SZName, AreaAcres){
   x <- dplyr::select(x, dplyr::any_of(cols)) |>
     dplyr::relocate(dplyr::any_of(cols))
 
-  return(x)
+  x
 }

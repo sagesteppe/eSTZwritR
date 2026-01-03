@@ -181,12 +181,10 @@ orderZones <- function(x, SeedZone = SeedZone, SZName = SZName,  n = 2500, rasta
     rcl[[dplyr::quo_name(SZName)]] <- rcl[[dplyr::quo_name(SeedZone)]]
   }
 
-  return(
-    list(
-      Reclassified = rcl,
-      Summary = ZoneOrder,
-      PlotKruskal = p,
-      PlotDunns = p1
-    )
+  list(
+    Reclassified = rcl,
+    Summary = ZoneOrder,
+    PlotKruskal = p,
+    PlotDunns = p1
   )
 }

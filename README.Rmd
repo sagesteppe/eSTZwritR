@@ -13,7 +13,7 @@ description: "R package for applying standardized file naming, directory structu
 cat(
 	badger::badge_codefactor('sagesteppe/eSTZwritR'), "\n",
 	badger::badge_repostatus("Active"), "\n",
-	badger::badge_doi("DOI: 10.5281/zenodo.14641975", "yellow"), "\n",
+	badger::badge_doi("DOI: 10.5281/zenodo.14641975", "orange"), "\n",
   "[![R-CMD-check](https://github.com/sagesteppe/eSTZwritR/workflows/R-CMD-check/badge.svg)](https://github.com/sagesteppe/eSTZwritR/actions/workflows/R-CMD-check.yaml)", "\n"
 )
 ```

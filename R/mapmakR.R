@@ -248,7 +248,7 @@ mapmakR <- function(x, sci_name, save = TRUE, outpath, ecoregions = TRUE, cities
     message('File saved to: ', fname)
   }
 
-  return(p) # also return the plot to user.
+  p # also return the plot to user.
 
 }
 
