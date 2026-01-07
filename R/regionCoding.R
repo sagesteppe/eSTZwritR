@@ -5,6 +5,9 @@
 #' @param x an empirical STZ as vector data.
 #' @param n a sample size for determining which interior regions cover the most area of the stz
 #' defaults to 1000, sizes above a couple thousand seem gratuitous.
+#' @param regions an sf object of regions to use the names of. 
+#' If not provided the function will read in a default set. 
+#' Note that the sf object must have a column named 'REG_ABB' containing the region abbreviations.
 #' @examples
 #' acth7 <- sf::st_read(file.path(
 #'   system.file(package="eSTZwritR"), "extdata", 'ACTH7.gpkg')
@@ -20,17 +23,20 @@
 #' interior regions. For areas with near ties we recommend increasing the sample size argument, `n` which is paseed to
 #'  to st:sample.
 #' @export
-regionCoding <- function(x, n){
+regionCoding <- function(x, n, regions){
 
   if(missing(n)){n <- 1000}
 
-  regions <- sf::st_read(
-    file.path(
-      system.file(package="eSTZwritR"),  "extdata", 'regions.gpkg'
-    ), quiet = TRUE
-  )
+  if(missing(regions)){
+    regions <- sf::st_read(
+      file.path(
+        system.file(package="eSTZwritR"),  "extdata", 'regions.gpkg'
+      ), quiet = TRUE
+    )
+  }
 
   sf::st_agr(regions) <- 'constant';  sf::st_agr(x) <- 'constant'
+
   pts <- sf::st_sample(x, size = n, type = 'regular') |>
     sf::st_as_sf() |>
     sf::st_set_crs(sf::st_crs(x)) |>
