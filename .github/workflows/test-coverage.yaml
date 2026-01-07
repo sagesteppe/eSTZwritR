@@ -37,6 +37,8 @@ jobs:
       run: |
         install.packages('remotes')
         remotes::install_deps(dependencies = TRUE)
+        install.packages('covr')
+      shell: Rscript {0}
 
     # Optional: cache extdata or other heavy files (if large)
     - name: Cache extdata
@@ -52,5 +54,7 @@ jobs:
       run: R CMD check --no-manual --as-cran .
 
     - name: Upload coverage to Codecov
-       run: |
+      env:
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      run: |
         Rscript -e 'covr::codecov()'
