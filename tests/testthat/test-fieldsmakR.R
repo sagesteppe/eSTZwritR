@@ -28,8 +28,7 @@ test_that("fieldsmakR creates required fields and orders them correctly", {
 test_that("fieldsmakR standardizes BIO column names correctly", {
 
   # Add contrived BIO columns to test renaming
-  ob <- acth7 %>%
-    mutate(
+  ob <- mutate(acth7, 
       bio1_sd = runif(nrow(acth7), 5, 7),
       bio8_mean = runif(nrow(acth7), 10, 15)
     )
@@ -42,8 +41,7 @@ test_that("fieldsmakR standardizes BIO column names correctly", {
 
 test_that("fieldsmakR emits message for unknown columns", {
 
-  ob <- acth7 %>%
-    mutate(unknown_col = 1:nrow(acth7))
+  ob <- mutate(acth7, unknown_col = seq_len(nrow(acth7)))
 
   expect_message(
     fieldsmakR(ob, SeedZone = "GRIDCODE", SZName = "zone"),
