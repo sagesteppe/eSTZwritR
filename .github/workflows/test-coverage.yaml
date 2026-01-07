@@ -35,10 +35,8 @@ jobs:
     # Install dependencies
     - name: Install dependencies
       run: |
-        install.packages('remotes')
-        remotes::install_deps(dependencies = TRUE)
-        install.packages('covr')
-      shell: Rscript {0}
+        Rscript -e "install.packages(c('remotes', 'covr'))"
+        Rscript -e "remotes::install_deps(dependencies = TRUE)"
 
     # Optional: cache extdata or other heavy files (if large)
     - name: Cache extdata
