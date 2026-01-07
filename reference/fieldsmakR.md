@@ -18,24 +18,24 @@ fieldsmakR(x, SeedZone, ID, SZName, AreaAcres)
 
 - SeedZone:
 
-  a string containing the numeric SeedZone code, if not supplied
-  function will fail.
+  Character. Column name containing the numeric SeedZone code, if not
+  supplied function will fail.
 
 - ID:
 
-  a string specifying this columns names, If not supplied will create
-  one.
+  Character. Columm name specifying this columns names, If not supplied
+  will create one.
 
 - SZName:
 
-  a string containing a name for the SeedZone column to be used in
-  conversation, such as 'Productivity high, Phenology late' or 'SW
-  midmontane', if not supplied will copy 'SeedZone' column values
+  Character. Column name containing a name for the SeedZone column to be
+  used in conversation, such as 'Productivity high, Phenology late' or
+  'SW midmontane', if not supplied will copy 'SeedZone' column values
 
 - AreaAcres:
 
-  a string containing the name for the column containing an area
-  measurement, if not supplied this value will be calculated using
+  Chacter. Column name containing the name for the column containing an
+  area measurement, if not supplied this value will be calculated using
   epsg:5070
 
 ## Examples

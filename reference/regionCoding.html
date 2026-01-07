@@ -101,7 +101,7 @@ of an empirical seed transfer zone and should be used for naming the file.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">regionCoding</span><span class="op">(</span><span class="va">x</span>, <span class="va">n</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">regionCoding</span><span class="op">(</span><span class="va">x</span>, <span class="va">n</span>, <span class="va">regions</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -115,6 +115,12 @@ of an empirical seed transfer zone and should be used for naming the file.</p>
 <dt id="arg-n">n<a class="anchor" aria-label="anchor" href="#arg-n"></a></dt>
 <dd><p>a sample size for determining which interior regions cover the most area of the stz
 defaults to 1000, sizes above a couple thousand seem gratuitous.</p></dd>
+
+
+<dt id="arg-regions">regions<a class="anchor" aria-label="anchor" href="#arg-regions"></a></dt>
+<dd><p>an sf object of regions to use the names of.
+If not provided the function will read in a default set.
+Note that the sf object must have a column named 'REG_ABB' containing the region abbreviations.</p></dd>
 
 </dl></div>
     <div class="section level2">

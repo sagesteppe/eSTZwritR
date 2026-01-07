@@ -7,7 +7,7 @@ naming the file.
 ## Usage
 
 ``` r
-regionCoding(x, n)
+regionCoding(x, n, regions)
 ```
 
 ## Arguments
@@ -21,6 +21,12 @@ regionCoding(x, n)
   a sample size for determining which interior regions cover the most
   area of the stz defaults to 1000, sizes above a couple thousand seem
   gratuitous.
+
+- regions:
+
+  an sf object of regions to use the names of. If not provided the
+  function will read in a default set. Note that the sf object must have
+  a column named 'REG_ABB' containing the region abbreviations.
 
 ## Value
 
