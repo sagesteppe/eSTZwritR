@@ -50,6 +50,7 @@
 mapmakR <- function(x, sci_name, save = TRUE, outpath, ecoregions = TRUE, cities = TRUE, city_reduce = 'Distance', city_reduce_no = 20, 
   landscape = TRUE, caption, filetype = 'pdf', buf_prcnt = 0.025, SZName = SZName){
 
+  if(missing(caption))((stop('Caption Not supplied. It is recommended to include a caption with data source information.')))
   if(missing(sci_name))(stop('sci_name Name Not supplied.'))
   if(missing(outpath)){outpath = getwd()}
   

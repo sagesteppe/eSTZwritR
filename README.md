@@ -1,12 +1,11 @@
-<!-- README.md is generated from README.Rmd. Please edit that file -->
+<!-- badges: start -->
 
 [![CodeFactor](https://www.codefactor.io/repository/github/sagesteppe/eSTZwritR/badge)](https://www.codefactor.io/repository/github/sagesteppe/eSTZwritR)
 [![Project Status: Active - The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![](https://img.shields.io/badge/doi-DOI:%2010.5281/zenodo.14641975%20-yellow.svg)](https://doi.org/DOI:%2010.5281/zenodo.14641975)
-[![R build
-status](https://github.com/R-CMD-check/workflows/sagesteppe/eSTZwritR/badge.svg)](https://github.com/R-CMD-check/actions)
+[![](https://img.shields.io/badge/doi-DOI:%2010.5281/zenodo.14641975-orange.svg)](https://doi.org/DOI:%2010.5281/zenodo.14641975)
+[![R-CMD-check](https://github.com/sagesteppe/eSTZwritR/workflows/R-CMD-check/badge.svg)](https://github.com/sagesteppe/eSTZwritR/actions/workflows/R-CMD-check.yaml)
 
 <!-- badges: end -->
 
