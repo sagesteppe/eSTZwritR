@@ -1,4 +1,7 @@
-# eSTZwritR [\<img src=“man/figures/logo.png” align=“right” height=“138”,alt=“eSTZwritR package hexagonal logo” /\>](https://sagesteppe.github.io/eSTZwritR/)
+# eSTZwritR
+
+[![eSTZwritR package hexagonal
+logo](reference/figures/logo.png)](https://sagesteppe.github.io/eSTZwritR/)
 
 An R package for applying standardized file naming, directory structure,
 mapping, for empirical Seed Transfer Zones (eSTZs) in the United States.
