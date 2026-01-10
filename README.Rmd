@@ -15,7 +15,7 @@ cat(
 	badger::badge_repostatus("Active"), "\n",
 	badger::badge_doi("DOI: 10.5281/zenodo.14641975", "orange"), "\n",
 	badger::badge_codecov("sagesteppe/eSTZwritR", branch = "main"), "\n",
-  "[![R-CMD-check](https://github.com/sagesteppe/eSTZwritR/workflows/R-CMD-check/badge.svg)](https://github.com/sagesteppe/eSTZwritR/actions/workflows/R-CMD-check.yaml)", "\n"
+  badger::badge_github_actions('sagesteppe/eSTZwritR'), '\n',
 )
 ```
 
