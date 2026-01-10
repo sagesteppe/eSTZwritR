@@ -11,11 +11,11 @@ description: "R package for applying standardized file naming, directory structu
 
 ```{r, echo = FALSE, results='asis'}
 cat(
+  badger::badge_github_actions('sagesteppe/eSTZwritR'), '\n',
 	badger::badge_codefactor('sagesteppe/eSTZwritR'), "\n",
 	badger::badge_repostatus("Active"), "\n",
-	badger::badge_doi("DOI: 10.5281/zenodo.14641975", "orange"), "\n",
-	badger::badge_codecov("sagesteppe/eSTZwritR", branch = "main"), "\n",
-  badger::badge_github_actions('sagesteppe/eSTZwritR'), '\n',
+	badger::badge_doi("10.5281/zenodo.14641975", "orange"), "\n",
+	badger::badge_codecov("sagesteppe/eSTZwritR", branch = "main"), "\n"
 )
 ```
 
