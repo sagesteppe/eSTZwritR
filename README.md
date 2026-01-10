@@ -1,26 +1,56 @@
+<!-- Open Graph / Facebook / X -->
+
+<meta property="og:type" content="website">
+
+<meta property="og:url" content="https://sagesteppe.github.io/eSTZwritR/">
+
+<meta property="og:title" content="eSTZwritR: Documentation for Empirical STZs">
+
+<meta property="og:description" content="R package for applying standardized file naming, directory structure, and mapping conventions to empirical Seed Transfer Zones (eSTZs) in the United States">
+
+<meta property="og:image" content="https://sagesteppe.github.io/eSTZwritR/man/figures/social-preview.png">
+
+<meta property="og:image:width" content="1200">
+
+<meta property="og:image:height" content="630">
+
+<!-- Twitter -->
+
+<meta name="twitter:card" content="summary_large_image">
+
+<meta name="twitter:url" content="https://sagesteppe.github.io/eSTZwritR/">
+
+<meta name="twitter:title" content="eSTZwritR: Documentation for Empirical STZs">
+
+<meta name="twitter:description" content="R package for applying standardized file naming, directory structure, and mapping conventions to empirical Seed Transfer Zones (eSTZs) in the United States">
+
+<meta name="twitter:image" content="https://sagesteppe.github.io/eSTZwritR/man/figures/social-preview.png">
+
+<!-- SEO Meta Tags -->
+
+<meta name="description" content="R package for applying standardized file naming, directory structure, and mapping conventions to empirical Seed Transfer Zones (eSTZs) in the United Stat">
+
+# eSTZwritR <a href="https://sagesteppe.github.io/eSTZwritR/">\<img src=“man/figures/logo.png” align=“right” height=“138”,alt=“eSTZwritR package hexagonal logo” /\></a>
+
 <!-- badges: start -->
 
+[![R build
+status](https://github.com/sagesteppe/eSTZwritR/workflows/R-CMD-check/badge.svg)](https://github.com/sagesteppe/eSTZwritR/actions)
 [![CodeFactor](https://www.codefactor.io/repository/github/sagesteppe/eSTZwritR/badge)](https://www.codefactor.io/repository/github/sagesteppe/eSTZwritR)
 [![Project Status: Active - The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![](https://img.shields.io/badge/doi-DOI:%2010.5281/zenodo.14641975-orange.svg)](https://doi.org/DOI:%2010.5281/zenodo.14641975)
+[![](https://img.shields.io/badge/doi-10.5281/zenodo.14641975-orange.svg)](https://doi.org/10.5281/zenodo.14641975)
 [![](https://codecov.io/gh/sagesteppe/eSTZwritR/branch/main/graph/badge.svg)](https://app.codecov.io/gh/sagesteppe/eSTZwritR)
-[![R-CMD-check](https://github.com/sagesteppe/eSTZwritR/workflows/R-CMD-check/badge.svg)](https://github.com/sagesteppe/eSTZwritR/actions/workflows/R-CMD-check.yaml)
 
 <!-- badges: end -->
-
-<img src="man/figures/logo.png"
-     align="right"
-     height="138"
-     alt="eSTWwritR package hexagonal logo"/>
 
 An R package for applying standardized file naming, directory structure,
 mapping, for empirical Seed Transfer Zones (eSTZs) in the United States.
 
 ## Overview
 
-The goal of this R package is to standardize eSTZ reporting to
+The goal of this package is to standardize eSTZ documentation to
 streamline the sharing of these products among natural resource
 professionals, and for researchers to be able to collectively utilize
 the products.
@@ -36,7 +66,7 @@ install.packages('devtools')
 devtools::install_github('sagesteppe/eSTZwritR')
 ```
 
-eSTZwritR relies on `sf` which on occasion can be difficult to install. If you
+It relies on `sf` which on occasion can be difficult to install. If you
 have install problems (read them…), but `sf` is a likely culprit as it
 requires several external binaries and libraries.
 
@@ -64,6 +94,9 @@ A paper describing the impetus behind the creation of eSTZwritR, and
 broadly outlining it’s functionality is available
 [here](https://github.com/sagesteppe/EmpiricalSeedZones/blob/main/manuscript/Empirical-seed-transfer-zones-require-conventions-for-data-sharing-to-increase-their-utilization-by-practitioners.pdf).
 
+This is being revised for a dual-package submission to *Applications in
+Plant Science*
+
 A poster on the project for the National Native Seed Conference 2025 is
 below. It contains all of the proposed conventions, it is also located
 in the ./man/figures subdirectory, where you can download a high
@@ -83,6 +116,17 @@ This vignette includes the images in the ‘Suggestions’ portion of the
 above poster in the relevant areas so you can get a better idea of
 specific suggestions (most of which are not included in the text
 portions of the manuscript.)
+
+## Related
+
+Researchers engaged in collecting herbarium samples to document the
+material they used in developing seed transfer zones may benefit from
+using [BarnebyLives](https://sagesteppe.github.io/BarnebyLives/), an R
+packge to help create herbarium label data. Curators running native seed
+development projects are sure to find
+[safeHavens](https://sagesteppe.github.io/safeHavens/) useful.
+safeHavens is an R packge to help create sampling schema for germplasm
+collections.
 
 ## Citation
 
