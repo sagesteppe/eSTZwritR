@@ -14,6 +14,22 @@ template:
       <!-- Google Search Console Verification -->
       <meta name="google-site-verification" content="viUZcwXk_Fi5hsfdB7m6GgrFgGMJ-xVe1BcMTezGJII" />
       
+      <!-- Open Graph / Facebook / X -->
+      <meta property="og:type" content="website">
+      <meta property="og:url" content="https://sagesteppe.github.io/eSTZwritR/">
+      <meta property="og:title" content="eSTZwritR: Documentation for Empirical Seed Transfer Zones">
+      <meta property="og:description" content="R package for applying standardized file naming, directory structure, and mapping conventions to empirical STZs in the US.">
+      <meta property="og:image" content="https://sagesteppe.github.io/eSTZwritR/reference/figures/social-preview.png">
+      <meta property="og:image:width" content="1200">
+      <meta property="og:image:height" content="630">
+      
+      <!-- Twitter -->
+      <meta name="twitter:card" content="summary_large_image">
+      <meta name="twitter:url" content="https://sagesteppe.github.io/eSTZwritR/">
+      <meta name="twitter:title" content="eSTZwritR: Empirical Seed Transfer Zones">
+      <meta name="twitter:description" content="Standardized conventions for eSTZ data sharing among natural resource professionals">
+      <meta name="twitter:image" content="https://sagesteppe.github.
+      
       <!-- JSON-LD Structured Data for AI Crawlers -->
       <script type="application/ld+json">
       {
