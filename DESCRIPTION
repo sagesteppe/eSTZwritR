@@ -3,7 +3,7 @@ Title: A simple package for documenting and sharing empirical Seed Transfer Zone
 Version: 0.1.1
 Authors@R: c(
     person("Brianna", "Wieferich", role = c("aut")),
-    person("Reed", "Benkendorf",  email = "rbenkendorf@chicagobotanic.org", role = c("aut", "cre"),
+    person("Reed", "Benkendorf",  email = "reedbenkendorf2021@u.northwestern.edu", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-9178-3087"))
            )
 Description: The goal of this package is to standardize eSTZ documentation to accelerate the sharing of these resources among natural resource professionals.
