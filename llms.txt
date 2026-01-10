@@ -1,11 +1,11 @@
-![eSTWwritR package hexagonal logo](reference/figures/logo.png)
+# eSTZwritR [\<img src=“man/figures/logo.png” align=“right” height=“138”,alt=“eSTZwritR package hexagonal logo” /\>](https://sagesteppe.github.io/eSTZwritR/)
 
 An R package for applying standardized file naming, directory structure,
 mapping, for empirical Seed Transfer Zones (eSTZs) in the United States.
 
 ## Overview
 
-The goal of this R package is to standardize eSTZ reporting to
+The goal of this package is to standardize eSTZ documentation to
 streamline the sharing of these products among natural resource
 professionals, and for researchers to be able to collectively utilize
 the products.
@@ -21,9 +21,9 @@ install.packages('devtools')
 devtools::install_github('sagesteppe/eSTZwritR')
 ```
 
-eSTZwritR relies on `sf` which on occasion can be difficult to install.
-If you have install problems (read them…), but `sf` is a likely culprit
-as it requires several external binaries and libraries.
+It relies on `sf` which on occasion can be difficult to install. If you
+have install problems (read them…), but `sf` is a likely culprit as it
+requires several external binaries and libraries.
 
 Once installed it can be attached for use like any other package from
 github or CRAN
@@ -51,6 +51,9 @@ A paper describing the impetus behind the creation of eSTZwritR, and
 broadly outlining it’s functionality is available
 [here](https://github.com/sagesteppe/EmpiricalSeedZones/blob/main/manuscript/Empirical-seed-transfer-zones-require-conventions-for-data-sharing-to-increase-their-utilization-by-practitioners.pdf).
 
+This is being revised for a dual-package submission to *Applications in
+Plant Science*
+
 A poster on the project for the National Native Seed Conference 2025 is
 below. It contains all of the proposed conventions, it is also located
 in the ./man/figures subdirectory, where you can download a high
@@ -76,6 +79,17 @@ This vignette includes the images in the ‘Suggestions’ portion of the
 above poster in the relevant areas so you can get a better idea of
 specific suggestions (most of which are not included in the text
 portions of the manuscript.)
+
+## Related
+
+Researchers engaged in collecting herbarium samples to document the
+material they used in developing seed transfer zones may benefit from
+using [BarnebyLives](https://sagesteppe.github.io/BarnebyLives/), an R
+packge to help create herbarium label data. Curators running native seed
+development projects are sure to find
+[safeHavens](https://sagesteppe.github.io/safeHavens/) useful.
+safeHavens is an R packge to help create sampling schema for germplasm
+collections.
 
 ## Citation
 
