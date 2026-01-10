@@ -10,7 +10,8 @@ description: "R package for applying standardized file naming, directory structu
 <!-- SEO Meta Tags -->
 <meta name="description" content="R package for applying standardized file naming, directory structure, and mapping conventions to empirical Seed Transfer Zones (eSTZs) in the United Stat">
 
-# eSTZwritR <a href="https://sagesteppe.github.io/eSTZwritR/"><img src="man/figures/logo.png" align="right" height="138" alt="eSTZwritR package hexagonal logo" /></a>
+# eSTZwritR  
+<a href="https://sagesteppe.github.io/eSTZwritR/"><img src="man/figures/logo.png" align="right" height="138" alt="eSTZwritR package hexagonal logo" /></a>
 
 <!-- badges: start -->
 

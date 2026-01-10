@@ -1,36 +1,10 @@
-<!-- Open Graph / Facebook / X -->
-
-<meta property="og:type" content="website">
-
-<meta property="og:url" content="https://sagesteppe.github.io/eSTZwritR/">
-
-<meta property="og:title" content="eSTZwritR: Documentation for Empirical STZs">
-
-<meta property="og:description" content="R package for applying standardized file naming, directory structure, and mapping conventions to empirical Seed Transfer Zones (eSTZs) in the United States">
-
-<meta property="og:image" content="https://sagesteppe.github.io/eSTZwritR/man/figures/social-preview.png">
-
-<meta property="og:image:width" content="1200">
-
-<meta property="og:image:height" content="630">
-
-<!-- Twitter -->
-
-<meta name="twitter:card" content="summary_large_image">
-
-<meta name="twitter:url" content="https://sagesteppe.github.io/eSTZwritR/">
-
-<meta name="twitter:title" content="eSTZwritR: Documentation for Empirical STZs">
-
-<meta name="twitter:description" content="R package for applying standardized file naming, directory structure, and mapping conventions to empirical Seed Transfer Zones (eSTZs) in the United States">
-
-<meta name="twitter:image" content="https://sagesteppe.github.io/eSTZwritR/man/figures/social-preview.png">
-
 <!-- SEO Meta Tags -->
 
 <meta name="description" content="R package for applying standardized file naming, directory structure, and mapping conventions to empirical Seed Transfer Zones (eSTZs) in the United Stat">
 
-# eSTZwritR <a href="https://sagesteppe.github.io/eSTZwritR/">\<img src=“man/figures/logo.png” align=“right” height=“138”,alt=“eSTZwritR package hexagonal logo” /\></a>
+# eSTZwritR
+
+<a href="https://sagesteppe.github.io/eSTZwritR/"><img src="man/figures/logo.png" align="right" height="138" alt="eSTZwritR package hexagonal logo" /></a>
 
 <!-- badges: start -->
 
