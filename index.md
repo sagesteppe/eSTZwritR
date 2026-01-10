@@ -1,5 +1,3 @@
-# eSTZwritR (‘easy rider’)
-
 ![eSTWwritR package hexagonal logo](reference/figures/logo.png)
 
 An R package for applying standardized file naming, directory structure,
@@ -7,8 +5,8 @@ mapping, for empirical Seed Transfer Zones (eSTZs) in the United States.
 
 ## Overview
 
-The goal of this package is to standardize eSTZ documentation to
-streamline the sharing of these resources among natural resource
+The goal of this R package is to standardize eSTZ reporting to
+streamline the sharing of these products among natural resource
 professionals, and for researchers to be able to collectively utilize
 the products.
 
@@ -23,9 +21,9 @@ install.packages('devtools')
 devtools::install_github('sagesteppe/eSTZwritR')
 ```
 
-It relies on `sf` which on occasion can be difficult to install. If you
-have install problems (read them…), but `sf` is a likely culprit as it
-requires several external binaries and libraries.
+eSTZwritR relies on `sf` which on occasion can be difficult to install.
+If you have install problems (read them…), but `sf` is a likely culprit
+as it requires several external binaries and libraries.
 
 Once installed it can be attached for use like any other package from
 github or CRAN
