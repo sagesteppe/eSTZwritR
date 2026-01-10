@@ -51,8 +51,14 @@ jobs:
     - name: Run tests
       run: R CMD check --no-manual --as-cran .
 
-    - name: Upload coverage to Codecov
-      env:
-        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-      run: |
-        Rscript -e 'covr::codecov()'
+    ## upload results to codecov
+    #- name: Upload coverage to Codecov
+    #  env:
+    #    CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+    #  run: |
+    #    Rscript -e 'covr::codecov()'
+
+    - name: Upload coverage reports to Codecov
+      uses: codecov/codecov-action@v5
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
