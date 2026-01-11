@@ -69,7 +69,7 @@ mapmakR <- function(x, sci_name, save = TRUE, outpath, ecoregions = TRUE, cities
     cities.sf <- sf::st_crop(cities.sf, x)
   }
 
-  if(nrow(cities.sf) > city_reduce_no){
+  if(cities && nrow(cities.sf) > city_reduce_no){
     if(city_reduce=='population'){
       cities.sf <- dplyr::slice_max(cities.sf, order_by = Population, n = city_reduce_no)
     } else if(city_reduce=='Distance'){
