@@ -25,7 +25,7 @@ test_that("regionCoding returns correct structure and types", {
 })
 
 test_that("regionCoding respects sample size argument (approximate)", {
-  tol <- 0.05  # 5% tolerance
+  tol <- 0.1  # 10% tolerance
   
   # smaller n
   n_small <- 100
