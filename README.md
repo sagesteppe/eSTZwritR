@@ -8,6 +8,8 @@
 
 <!-- badges: start -->
 
+[![CRAN
+checks](https://badges.cranchecks.info/summary/badger.svg)](https://cran.r-project.org/web/checks/check_results_badger.html)
 [![R build
 status](https://github.com/sagesteppe/eSTZwritR/workflows/R-CMD-check/badge.svg)](https://github.com/sagesteppe/eSTZwritR/actions)
 [![CodeFactor](https://www.codefactor.io/repository/github/sagesteppe/eSTZwritR/badge)](https://www.codefactor.io/repository/github/sagesteppe/eSTZwritR)
@@ -54,13 +56,13 @@ github or CRAN
 eSTZwritR requires only five user-facing functions to implement all data
 sharing conventions.
 
-|    Function    |              Purpose              |               Output               |
-| :------------: | :-------------------------------: | :--------------------------------: |
-| `regionCoding` |       determine DOI Regions       |  Character string for file naming  |
-|   `dirmakR`    |         create Directory          |      Directory, spatial data       |
-|   `mapmakR`    |            create Map             | PDF or png map (for publications)  |
-|  `fieldsmakR`  | ensure fields (columns) are named |    sf object to local location     |
-|  `orderZones`  |    ordering seed zone numbers     | updated vector data, plot, summary |
+| Function | Purpose | Output |
+|:--:|:--:|:--:|
+| `regionCoding` | determine DOI Regions | Character string for file naming |
+| `dirmakR` | create Directory | Directory, spatial data |
+| `mapmakR` | create Map | PDF or png map (for publications) |
+| `fieldsmakR` | ensure fields (columns) are named | sf object to local location |
+| `orderZones` | ordering seed zone numbers | updated vector data, plot, summary |
 
 ## Documentation
 
@@ -76,11 +78,15 @@ below. It contains all of the proposed conventions, it is also located
 in the ./man/figures subdirectory, where you can download a high
 resolution copy and zoom in on it.
 
-![Conference poster for National Native Seed Conference 2025 presenting
-eSTZwritR conventions for documenting empirical seed transfer zones,
-including file naming standards, directory structure, mapping
-guidelines, and field naming conventions with visual examples and
-workflow diagrams](./man/figures/Poster4NNSC2025.png)
+<figure>
+<img src="./man/figures/Poster4NNSC2025.png"
+alt="Conference poster for National Native Seed Conference 2025 presenting eSTZwritR conventions for documenting empirical seed transfer zones, including file naming standards, directory structure, mapping guidelines, and field naming conventions with visual examples and workflow diagrams" />
+<figcaption aria-hidden="true">Conference poster for National Native
+Seed Conference 2025 presenting eSTZwritR conventions for documenting
+empirical seed transfer zones, including file naming standards,
+directory structure, mapping guidelines, and field naming conventions
+with visual examples and workflow diagrams</figcaption>
+</figure>
 
 <br>
 
