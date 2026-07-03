@@ -7,6 +7,7 @@ packages in general. If one package is not easy for the install, perhaps
 try the other.
 
 ``` r
+
 # install.packages('devtools')
 devtools::install_github('sagesteppe/eSTZwritR')
 
@@ -18,6 +19,7 @@ We will also load the core tidyverse packages for assorted data handling
 tasks.
 
 ``` r
+
 set.seed(5)
 library(eSTZwritR)
 library(tidyverse)
@@ -52,6 +54,7 @@ understanding these operations is tangential to the rest of the
 vignette.
 
 ``` r
+
 # This step was already run during creation of the package. simple feature 
 # geometries have certain rules about what constitutes a valid geometry. One
 # of the most important rules (or at least the most violated) is that a polygon 
@@ -150,6 +153,7 @@ our seed transfer zones is across by looking at the second item in our
 list `RegionsCovered`.
 
 ``` r
+
 knitr::kable(rc$RegionsCovered)
 ```
 
@@ -175,6 +179,7 @@ encourage you to increase this value (to say 5000) when actually
 determining an order before distributing a data set.
 
 ``` r
+
 oz <- orderZones(acth7, SeedZone = zone, n = 200)
 # oz$Summary # i use kable so this looks nice online, 
 # just run oz$Summary to print to console. 
@@ -198,6 +203,7 @@ Obviously, we can always get an order from the seed zones - but is there
 actually any merit to this order?
 
 ``` r
+
 oz$PlotKruskal
 ```
 
@@ -216,6 +222,7 @@ one group differs from the others, i.e. they were not drawn from the
 same distribution.
 
 ``` r
+
 oz$PlotDunns
 ```
 
@@ -241,6 +248,7 @@ Finally, we can make some maps and see how our seed zones differ on
 them - is their any intuitive sensibility here?
 
 ``` r
+
 p1 <- ggplot(data = acth7, aes(fill = zone)) + 
   geom_sf(color = NA) + 
   theme_void() + 
@@ -259,6 +267,7 @@ p1 + p2
 ![](eSTZwritR_files/figure-html/Maps%20of%20Ordered%20Seed%20Zones-1.png)
 
 ``` r
+
 rm(p1, p2)
 ```
 
@@ -274,6 +283,7 @@ just overwrite out original ACTH7 variable with the output data from the
 function.
 
 ``` r
+
 acth7 <- oz$Reclassified
 ```
 
@@ -379,6 +389,7 @@ determine if you need to manually alter any values so they are readily
 interpretable to other users.
 
 ``` r
+
 rm(acth7_stuff, acth7)
 ```
 
@@ -389,6 +400,7 @@ rm(acth7_stuff, acth7)
 Directory Structure
 
 ``` r
+
 dirmakR(
   outpath = '~/Documents/EmpiricalSeedZones', 
   sci_name = 'Eriocoma_thurberiana', 
@@ -414,6 +426,7 @@ altering maps if the appearance of the PDF’s leave something to be
 desired, not the examples from the viewing pane.
 
 ``` r
+
 map <- mapmakR(
   acth7_clean,
   sci_name = 'Eriocoma thurberiana', # this will become the title. 
@@ -433,6 +446,7 @@ output directory `outdir` to save our map too. Note that *all* ancillary
 information for our projects go into the `Information` sub-directory.
 
 ``` r
+
 mapmakR(acth7_clean,
   species = 'Eriocoma thurberiana', # this will become the title. 
   save = FALSE,
@@ -450,6 +464,7 @@ them, all it takes to do that is to change ‘save = FALSE’ to TRUE in the
 code chunk above.
 
 ``` r
+
 map
 ```
 

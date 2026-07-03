@@ -56,10 +56,10 @@ rc <- regionCoding(acth7)
 #> although coordinates are longitude/latitude, st_sample assumes that they are
 #> planar
 rc$SuggestedName # name suggestions
-#> [1] "CGB-CPN"
+#> [1] "CPN-CGB"
 rc$RegionsCovered # number of random points in each DOI region
 #>   REG_ABB   n
-#> 1     CGB 436
-#> 2     CPN 431
-#> 3     UCB 132
+#> 1     CPN 444
+#> 2     CGB 417
+#> 3     UCB 137
 ```

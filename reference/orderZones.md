@@ -108,17 +108,19 @@ zoneOrder_suggestions$Summary
 #>    <dbl>          <int> <fct>         <dbl> <int>
 #>  1    12              1 12            0.108    14
 #>  2     9              2 9             0.131     8
-#>  3    11              3 11            0.145    40
-#>  4     8              4 8             0.165    60
-#>  5     7              5 7             0.175    20
-#>  6    10              6 10            0.187     4
+#>  3    11              3 11            0.146    40
+#>  4     8              4 8             0.165    61
+#>  5     7              5 7             0.172    18
+#>  6    10              6 10            0.178     5
 #>  7     4              7 4             0.198    10
-#>  8     5              8 5             0.241    34
+#>  8     5              8 5             0.230    33
 #>  9     1              9 1             0.248     1
 #> 10     2             10 2             0.281     2
 #> 11     6             11 6             0.293     6
-#> 12     3             12 3             0.323     1
+#> 12     3             12 3             0.297     2
 zoneOrder_suggestions$PlotKruskal
+#> Notch went outside hinges
+#> ℹ Do you want `notch = FALSE`?
 #> Notch went outside hinges
 #> ℹ Do you want `notch = FALSE`?
 #> Notch went outside hinges
@@ -135,6 +137,8 @@ zoneOrder_suggestions$PlotKruskal
 #> ℹ Do you want `notch = FALSE`?
 
 zoneOrder_suggestions$PlotDunns
+#> Notch went outside hinges
+#> ℹ Do you want `notch = FALSE`?
 #> Notch went outside hinges
 #> ℹ Do you want `notch = FALSE`?
 #> Notch went outside hinges

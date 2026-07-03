@@ -20,6 +20,7 @@ CRAN. It can be installed using `remotes` or `devtools` (or `pak` etc.)
 like so:
 
 ``` r
+
 install.packages('devtools')
 devtools::install_github('sagesteppe/eSTZwritR')
 ```
@@ -40,13 +41,13 @@ library(eSTZwritR)
 eSTZwritR requires only five user-facing functions to implement all data
 sharing conventions.
 
-|    Function    |              Purpose              |               Output               |
-|:--------------:|:---------------------------------:|:----------------------------------:|
-| `regionCoding` |       determine DOI Regions       |  Character string for file naming  |
-|   `dirmakR`    |         create Directory          |      Directory, spatial data       |
-|   `mapmakR`    |            create Map             | PDF or png map (for publications)  |
-|  `fieldsmakR`  | ensure fields (columns) are named |    sf object to local location     |
-|  `orderZones`  |    ordering seed zone numbers     | updated vector data, plot, summary |
+| Function | Purpose | Output |
+|:--:|:--:|:--:|
+| `regionCoding` | determine DOI Regions | Character string for file naming |
+| `dirmakR` | create Directory | Directory, spatial data |
+| `mapmakR` | create Map | PDF or png map (for publications) |
+| `fieldsmakR` | ensure fields (columns) are named | sf object to local location |
+| `orderZones` | ordering seed zone numbers | updated vector data, plot, summary |
 
 ## Documentation
 
@@ -110,6 +111,7 @@ doi = {10.5281/zenodo.14641975} }
 Or use R to display citations:
 
 ``` r
+
 citation('eSTZwritR')
 ```
 
